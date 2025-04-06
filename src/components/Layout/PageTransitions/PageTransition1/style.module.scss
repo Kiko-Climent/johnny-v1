@@ -1,0 +1,31 @@
+.columns {
+  .transition-container {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    display: flex;
+    // z-index: 1000; // aplicar este z-index para realizar animacion de transicion completa entre paginas
+
+    div{
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background-color: #ed3833;
+      // background-color: #d33630;
+      // background-color: black;
+    }
+  }
+  .background {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-color: black;
+    // background-color: #ed3833;
+  }
+}
