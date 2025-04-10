@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
@@ -12,13 +12,37 @@ const elements = [
   { id: 6, name: "späti tales", image: "/images/image00029.webp" },
 ];
 
+const animation = {
+  initial: {y: "100%", opacity: 0.1, filter: "blur(15px)", transformOrigin: "bottom" },
+  enter: (i) => ({
+    y: "0",
+    filter: "blur(0px)",
+    opacity: 1,
+    transformOrigin: "bottom",
+    transition: {
+      duration: 0.75,
+      ease: [0.33, 1, 0.68, 1],
+      delay: 0.075 * i,
+    },
+  }),
+};
+
 const WorkMenu7 = () => {
+  const body = useRef(null)
   const [selectedElement, setSelectedElement] = useState(elements[0]);
   const [clipSize, setClipSize] = useState("33%");
   const [position, setPosition] = useState({ x: "50%", y: "50%" });
   const [expanded, setExanded] = useState(false);
+  const [clipVisible, setClipVisible] = useState(false)
   const router = useRouter();
   
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setClipVisible(true);
+    }, 800);
+    return() => clearTimeout(timeout)
+  }, [])
+
   const handleTitleClick = (element) => {
     if (selectedElement.id === element.id) {
       if (expanded) {
@@ -38,30 +62,32 @@ const WorkMenu7 = () => {
   };
   
   return (
-    <div className="flex flex-col h-screen w-screen relative">
+    <div ref={body} className="flex flex-col h-screen w-screen relative">
       {/* Imagen de fondo */}
-      <motion.div
-        className="absolute w-full h-full"
-        animate={{
-          clipPath: expanded
-            ? "circle(100% at 50% 50%)"
-            : `circle(${clipSize} at ${position.x} ${position.y})`,
-        }}
-        style={{
-          filter: "invert(1)",
-          mixBlendMode: "difference",
-          pointerEvents: "none", // Evita interferencias
-        }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      >
-        <Image
-          alt={selectedElement.name}
-          src={selectedElement.image}
-          fill
-          priority={true}
-          className="object-cover"
-        />
-      </motion.div>
+      {clipVisible && (
+        <motion.div
+          className="absolute w-full h-full"
+          animate={{
+            clipPath: expanded
+              ? "circle(100% at 50% 50%)"
+              : `circle(${clipSize} at ${position.x} ${position.y})`,
+          }}
+          style={{
+            filter: "invert(1)",
+            mixBlendMode: "difference",
+            pointerEvents: "none", // Evita interferencias
+          }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+          <Image
+            alt={selectedElement.name}
+            src={selectedElement.image}
+            fill
+            priority={true}
+            className="object-cover"
+          />
+        </motion.div>
+      )}
 
       {/* Imagen de fondo real */}
       <Image
@@ -82,7 +108,11 @@ const WorkMenu7 = () => {
             key={element.id}
             className="text-3xl uppercase text-black cursor-pointer transition-opacity"
             onClick={() => handleTitleClick(element)}
-            animate={{
+            initial="initial"
+            animate="enter"
+            custom={1}
+            variants={animation}
+            style={{
               opacity: selectedElement.id === element.id ? 1 : 0.5,
               fontWeight: selectedElement.id === element.id ? 700 : 400,
             }}

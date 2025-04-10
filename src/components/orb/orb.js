@@ -5,11 +5,11 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 const Orb = ({
-  totalImages = 13,
-  totalItems = 100,
+  totalImages = 22,
+  totalItems = 80,
   baseWidth = 1,
   baseHeight = 0.6,
-  sphereRadius = 5,
+  sphereRadius = 4.8,
   backgroundColor = "FFFFFF"
 }) => {
 
@@ -52,17 +52,28 @@ const Orb = ({
     let loadedCount = 0
 
     const imagePool = [
-      "image00001.jpeg",
-      "image00003.jpeg",
-      "image00011.jpeg",
-      "image00015.jpeg",
-      "image00021.jpeg",
-      "image00023.jpeg",
-      "image00025.jpeg",
-      "image00027.jpeg",
-      "image00028.jpeg",
-      "image00029.jpeg",
-      "image00030.jpeg"
+      "image1.webp",
+      "image2.webp",
+      "image3.webp",
+      "image4.webp",
+      "image5.webp",
+      "image6.webp",
+      "image7.webp",
+      "image8.webp",
+      "image9.webp",
+      "image10.webp",
+      "image11.webp",
+      "image12.webp",
+      "image13.webp",
+      "image14.webp",
+      "image15.webp",
+      "image16.webp",
+      "image17.webp",
+      "image18.webp",
+      "image19.webp",
+      "image20.webp",
+      "image21.webp",
+      "image22.webp",
     ];
     
     const getRandomImagePath = () => {

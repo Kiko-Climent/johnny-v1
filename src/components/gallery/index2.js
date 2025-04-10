@@ -1,23 +1,29 @@
 'use client';
 
-import styles from "@/styles/slider.module.css"; // Asegúrate de tener un archivo CSS module
-import { useEffect, useState } from 'react';
+import styles from "@/styles/slider.module.css";
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Image from 'next/image';
 
 const Slider2 = ({ images }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  let currentTopValue = 0;
+  const sliderRef = useRef(null);
+  const currentTop = useRef(0);
 
   useEffect(() => {
-    const slides = document.querySelectorAll(".slide");
+    const sliderEl = sliderRef.current;
+    const slides = sliderEl.querySelectorAll(`.${styles.slide}`);
+    const prefix = sliderEl.querySelector(`.${styles.prefix}`);
+    const names = sliderEl.querySelector(`.${styles.names}`);
+    const years = sliderEl.querySelector(`.${styles.years}`);
+
     const elements = [
-      { selector: ".prefix", delay: 0 },
-      { selector: ".names", delay: 0.15 },
-      { selector: ".years", delay: 0.3 }
+      { el: prefix, delay: 0 },
+      { el: names, delay: 0.15 },
+      { el: years, delay: 0.3 }
     ];
-    
+
     slides.forEach((slide, idx) => {
       if (idx !== 0) {
         const img = slide.querySelector("img");
@@ -25,27 +31,18 @@ const Slider2 = ({ images }) => {
       }
     });
 
-    const handleScroll = (e) => {
-      if (isAnimating) return;
-      if (e.deltaY > 0 && currentSlideIndex < slides.length - 1) {
-        showSlide(currentSlideIndex + 1);
-      } else if (e.deltaY < 0 && currentSlideIndex > 0) {
-        hideSlide(currentSlideIndex);
-      }
-    };
-
     const showSlide = (index) => {
       setIsAnimating(true);
       const slide = slides[index];
       const img = slide.querySelector("img");
-      currentTopValue -= 30;
+      currentTop.current -= 30;
 
-      elements.forEach((elem) => {
-        gsap.to(document.querySelector(elem.selector), {
-          y: `${currentTopValue}px`,
+      elements.forEach(({ el, delay }) => {
+        gsap.to(el, {
+          y: `${currentTop.current}px`,
           duration: 2,
           ease: "power4.inOut",
-          delay: elem.delay
+          delay
         });
       });
 
@@ -60,8 +57,9 @@ const Slider2 = ({ images }) => {
         clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
         duration: 2,
         ease: "power4.inOut",
-        onComplete: () => setIsAnimating(false),
+        onComplete: () => setIsAnimating(false)
       });
+
       setCurrentSlideIndex(index);
     };
 
@@ -69,14 +67,14 @@ const Slider2 = ({ images }) => {
       setIsAnimating(true);
       const slide = slides[index];
       const img = slide.querySelector("img");
-      currentTopValue -= 30;
+      currentTop.current -= 30;
 
-      elements.forEach((elem) => {
-        gsap.to(document.querySelector(elem.selector), {
-          y: `${currentTopValue}px`,
+      elements.forEach(({ el, delay }) => {
+        gsap.to(el, {
+          y: `${currentTop.current}px`,
           duration: 2,
           ease: "power4.inOut",
-          delay: elem.delay,
+          delay
         });
       });
 
@@ -91,9 +89,19 @@ const Slider2 = ({ images }) => {
         clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
         duration: 2,
         ease: "power4.inOut",
-        onComplete: () => setIsAnimating(false),
+        onComplete: () => setIsAnimating(false)
       });
+
       setCurrentSlideIndex(index - 1);
+    };
+
+    const handleScroll = (e) => {
+      if (isAnimating) return;
+      if (e.deltaY > 0 && currentSlideIndex < slides.length - 1) {
+        showSlide(currentSlideIndex + 1);
+      } else if (e.deltaY < 0 && currentSlideIndex > 0) {
+        hideSlide(currentSlideIndex);
+      }
     };
 
     window.addEventListener("wheel", handleScroll);
@@ -101,7 +109,7 @@ const Slider2 = ({ images }) => {
   }, [currentSlideIndex, isAnimating]);
 
   return (
-    <div className="w-screen h-screen">
+    <div ref={sliderRef} className="w-screen h-screen">
       <div className={styles.sliderContent}>
         <div className={styles.slideNumber}>
           <div className={styles.prefix}>
@@ -124,17 +132,17 @@ const Slider2 = ({ images }) => {
           </div>
         </div>
       </div>
-      <div className={styles.slider}>
-      {images.map((img, i) => (
 
+      <div className={styles.slider}>
+        {images.map((img, i) => (
           <div className={styles.slide} key={i}>
-            <Image 
-            src={img} 
-            alt="gallery images" 
-            width={1920}
-            height={1080}
-            priority
-            style={{ objectFit: 'cover' }} 
+            <Image
+              src={img}
+              alt={`slide-${i}`}
+              width={1920}
+              height={1080}
+              priority
+              style={{ objectFit: 'cover' }}
             />
           </div>
         ))}
