@@ -22,50 +22,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.slider-container {
-  top: calc(100vh - 350px);
-}
-
-.first{
-
-  position: relative;
-  margin: 0px;
-  color: white;
-  font-size: 150px;
-  padding-right: 50px;
-
-}
-
-.second{
-  position: absolute;
-  font-size: 150px;
-  left: 100%;
-  top: 0;
-
-}
-
-/* animation about */
-.perspective {
-  perspective: 1000px;
-}
-
-.transform-style {
-  transform-style: preserve-3d;
-}
-
-.face {
-  backface-visibility: hidden;
-  display: block;
-}
-
-.back {
-  transform: rotateX(180deg);
-}
-
-.group:hover .flipper {
-  transform: rotateX(180deg);
-}
-
 /* animated links */
 .text:hover .letter,
 .text.play .letter {
@@ -145,3 +101,58 @@ body {
 .letter:nth-child(15) {
   transition-delay: 0.42s;
 }
+
+/* text moving home */
+.slider-container {
+  top: calc(100vh - 350px);
+}
+
+.first{
+
+  position: relative;
+  margin: 0px;
+  color: white;
+  font-size: 150px;
+  padding-right: 50px;
+
+}
+
+.second{
+  position: absolute;
+  font-size: 150px;
+  left: 100%;
+  top: 0;
+
+}
+
+/* text moving work */
+.slider-container-work {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.first{
+
+  position: relative;
+  margin: 0px;
+  color: white;
+  font-size: 150px;
+  padding-right: 50px;
+
+}
+
+.second{
+  position: absolute;
+  font-size: 150px;
+  left: 100%;
+  top: 0;
+
+}
+

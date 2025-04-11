@@ -5,9 +5,12 @@ import Head from "next/head";
 // import styles from "@/styles/Work.module.css";
 // import WorkMenu from "@/components/work";
 // import WorkMenu3 from "@/components/work/index3";
-import WorkMenu5 from "@/components/work/index5";
+// import WorkMenu5 from "@/components/work/index5";
 // import WorkMenu4 from "@/components/work/index4";
 // import WorkMenu6 from "@/components/work/index6";
+// import WorkMenu7 from "@/components/work/index7";
+import WorkMenu8 from "@/components/work/index8";
+import WorkMenu9 from "@/components/work/index9";
 import WorkMenu7 from "@/components/work/index7";
 // import WorkMenu from "@/components/work";
 
