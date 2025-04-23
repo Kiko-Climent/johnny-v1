@@ -1,3 +1,4 @@
+// components/PageTransitionOverlay.js
 import { motion } from "framer-motion";
 
 const overlayVariants = {

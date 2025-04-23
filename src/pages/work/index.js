@@ -9,9 +9,10 @@ import Head from "next/head";
 // import WorkMenu4 from "@/components/work/index4";
 // import WorkMenu6 from "@/components/work/index6";
 // import WorkMenu7 from "@/components/work/index7";
-import WorkMenu8 from "@/components/work/index8";
-import WorkMenu9 from "@/components/work/index9";
-import WorkMenu7 from "@/components/work/index7";
+// import WorkMenu8 from "@/components/work/index8";
+// import WorkMenu9 from "@/components/work/index9";
+// import WorkMenu7 from "@/components/work/index7";
+import WorkMenu10 from "@/components/work/index10";
 // import WorkMenu from "@/components/work";
 
 
@@ -26,7 +27,7 @@ export default function Work() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <PageTransition> */}
-      <WorkMenu7 />
+      <WorkMenu10 />
       {/* </PageTransition> */}
     </>
   );

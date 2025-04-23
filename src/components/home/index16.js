@@ -75,7 +75,7 @@ const HomeGallery11 = ({images}) => {
         alt="Siguiente fondo"
         className="absolute w-full h-full object-cover"
         style={{ willChange: "opacity, transform" }}
-        initial={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         // transition={{ duration: 0.5, ease: "easeOut" }}
       />
@@ -85,7 +85,7 @@ const HomeGallery11 = ({images}) => {
         key={backgroundIndex}
         src={images[backgroundIndex].src}
         alt="Fondo actual"
-        className="absolute w-full object-cover aspect-[3/4]"
+        className="absolute w-full object-cover aspect-[4/5]"
         initial={{ opacity: 1, scale: 1, clipPath: "inset(0%)" }}
         animate={{
           opacity: 1,

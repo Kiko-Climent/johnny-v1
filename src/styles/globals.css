@@ -128,8 +128,8 @@ body {
 /* text moving work */
 .slider-container-work {
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   display: flex;

@@ -59,7 +59,7 @@ const WorkMenu8 = () => {
     gsap.set(firstText.current, { xPercent: xPercent });
     gsap.set(secondText.current, { xPercent: xPercent });
     requestAnimationFrame(animate);
-    xPercent += 0.3;
+    xPercent += 0.1;
   };
   
   useEffect(() => {
@@ -149,12 +149,19 @@ const WorkMenu8 = () => {
           ))}
         </div>
         ) : (
-        <div className="absolute slider-container-work ">
-          <div className="relative text-white whitespace-nowrap">
-            <p ref={secondText} className="second">mediterraneo | johnny carretes |</p>
-            <p ref={firstText} className="first">mediterraneo | johnny carretes |</p>
+        <>
+          <div className="absolute slider-container-work flex flex-col uppercase cursor-pointer">
+            <div className="relative text-white whitespace-nowrap flex">
+              <p ref={secondText} className="second">{selectedElement.name} / johnny carretes /</p>
+              <p ref={firstText} className="first">{selectedElement.name} / johnny carretes /</p>
+            </div>
+            <div className="flex flex-row text-white text-[10vw] -mt-6 md:-mt-24">
+              <div className="flex">back </div> /
+              <div onClick={() => router.push(`/work/${selectedElement.name.replace(/\s+/g, "-").toLowerCase()}`)} 
+              className="flex">enter</div>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

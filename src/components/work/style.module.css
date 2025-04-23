@@ -1,59 +1,57 @@
 .project{
 
-  padding-top: 0.8vw;
+    border-top: 2px solid black;
 
-  padding-bottom: 0.8vw;
+    padding-top: 0.4vh;
 
-  cursor: pointer;
+    height: 12.5vh;
 
-  width: 100%;
+    cursor: pointer;
 
-  display: flex;
+    width: 100%;
 
-  justify-content: center;
+    display: flex;
 
-  align-items: center;
+    justify-content: center;
+
+    align-items: center;
 
 }
 
-
+  
 
 .project p{
 
-  font-size: 5vw;
-
-  margin: 0px;
+    font-size: 15.5vh;
+    text-transform: uppercase;
+    margin: 0px;
 
 }
 
 .project p:nth-of-type(1){
 
-  margin-right: 0.75vw;
+    margin-right: 0.75vw;
 
 }
 
 .project p:nth-of-type(2){
 
-  margin-left: 0.75vw;
+    margin-left: 0.75vw;
 
 }
 
+.project:last-of-type{
 
+    border-bottom: 2px solid black;
+
+}
 
 .project img{
 
-  width: 4vw;
-
-}
-
-.project .imgContainer{
-
-  overflow: hidden;
-
-  display: flex;
-
-  justify-content: center;
-
-  width: 0;
+    width: 100vw;
+    height: 12.5vh;
+    object-fit: cover;
+    padding-top: 0.4vh;
+    padding-bottom: 0.6vh;
 
 }

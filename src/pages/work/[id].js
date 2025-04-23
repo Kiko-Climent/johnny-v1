@@ -11,6 +11,10 @@ const galleries = {
     "/images/image00030.jpeg", 
     "/images/image00007.jpeg",
     "/images/image00039.jpeg",
+  ],
+  dolce_vita: [
+    "/images/image00014.webp", 
+    "/images/image00007.webp", 
   ]
 };
 
@@ -29,10 +33,10 @@ const Gallery = () => {
     <div className="min-h-screen w-screen flex flex-col items-center justify-center">
       {images.length > 0 ? (
         <div className="w-full">
-          <Slider4 images={images} />
+          <Slider4 images={images} id={id} />
         </div>
       ) : (
-        <p className="text-white">Cargando imágenes...</p>
+        <p className="text-white">Charging images...</p>
       )}
     </div>
   );

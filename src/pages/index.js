@@ -12,6 +12,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 // import HomeGallery7 from "@/components/home/index12";
 // import HomeGallery10 from "@/components/home/index15";
 import HomeGallery11 from "@/components/home/index16";
+import HomeGallery12 from "@/components/home/index17";
 // import HomeGallery8 from "@/components/home/index13";
 // import HomeGallery9 from "@/components/home/index14";
 // import HomeGallery7 from "@/components/home/index12";
@@ -82,6 +83,7 @@ export default function Home() {
         {/* <div onClick={handleClick}> */}
           {/* <HomeGallery9 src={images[currentIndex]}/> */}
           <HomeGallery11 images={images}/>
+          {/* <HomeGallery12/> */}
         {/* </div> */}
       {/* </PageTransition> */}
     </>

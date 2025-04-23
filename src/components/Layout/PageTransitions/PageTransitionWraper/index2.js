@@ -4,23 +4,9 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const PageTransitionWrapper = ({ children }) => {
+const PageTransitionWrapper2 = ({ children }) => {
   const pathname = usePathname();
   const [isTransitioning, setIsTransitioning] = useState(true);
-
-  const formatPathname = (path) => {
-    if (!path) return "Home";
-
-    return path
-      .slice(1)
-      .split("/")
-      .map(segment =>
-        segment
-          .replace(/_/g, " ")
-          .replace(/\b\w/g, c => c.toUpperCase())
-      )
-      .join(" / ");
-  }
 
   // Forzar transición en cada pathname diferente
   useEffect(() => {
@@ -38,25 +24,33 @@ const PageTransitionWrapper = ({ children }) => {
       <AnimatePresence mode="wait">
         {isTransitioning && (
           <motion.div
-          key="overlay"
-          initial={{ clipPath: 'circle(0% at 50% 50%)' }}
-          animate={{ clipPath: 'circle(150% at 50% 50%)' }}
-          exit={{ clipPath: 'circle(0% at 50% 50%)' }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="fixed top-0 left-0 w-full h-full bg-black z-[1000] flex items-center justify-center"
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="text-white text-4xl font-bold uppercase"
+            key="overlay"
+            initial={{
+              clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
+            }}
+            animate={{
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+              transition: { duration: 0.6, ease: "easeInOut" },
+            }}
+            exit={{
+              clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
+              transition: { duration: 0.6, ease: "easeInOut" },
+            }}
+            className="fixed top-0 left-0 w-full h-full bg-black z-[1000] flex items-center justify-center"
           >
-            {formatPathname(pathname)}
-          </motion.h1>
-        </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className="text-white text-4xl font-bold uppercase"
+            >
+              {pathname?.replace("/", "") || "home"}
+            </motion.h1>
+          </motion.div>
         )}
       </AnimatePresence>
+
 
       {/* Página que se revela con clip-path */}
       <motion.div
@@ -72,4 +66,4 @@ const PageTransitionWrapper = ({ children }) => {
   );
 };
 
-export default PageTransitionWrapper;
+export default PageTransitionWrapper2;
