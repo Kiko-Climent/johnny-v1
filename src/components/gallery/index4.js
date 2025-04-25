@@ -3,7 +3,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import Image from "next/image";
-import { useRef } from "react";
+import { useState, useRef } from "react";
+import AnimatedText from "../tools/AnimatedText";
 
 import "swiper/css"
 import "swiper/css/pagination"
@@ -11,6 +12,7 @@ import "swiper/css/pagination"
 
 
 const Slider4 = ({images, id}) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const formatTitle = (id) => id.replace(/_/g, " ");
   const swiperRef = useRef(null);
 
@@ -39,6 +41,7 @@ const Slider4 = ({images, id}) => {
         <div className="flex grow h-full w-full px-3">
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
+            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             pagination={{
               type: "fraction",
               el: ".custom-pagination"
@@ -62,11 +65,13 @@ const Slider4 = ({images, id}) => {
         </div>
         <div className="flex flex-col px-3 text-center justify-center items-center">
           <div className="flex flex-row gap-x-1 text-xl">
-            <div className="flex whitespace-nowrap">{formatTitle(id)}</div>
+            <div className="flex whitespace-nowrap uppercase">{formatTitle(id)}</div>
             <div className="flex custom-pagination text-black" />
             </div>
-          <div className="flex">35°18′35″N 24°53′36″E</div>
-
+          <div className="flex">
+            <AnimatedText text={images[activeIndex].coord} hoverText={images[activeIndex].location} 
+              className="text-lg" />
+          </div>
         </div>
       </div>
       {/* <div className="flex custom-pagination text-black text-3xl text-center justify-center items-center" /> */}

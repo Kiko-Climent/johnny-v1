@@ -57,17 +57,19 @@ const PageTransitionWrapper = ({ children }) => {
         </motion.div>
         )}
       </AnimatePresence>
+      {!isTransitioning && (
 
+        <motion.div
+          key={pathname}
+          initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
+          animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+          transition={{ duration: 0.8, ease: "easeInOut", delay: 0.6 }}
+          className="relative z-10 h-full w-full"
+        >
+          {children}
+        </motion.div>
+      )}
       {/* Página que se revela con clip-path */}
-      <motion.div
-        key={pathname}
-        initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
-        animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-        transition={{ duration: 0.8, ease: "easeInOut", delay: 0.6 }}
-        className="relative z-10 h-full w-full"
-      >
-        {children}
-      </motion.div>
     </div>
   );
 };
