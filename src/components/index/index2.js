@@ -24,36 +24,45 @@ export default function IndexGallery2() {
     const importSplitType = async () => {
       const SplitTypeModule = await import("split-type");
       SplitType = SplitTypeModule.default;
-
+  
       initializeGallery();
       setInitialized(true);
     };
-
+  
     gsap.registerPlugin(CustomEase);
     CustomEase.create("hop", "0.9, 0, 0.1, 1");
-
+  
+    // MOVER .projectTitle AL BODY
+    const el = projectTitleRef.current;
+    if (el && el.parentNode !== document.body) {
+      document.body.appendChild(el);
+    }
+  
     importSplitType();
-
+  
     return () => {
       if (containerRef.current) {
         containerRef.current.removeEventListener("mousedown", handleMouseDown);
-        containerRef.current.removeEventListener(
-          "touchstart",
-          handleTouchStart
-        );
+        containerRef.current.removeEventListener("touchstart", handleTouchStart);
       }
-
+  
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
-
+  
       if (stateRef.current.animationFrameId) {
         cancelAnimationFrame(stateRef.current.animationFrameId);
-      }      
+      }
+  
+      // DEVOLVER .projectTitle SI HACE FALTA
+      if (el && containerRef.current?.contains(el) === false) {
+        containerRef.current?.appendChild(el);
+      }
     };
   }, []);
+  
 
   const itemCount = 20;
   const itemGap = 150;
@@ -96,6 +105,10 @@ export default function IndexGallery2() {
   
     stateRef.current.titleSplit = new SplitType(projectTitleElement, {
       types: "words",
+    });
+
+    stateRef.current.titleSplit.words.forEach(word => {
+      word.classList.add(styles.word);
     });
     gsap.set(stateRef.current.titleSplit.words, { y: "100%" });
   };
@@ -514,11 +527,8 @@ export default function IndexGallery2() {
       </div>
 
       <div className={styles.projectTitle} ref={projectTitleRef}>
-        <p className={styles.projectText} ref={projectTextRef}>
-          <span className={styles.word}></span>
-        </p>
+        <p className={styles.projectText} ref={projectTextRef}></p>
       </div>
     </>
   );
 }
-console.log(styles.word);

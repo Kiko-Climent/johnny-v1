@@ -161,7 +161,9 @@ const Orb = ({
     createSphere()
 
     return () => {
-      orbRef.current.removeChild(renderer.domElement);
+      if (orbRef.current && renderer?.domElement && orbRef.current.contains(renderer.domElement)) {
+        orbRef.current.removeChild(renderer.domElement);
+      }
     }
   }, [
     totalImages,
