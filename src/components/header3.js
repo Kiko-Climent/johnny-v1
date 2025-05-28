@@ -3,11 +3,14 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import AnimatedLink from "./tools/AnimatedLink";
+import { playRevealerAnimation } from "./tools/UseRevealer";
 
-const Header = () => {
+const Header3 = () => {
 
   const router = useRouter();
   const [showIndexLink, setShowIndexLink] = useState(false);
+
+  
   
 
   useEffect(() => {
@@ -30,20 +33,31 @@ const Header = () => {
 
   const currentPath = router.pathname;
 
+  const handleNavigation = (path) => (e) => {
+    e.preventDefault();
+    if (path === router.pathname) return;
+  
+    playRevealerAnimation(() => {
+      router.push(path);
+    });
+  };
+
   return(
     <nav
     className={`w-full h-auto flex flex-row justify-between uppercase text-lg px-2 py-4 whitespace-nowrap ${
       currentPath === "/index"
         ? "fixed top-0 left-0 z-40 bg-transparent text-black"
-        : "relative bg-white text-black"
+        : "relative bg-white text-black z-40"
     }`}
     >
 
       <div className="flex flex-col items-start leading-tight">
-        <AnimatedLink href="/" className="flex text" text="johnny carretes" />
+        <AnimatedLink href="/" className="flex text" text="johnny carretes" 
+        onClick={handleNavigation("/")}/>
         <div className="flex flex-row gap-1">
           <AnimatedLink href="/work" text="work" 
-            className={`flex text ${currentPath === "/work" ? "text-gray-500" : ""}`} />
+            className={`flex text ${currentPath === "/work" ? "text-gray-500" : ""}`}
+            onClick={handleNavigation("/work")} />
           {showIndexLink && (
             <AnimatedLink href="/index" text="index" 
               className={`flex text ${currentPath === "/index" ? "text-gray-500" : ""}`} />
@@ -58,4 +72,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default Header3;

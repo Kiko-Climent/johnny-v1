@@ -1,31 +1,24 @@
 "use client"
 
 import { useState } from "react";
-import Project2 from "@/components/work/project2"
+import Project4 from "@/components/work/project4"
+import { useRevealer } from "../tools/UseRevealer";
 
 const projects = [
 
+  // {
+  //   id: "mediterraneo",
+  //   title1: "paradise",
+  //   title2: "",
+  //   src: "image00021.jpeg"
+  // },
   {
     id: "mediterraneo",
-    title1: "mediterraneo",
-    title2: "",
+    title1: "paradise",
+    title2: "is really",
+    title3: "nice",
     src: "image00021.jpeg"
   },
-
-  {
-    id: "dolce_vita",
-    title1: "dolce",
-    title2: "vita",
-    src: "image00041.webp"
-  },
-
-  {
-    id: "islas",
-    title1: "",
-    title2: "islas",
-    src: "image00030.jpeg"
-  },
-
   {
     id: "johnny_color",
     title1: "johnny",
@@ -34,26 +27,37 @@ const projects = [
   },
 
   {
-    id: "tempelfog",
-    title1: "tempelfog",
-    title2: "",
-    src: "image00001.webp"
+    id: "dolce_vita",
+    title1: "Leak",
+    title2: "of",
+    title3: "Dreams",
+    src: "image00041.webp"
   },
 
   {
-    id: "spaeti_tales",
-    title1: "spaeti",
-    title2: "tales",
-    src: "image00029.webp"
+    id: "islas",
+    title1: "costas",
+    title2: "de sol",
+    src: "image00030.jpeg"
+  },
+
+  {
+    id: "tempelfog",
+    title1: "johnny", 
+    title2: "de", 
+    title3: "noche",
+    src: "image00001.webp"
   },
 ]
 
 
 const WorkMenu10 = () => {
+  // useRevealer();
+  
   return(
       <div className="h-[calc(100vh-100px)] w-screen text-black text-xl tracking-tight flex flex-col justify-center items-center relative px-2">
         {projects.map((project) => (
-          <Project2
+          <Project4
             key={project.src}
             project={project}           
           />

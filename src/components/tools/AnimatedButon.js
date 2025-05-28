@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 
-const AnimatedLink = ({ href, text, onClick, className = "" }) => {
+const AnimatedButton = ({ onClick, text, className = "" }) => {
   const elementRef = useRef();
 
   useEffect(() => {
@@ -37,10 +36,10 @@ const AnimatedLink = ({ href, text, onClick, className = "" }) => {
   }, [text]);
 
   return (
-    <Link href={href} className="-mb-2" onClick={onClick}>
+    <button onClick={onClick} className="-mb-2">
       <div ref={elementRef} className={`text cursor-pointer ${className}`} />
-    </Link>
+    </button>
   );
 };
 
-export default AnimatedLink;
+export default AnimatedButton;

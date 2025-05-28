@@ -11,13 +11,22 @@
   will-change: transform;
 }
 
-.item {
+/* .item {
   position: absolute;
-  width: 120px;
-  height: 160px;
+  width: 160px;
+  aspect-ratio: 4/5;
   overflow: hidden;
   background-color: #000;
   cursor: pointer;
+} */
+
+/* nuevo class item con aspect original de imagenes */
+.item {
+  width: 160px;
+  height: auto;
+  overflow: hidden;
+  position: absolute;
+  background-color: #000;
 }
 
 .expandedItem {
@@ -26,19 +35,41 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #e3e3db;
+  /* background-color: #e3e3db; */
   overflow: hidden;
   cursor: pointer;
 }
 
-.image {
+/* .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   pointer-events: none;
   position: relative;
   z-index: 1;
+} */
+
+/* nuevo class image con aspect original de imagenes */
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
 }
+
+/* .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 2;
+} */
 
 .overlay {
   position: fixed;
@@ -47,6 +78,8 @@
   width: 100%;
   height: 100%;
   background-color: white;
+  backdrop-filter: blur(3px);
+  mix-blend-mode: difference;
   pointer-events: none;
   transition: opacity 0.3s ease;
   opacity: 0;
@@ -80,7 +113,7 @@
 .word {
   position: relative;
   display: inline-block;
-  font-size: 36px;
+  font-size: 24px;
   letter-spacing: -0.02rem;
   margin-right: 0.1em;
   transform: translateY(0%);

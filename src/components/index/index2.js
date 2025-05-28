@@ -244,6 +244,7 @@ export default function IndexGallery2() {
 
     const rect = item.getBoundingClientRect();
     const targetImg = item.querySelector("img").src;
+    gsap.delayedCall(0.5, animateTitleIn);
 
     state.originalPosition = {
       id: item.id,
@@ -277,29 +278,71 @@ export default function IndexGallery2() {
       }
     });
 
-    const viewportWidth = window.innerWidth;
-    const targetWidth = viewportWidth * 0.4;
-    const targetHeight = targetWidth * 1.2;
+    // const viewportWidth = window.innerWidth;
+    // const targetWidth = viewportWidth * 0.4;
+    // const targetHeight = targetWidth * 1.2;
 
-    gsap.delayedCall(0.5, animateTitleIn);
+    // gsap.delayedCall(0.5, animateTitleIn);
 
-    gsap.fromTo(
-      expandedItem,
-      {
-        width: itemWidth,
-        height: itemHeight,
-        x: rect.left + itemWidth / 2 - window.innerWidth / 2,
-        y: rect.top + itemHeight / 2 - window.innerHeight / 2,
-      },
-      {
-        width: targetWidth,
-        height: targetHeight,
-        x: 0,
-        y: 0,
-        duration: 1,
-        ease: "hop",
+    // gsap.fromTo(
+    //   expandedItem,
+    //   {
+    //     width: itemWidth,
+    //     height: itemHeight,
+    //     x: rect.left + itemWidth / 2 - window.innerWidth / 2,
+    //     y: rect.top + itemHeight / 2 - window.innerHeight / 2,
+    //   },
+    //   {
+    //     width: targetWidth,
+    //     height: targetHeight,
+    //     x: 0,
+    //     y: 0,
+    //     duration: 1,
+    //     ease: "hop",
+    //   }
+    // );
+
+    img.src = targetImg;
+    img.onload = () => {
+      const naturalWidth = img.naturalWidth;
+      const naturalHeight = img.naturalHeight;
+
+      const aspectRatio = naturalWidth / naturalHeight;
+      const maxWidth = window.innerWidth * 0.8;
+      const maxHeight = window.innerHeight * 0.8;
+
+      let targetWidth = naturalWidth;
+      let targetHeight = naturalHeight;
+
+      // Escalamos si excede los límites de pantalla
+      if (targetWidth > maxWidth) {
+        targetWidth = maxWidth;
+        targetHeight = targetWidth / aspectRatio;
       }
-    );
+
+      if (targetHeight > maxHeight) {
+        targetHeight = maxHeight;
+        targetWidth = targetHeight * aspectRatio;
+      }
+
+      gsap.fromTo(
+        expandedItem,
+        {
+          width: itemWidth,
+          height: itemHeight,
+          x: rect.left + itemWidth / 2 - window.innerWidth / 2,
+          y: rect.top + itemHeight / 2 - window.innerHeight / 2,
+        },
+        {
+          width: targetWidth,
+          height: targetHeight,
+          x: 0,
+          y: 0,
+          duration: 1,
+          ease: "hop",
+        }
+      );
+    };
   };
 
   const closeExpandedItem = () => {

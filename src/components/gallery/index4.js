@@ -13,7 +13,9 @@ import "swiper/css/pagination"
 
 const Slider4 = ({images, id}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const formatTitle = (id) => id.replace(/_/g, " ");
+  const formatTitle = (id) => {
+    return typeof id === "string" ? id.replace(/_/g, " ") : "";
+  };
   const swiperRef = useRef(null);
 
   const handleClick = (e) => {

@@ -5,10 +5,14 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+// import { useRevealer } from "../tools/UseRevealer";
 
 
 
 const HomeGallery11 = ({images}) => {
+
+  // useRevealer();
+  
   const [index, setIndex] = useState(0);
   const firstText = useRef(null);
   const secondText = useRef(null);

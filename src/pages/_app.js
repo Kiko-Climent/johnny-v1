@@ -1,10 +1,15 @@
+"use client";
+
 import Header from "@/components/header";
+import Header2 from "@/components/header2";
 import PageTransitionWrapper from "@/components/Layout/PageTransitions/PageTransitionWraper";
+import PageTransitionWrapper2 from "@/components/Layout/PageTransitions/PageTransitionWraper/index2";
 import "@/styles/globals.css";
 import "@/styles/Work.module.css";
 // import "@/components/Layout/PageTransitions/PageTransition1/style.module.scss";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
+import ProgressBar from "nextjs-progressbar"
 
 
 export default function App({ Component, pageProps }) {
@@ -12,12 +17,14 @@ export default function App({ Component, pageProps }) {
   
   return (
     <div className="w-screen h-screen flex flex-col">
-      <Header />
+      <ProgressBar color="#000" startPosition={0.2} height={2} stopDelayMs={200}/>
+      <Header2 />
       <AnimatePresence mode="wait" initial={false}>
         <div key={router.pathname} className="flex-1 overflow-hidden">
-          <PageTransitionWrapper>
+        {/* <div key={router.pathname} className=""> */}
+          {/* <PageTransitionWrapper2 key={router.pathname}> */}
             <Component {...pageProps} />
-          </PageTransitionWrapper>
+          {/* </PageTransitionWrapper2> */}
         </div>
       </AnimatePresence>
     </div>

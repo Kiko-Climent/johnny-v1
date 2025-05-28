@@ -27,6 +27,7 @@ export default function Work() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <PageTransition> */}
+      {/* <div className="revealer"></div> */}
       <WorkMenu10 />
       {/* </PageTransition> */}
     </>

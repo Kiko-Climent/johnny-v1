@@ -1,0 +1,85 @@
+.text-splash {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+.text-splash .block {
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+}
+
+.text-splash .letter-splash {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.024, 1);
+}
+
+
+.letter-splash:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.letter-splash:nth-child(2) {
+  transition-delay: 0.03s;
+}
+.letter-splash:nth-child(3) {
+  transition-delay: 0.06s;
+}
+.letter-splash:nth-child(4) {
+  transition-delay: 0.09s;
+}
+.letter-splash:nth-child(5) {
+  transition-delay: 0.12s;
+}
+.letter-splash:nth-child(6) {
+  transition-delay: 0.15s;
+}
+.letter-splash:nth-child(7) {
+  transition-delay: 0.18s;
+}
+.letter-splash:nth-child(8) {
+  transition-delay: 0.21s;
+}
+.letter-splash:nth-child(9) {
+  transition-delay: 0.24s;
+}
+.letter-splash:nth-child(10) {
+  transition-delay: 0.27s;
+}
+.letter-splash:nth-child(11) {
+  transition-delay: 0.30s;
+}
+.letter-splash:nth-child(12) {
+  transition-delay: 0.33s;
+}
+.letter-splash:nth-child(13) {
+  transition-delay: 0.36s;
+}
+.letter-splash:nth-child(14) {
+  transition-delay: 0.39s;
+}
+.letter-splash:nth-child(15) {
+  transition-delay: 0.42s;
+}
+.letter-splash:nth-child(16) {
+  transition-delay: 0.45s;
+}
+.letter-splash:nth-child(17) {
+  transition-delay: 0.48s;
+}
+.letter-splash:nth-child(18) {
+  transition-delay: 0.51s;
+}
+.letter-splash:nth-child(19) {
+  transition-delay: 0.54s;
+}
+.letter-splash:nth-child(20) {
+  transition-delay: 0.57s;
+}
+.letter-splash:nth-child(21) {
+  transition-delay: 0.69s;
+}
