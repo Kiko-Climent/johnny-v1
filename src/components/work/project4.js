@@ -35,10 +35,10 @@ export default function index4({ project, onHoverChange }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      className={`${styles.project} flex flex-row items-center gap-0 text-4xl -mb-2`}
+      className={`${styles.project} flex flex-row items-center justify-center gap-0 text-4xl -mb-2`}
     >
       {/* Título izquierda */}
-      <p className="text-[15.8vh] flex">{title1}</p>
+      <p className="text-[6vh] md:text-[15.8vh] flex">{title1}</p>
 
       {/* Imagen con animación */}
       <motion.div
@@ -53,13 +53,13 @@ export default function index4({ project, onHoverChange }) {
       {/* Título derecha */}
       {title3 ? (
         // Si hay title3, mostramos title2 y title3 en columna
-        <div className={`${styles.doubleTitle} flex flex-col items-start justify-start text-[7.5vh] leading-[6.0vh] whitespace-nowrap`}>
+        <div className={`${styles.doubleTitle} flex flex-col items-start justify-start text-[2.5vh] md:text-[7.5vh] leading-[3.0vh] md:leading-[6.0vh] whitespace-nowrap`}>
           <p className="text-left">{title2}</p>
           <p className="text-left">{title3}</p>
         </div>
       ) : (
         // Si no, mostramos solo title2 en línea
-        <p className="text-[15.8vh] flex whitespace-nowrap">{title2}</p>
+        <p className="text-[6vh] md:text-[15.8vh] flex whitespace-nowrap">{title2}</p>
       )}
     </div>
   );

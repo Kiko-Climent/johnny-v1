@@ -15,8 +15,8 @@ import gsap from 'gsap';
 // ];
 
 const sliderContentList = [
+  "35°18'35″N 24°53'36″E",
   "JOHNNY CARRETES",
-  "35°18'35″N 24°53'36″E",
   "43°21'09″N 19°73'77″W",
   "35°18'35″N 24°53'36″E",
   "61°10'45″N 71°93'65″E",
@@ -24,7 +24,6 @@ const sliderContentList = [
   "43°21'09″N 19°73'77″W",
   "61°10'45″N 71°93'65″E",
   "43°21'09″N 19°73'77″W",
-  "61°10'45″N 71°93'65″E",
 ];
 
 const sliderImages = [
@@ -67,25 +66,26 @@ const HomeSlider4 = () => {
     
     const activeSpans = contentRef.current.querySelectorAll(".slider-content-active h1 span");
     gsap.to(activeSpans, {
-      top: "-175px",
-      stagger: 0.05,
-      ease: "power3.out",
-      duration: 0.5,
+      y: 100,
+      rotationX: 90,
+      transformOrigin: "center top",
+      stagger: 0.04,
+      ease: "power2.in",
       onComplete: () => {
         gsap.to(".slider-content-active", {
-          // top: "-175px",
           duration: 0.25,
           ease: "power3.out",
         });
       },
     });
+    
 
   // Crear nuevo texto
   const nextContentText = sliderContentList[(currentContentIndex + 1) % sliderContentList.length];
   const newContentDiv = document.createElement('div');
   newContentDiv.className = "slide-content-next absolute top-[200px]";
   newContentDiv.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
-  newContentDiv.innerHTML = `<h1 class="text-[1.50vw] text-white">${nextContentText}</h1>`;
+  newContentDiv.innerHTML = `<h1 class="text-xl text-white">${nextContentText}</h1>`;
   contentRef.current.appendChild(newContentDiv);
 
   const nextTitle = newContentDiv.querySelector("h1");
@@ -167,40 +167,39 @@ const HomeSlider4 = () => {
 gsap.to(newSlideImg, {
   width: "100vw",
   height: "100vh",
-  duration: 1.3,
-  delay: 0.0,
-  ease: "power3.out",
-});
+    duration: 1.3,
+    delay: 0.0,
+    ease: "power3.out",
+  });
 
-// Lógica post-animación (pero con delay, NO dentro del onComplete)
-setTimeout(() => {
-  sliderRef.current.querySelector(".slide-active")?.remove();
-  newSlide.classList.remove("slide-next");
-  newSlide.classList.add("slide-active");
+  setTimeout(() => {
+    sliderRef.current.querySelector(".slide-active")?.remove();
+    newSlide.classList.remove("slide-next");
+    newSlide.classList.add("slide-active");
 
-  newSlideImg?.classList.remove("slide-next-img");
-  newSlideImg?.classList.add("slide-expanded-img");
+    newSlideImg?.classList.remove("slide-next-img");
+    newSlideImg?.classList.add("slide-expanded-img");
 
-  setCurrentImageIndex(newIndex % sliderImages.length);
-  setIsAnimating(false);
-}, 1300); // mismo tiempo que la animación de expansión
+    setCurrentImageIndex(newIndex % sliderImages.length);
+    setIsAnimating(false);
+  }, 1300); // mismo tiempo que la animación de expansión
 
-  };
+    };
 
-  // Primer efecto inicial
-  useEffect(() => {
-    gsap.to(".slide-next-img", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      duration: 1.5,
-      ease: "power3.out",
-      delay: 1,
-    });
-  }, []);
+    // Primer efecto inicial
+    useEffect(() => {
+      gsap.to(".slide-next-img", {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 1,
+      });
+    }, []);
 
   return (
     <div className="w-screen h-screen" onClick={handleClick}>
       <div
-        className="slider absolute top-0 left-0 w-screen h-screen overflow-hidden"
+        className="absolute top-0 left-0 w-screen h-screen overflow-hidden"
         ref={sliderRef}
       >
         <div className="slide-active absolute w-full h-full">
@@ -231,13 +230,13 @@ setTimeout(() => {
         ref={contentRef}
       >
         <div
-          className="slider-content-active absolute top-0 left-2 flex flex-col -space-y-3"
+          className="slider-content-active absolute top-0 left-50 text-center flex flex-col -space-y-3"
           style={{
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
           }}
         >
-          {/* <h1 className="text-xl uppercase">johnny carretes</h1>
-          <h1 className="text-xl uppercase">analog photography</h1> */}
+          <h1 className="text-xl uppercase">johnny carretes</h1>
+          <h1 className="text-xl uppercase">analog photography</h1>
         </div>
         <div
           className="slider-content-next absolute top-[200px]"
