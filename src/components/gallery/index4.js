@@ -39,7 +39,7 @@ const Slider4 = ({images, id}) => {
   return(
     <div className="w-full min-h-screen flex flex-col">
       <div onClick={handleClick}
-        className="flex flex-col justify-between items-center relative w-full h-[calc(100vh-75px)] gap-4 aspect-[5/8] overflow-hidden">
+        className="flex flex-col justify-between items-center relative w-full h-[calc(100vh-30px)] gap-4 aspect-[5/8] overflow-hidden">
         <div className="flex grow h-full w-full px-3">
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -49,7 +49,7 @@ const Slider4 = ({images, id}) => {
               el: ".custom-pagination"
             }}
             modules={[Pagination]}
-            spaceBetween={40}
+            spaceBetween={60}
             className="h-full w-full" 
           >
             {images.map((src, index) => (

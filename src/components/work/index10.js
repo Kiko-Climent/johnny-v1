@@ -55,7 +55,7 @@ const WorkMenu10 = () => {
   // useRevealer();
   
   return(
-      <div className="h-[calc(100vh-100px)] w-screen text-black text-xl tracking-tight flex flex-col justify-center items-center relative px-2">
+      <div className="min-h-screen w-screen text-black text-xl tracking-tight flex flex-col justify-center items-center relative px-2">
         {projects.map((project) => (
           <Project4
             key={project.src}

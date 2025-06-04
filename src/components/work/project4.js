@@ -53,7 +53,7 @@ export default function index4({ project, onHoverChange }) {
       {/* Título derecha */}
       {title3 ? (
         // Si hay title3, mostramos title2 y title3 en columna
-        <div className={`${styles.doubleTitle} flex flex-col items-start justify-start text-[2.5vh] md:text-[7.5vh] leading-[3.0vh] md:leading-[6.0vh] whitespace-nowrap`}>
+        <div className={`${styles.doubleTitle} flex flex-row md:flex-col items-start justify-start text-[2.5vh] md:text-[7.5vh] leading-[3.0vh] md:leading-[6.0vh] whitespace-nowrap`}>
           <p className="text-left">{title2}</p>
           <p className="text-left">{title3}</p>
         </div>
