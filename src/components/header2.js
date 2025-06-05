@@ -10,6 +10,7 @@ const Header2 = () => {
 
   const router = useRouter();
   const [showIndexLink, setShowIndexLink] = useState(false);
+  const [showOrbitalLink, setShowOrbitalLink] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   
 
@@ -17,6 +18,7 @@ const Header2 = () => {
     const handleRouteChangeComplete = (url) => {
       // Solo mostramos el link "index" si estamos ya en /work o /index después del cambio completo
       setShowIndexLink(["/work", "/index"].includes(url));
+      setShowOrbitalLink(["/work", "/index", "/orbital"].includes(url));
     };
 
     // Activamos una vez si ya estamos ahí
@@ -57,6 +59,10 @@ const Header2 = () => {
           {showIndexLink && (
             <AnimatedLink href="/index" text="index" 
               className={`flex text ${currentPath === "/index" ? "text-gray-500" : ""}`} />
+          )}
+          {showOrbitalLink && (
+            <AnimatedLink href="/orbital" text="orbital" 
+              className={`flex text ${currentPath === "/orbital" ? "text-gray-500" : ""}`} />
           )}
         </div>
       </div>
