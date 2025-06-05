@@ -39,7 +39,7 @@ const Slider4 = ({images, id}) => {
   return(
     <div className="w-full min-h-screen flex flex-col">
       <div onClick={handleClick}
-        className="flex flex-col justify-between items-center relative w-full h-[calc(100vh-30px)] gap-4 aspect-[5/8] overflow-hidden">
+        className="flex flex-col justify-between items-center relative w-full h-[calc(100vh-30px)] gap-0 md:gap-4 aspect-[5/8] overflow-hidden">
         <div className="flex grow h-full w-full px-3">
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -65,18 +65,17 @@ const Slider4 = ({images, id}) => {
             ))}
           </Swiper>
         </div>
-        <div className="flex flex-col px-3 text-center justify-center items-center">
+        <div className="flex flex-col px-3 text-center justify-center items-center mb-4 md:mb-0">
           <div className="flex flex-row gap-x-1 text-lg">
             <div className="flex whitespace-nowrap uppercase">{formatTitle(id)}</div>
             <div className="flex custom-pagination text-black" />
-            </div>
+          </div>
           <div className="flex">
             <AnimatedText text={images[activeIndex].coord} hoverText={images[activeIndex].location} 
               className="text-lg" />
           </div>
         </div>
       </div>
-      {/* <div className="flex custom-pagination text-black text-3xl text-center justify-center items-center" /> */}
     </div>
   )
 }

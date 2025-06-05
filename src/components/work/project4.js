@@ -27,6 +27,7 @@ export default function Index4({ project, onHoverChange }) {
   };
 
   const handleClick = () => {
+    setIsActive(false);
     router.push(`/work/${project.id}`);
   };
 
