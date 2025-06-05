@@ -1,17 +1,10 @@
 "use client"
 
-import { useState } from "react";
+// import { useState } from "react";
 import Project4 from "@/components/work/project4"
-import { useRevealer } from "../tools/UseRevealer";
 
 const projects = [
 
-  // {
-  //   id: "mediterraneo",
-  //   title1: "paradise",
-  //   title2: "",
-  //   src: "image00021.jpeg"
-  // },
   {
     id: "paradise_is_really_nice",
     title1: "paradise",
@@ -52,7 +45,6 @@ const projects = [
 
 
 const WorkMenu10 = () => {
-  // useRevealer();
   
   return(
       <div className="min-h-screen w-screen text-black text-xl tracking-tight flex flex-col justify-center items-center relative px-2">

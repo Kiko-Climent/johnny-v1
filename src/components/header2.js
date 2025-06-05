@@ -3,7 +3,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import AnimatedLink from "./tools/AnimatedLink";
-import { playRevealerAnimation } from "./tools/UseRevealer";
 import AboutModal from "./about_modal";
 import AnimatedButton from "./tools/AnimatedButon";
 
@@ -33,15 +32,11 @@ const Header2 = () => {
   }, [router]);
 
   const currentPath = router.pathname;
-
   const handleNavigation = (path) => (e) => {
     e.preventDefault();
     if (path === router.pathname) return;
-  
-    playRevealerAnimation(() => {
-      router.push(path);
-    });
-  };
+    router.push(path);
+  }
 
   return(
     <>
