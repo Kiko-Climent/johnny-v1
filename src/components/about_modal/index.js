@@ -54,7 +54,7 @@ export default function AboutModal({isOpen, onClose}) {
       {/* Modal principal */}
       <div
         ref={modalRef}
-        className="absolute flex flex-col top-1/2 left-1/2 z-50 w-[60vw] -translate-x-1/2 -translate-y-1/2 
+        className="absolute flex flex-col top-1/2 left-1/2 z-50 w-full md:w-[60vw] -translate-x-1/2 -translate-y-1/2 
                    bg-white/75 backdrop-blur-sm text-black px-24 py-16 gap-5"
       >
         {/* Header del modal con título y botón de cerrar */}

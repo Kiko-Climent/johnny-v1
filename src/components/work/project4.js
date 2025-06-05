@@ -32,7 +32,7 @@ export default function Index4({ project, onHoverChange }) {
   };
 
   return (
-    <motion.section
+    <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -62,6 +62,6 @@ export default function Index4({ project, onHoverChange }) {
         // Si no, mostramos solo title2 en línea
         <p className="text-[6vh] md:text-[15.8vh] flex whitespace-nowrap uppercase">{title2}</p>
       )}
-    </motion.section>
+    </div>
   );
 }
