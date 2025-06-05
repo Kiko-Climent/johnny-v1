@@ -22,7 +22,7 @@ const PageTransitionWrapper6 = ({ children }) => {
 
   if (step === "splash") {
     return (
-      <div className="absolute top-0 left-0 w-full h-full bg-white z-50">
+      <div className="fixed top-0 left-0 w-full h-full bg-white z-50">
         <Splash2 />
       </div>
     );
@@ -34,7 +34,7 @@ const PageTransitionWrapper6 = ({ children }) => {
       animate="animate"
       exit="exit"
       variants={variants}
-      className="absolute top-0 left-0 w-full h-full"
+      className="fixed top-0 left-0 w-full h-full"
     >
       {children}
     </motion.div>
