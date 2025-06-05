@@ -5,7 +5,7 @@ import { useState } from "react";
 import {motion} from "framer-motion";
 import styles from "@/components/work/style.module.css";
 
-export default function index3({ project, onHoverChange, index }) {
+export default function Index3({ project, onHoverChange, index }) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { title1, title2, src, id } = project;

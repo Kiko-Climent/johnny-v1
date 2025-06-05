@@ -1,19 +1,7 @@
 "use client";
 
 import Head from "next/head";
-// import WorkMenu2 from "@/components/work/index2";
-// import styles from "@/styles/Work.module.css";
-// import WorkMenu from "@/components/work";
-// import WorkMenu3 from "@/components/work/index3";
-// import WorkMenu5 from "@/components/work/index5";
-// import WorkMenu4 from "@/components/work/index4";
-// import WorkMenu6 from "@/components/work/index6";
-// import WorkMenu7 from "@/components/work/index7";
-// import WorkMenu8 from "@/components/work/index8";
-// import WorkMenu9 from "@/components/work/index9";
-// import WorkMenu7 from "@/components/work/index7";
 import WorkMenu10 from "@/components/work/index10";
-// import WorkMenu from "@/components/work";
 
 
 

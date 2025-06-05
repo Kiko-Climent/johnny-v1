@@ -19,6 +19,12 @@ const items = [
   "Palermo 2024",
   "Asturias 2021",
   "Oviedo 2021",
+  "Oviedo 2021",
+  "Oviedo 2021",
+  "Oviedo 2021",
+  "Oviedo 2021",
+  "Oviedo 2021",
+  "Oviedo 2021",
 ]
 
 export default items

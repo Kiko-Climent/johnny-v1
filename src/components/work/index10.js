@@ -13,40 +13,40 @@ const projects = [
   //   src: "image00021.jpeg"
   // },
   {
-    id: "mediterraneo",
+    id: "paradise_is_really_nice",
     title1: "paradise",
     title2: "is really",
     title3: "nice",
-    src: "image00021.jpeg"
+    src: "image31.webp"
   },
   {
     id: "johnny_color",
     title1: "johnny",
     title2: "color",
-    src: "image00036.jpeg"
+    src: "image6.webp"
   },
 
   {
-    id: "dolce_vita",
-    title1: "Leak",
+    id: "leak_of_dreams",
+    title1: "leak",
     title2: "of",
-    title3: "Dreams",
-    src: "image00041.webp"
+    title3: "dreams",
+    src: "image14.webp"
   },
 
   {
-    id: "islas",
+    id: "costas_de_sol",
     title1: "costas",
     title2: "de sol",
-    src: "image00030.jpeg"
+    src: "image21.webp"
   },
 
   {
-    id: "tempelfog",
+    id: "johnny_de_noche",
     title1: "johnny", 
     title2: "de", 
     title3: "noche",
-    src: "image00001.webp"
+    src: "image50.webp"
   },
 ]
 

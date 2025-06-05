@@ -2,18 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
-// const sliderContentList = [
-//   "napoles",
-//   "creta",
-//   "oviedo",
-//   "almeria",
-//   "mallorca",
-//   "berlin",
-//   "hamburg",
-//   "cologne",
-//   "cadiz",
-// ];
-
 const sliderContentList = [
   "35°18'35″N 24°53'36″E",
   "JOHNNY CARRETES",
@@ -26,17 +14,30 @@ const sliderContentList = [
   "43°21'09″N 19°73'77″W",
 ];
 
+// const sliderImages = [
+//   "image6.jpeg",
+//   "image7.jpeg",
+//   "image10.jpeg",
+//   "image3.jpeg",
+//   "image4.jpeg",
+//   "image12.jpeg",
+//   "image5.jpeg",
+//   "image8.jpeg",
+//   "image9.jpeg",
+// ];
+
 const sliderImages = [
-  "image6.jpeg",
-  "image7.jpeg",
-  "image10.jpeg",
-  "image3.jpeg",
-  "image4.jpeg",
-  "image12.jpeg",
-  "image5.jpeg",
-  "image8.jpeg",
-  "image9.jpeg",
+  "image1.webp",
+  "image2.webp",
+  "image3.webp",
+  "image4.webp",
+  "image5.webp",
+  "image6.webp",
+  "image7.webp",
+  "image8.webp",
+  "image9.webp",
 ];
+
 
 const HomeSlider4 = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(2);

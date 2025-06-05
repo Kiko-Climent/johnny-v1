@@ -14,7 +14,7 @@ const anim = {
 
 }
 
-export default function index({project, onHoverChange}) {
+export default function Index({project, onHoverChange}) {
 
   const [isActive, setIsActive] = useState(false)
 

@@ -11,7 +11,7 @@ const anim = {
   closed: {width: 0}
 }
 
-export default function index2({project, onHoverChange}) {
+export default function Index2({project, onHoverChange}) {
 
   const [isActive, setIsActive] = useState(false)
   const router = useRouter()

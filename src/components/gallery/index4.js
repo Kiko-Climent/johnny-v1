@@ -66,7 +66,7 @@ const Slider4 = ({images, id}) => {
           </Swiper>
         </div>
         <div className="flex flex-col px-3 text-center justify-center items-center">
-          <div className="flex flex-row gap-x-1 text-xl">
+          <div className="flex flex-row gap-x-1 text-lg">
             <div className="flex whitespace-nowrap uppercase">{formatTitle(id)}</div>
             <div className="flex custom-pagination text-black" />
             </div>

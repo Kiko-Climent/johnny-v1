@@ -11,7 +11,7 @@ const anim = {
   closed: { width: 0 }
 };
 
-export default function index4({ project, onHoverChange }) {
+export default function Index4({ project, onHoverChange }) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { title1, title2, title3, src } = project;
@@ -47,7 +47,7 @@ export default function index4({ project, onHoverChange }) {
         animate={isActive ? "open" : "closed"}
         className={styles.imgContainer}
       >
-        <img src={`/images/${src}`} alt={title1} />
+        <img src={`/images/gallery/${src}`} alt={title1} />
       </motion.div>
 
       {/* Título derecha */}

@@ -64,7 +64,7 @@ export default function IndexGallery2() {
   }, []);
   
 
-  const itemCount = 20;
+  const itemCount = 54;
   const itemGap = 150;
   const columns = 4;
   const itemWidth = 120;
@@ -187,7 +187,7 @@ export default function IndexGallery2() {
 
         const itemNum = (Math.abs(row * columns + col) % itemCount) + 1;
         const img = document.createElement("img");
-        img.src = `/assets/image${itemNum}.jpeg`;
+        img.src = `/images/gallery/image${itemNum}.webp`;
         img.alt = `Image ${itemNum}`;
         item.appendChild(img);
 
