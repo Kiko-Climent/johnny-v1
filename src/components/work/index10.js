@@ -47,7 +47,7 @@ const projects = [
 const WorkMenu10 = () => {
   
   return(
-      <div className="min-h-screen w-screen text-black text-xl tracking-tight flex flex-col justify-center items-center relative px-2">
+      <div className="min-h-screen w-screen oveflow-hidden text-black flex flex-col justify-center items-center">
         {projects.map((project) => (
           <Project4
             key={project.src}
