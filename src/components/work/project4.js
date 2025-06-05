@@ -46,7 +46,7 @@ export default function Index4({ project, onHoverChange }) {
         variants={anim}
         initial="closed"
         animate={isActive ? "open" : "closed"}
-        className={styles.imgContainer}
+        className={`${styles.imgContainer} hidden md:block`}
       >
         <img src={`/images/gallery/${src}`} alt={title1} />
       </motion.div>

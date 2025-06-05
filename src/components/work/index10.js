@@ -1,7 +1,9 @@
 "use client"
 
 // import { useState } from "react";
-import Project4 from "@/components/work/project4"
+import Project4 from "@/components/work/project4";
+import ProjectMobile from "./projectMobile";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const projects = [
 
@@ -45,18 +47,19 @@ const projects = [
 
 
 const WorkMenu10 = () => {
+  const isMobile = useIsMobile();
   
-  return(
-      <div className="min-h-screen w-screen oveflow-hidden text-black flex flex-col justify-center items-center">
-        {projects.map((project) => (
-          <Project4
-            key={project.src}
-            project={project}           
-          />
-        ))}
-      </div>
-    
-  )
+  return (
+    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center -space-y-5 md:space-y-0">
+      {projects.map((project) =>
+        isMobile ? (
+          <ProjectMobile key={project.id} project={project} />
+        ) : (
+          <Project4 key={project.id} project={project} />
+        )
+      )}
+    </div>
+  );
 }
 
 export default WorkMenu10;
