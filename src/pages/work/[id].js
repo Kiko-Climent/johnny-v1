@@ -49,6 +49,19 @@ const galleries = {
     
   ],
   costas_de_sol: [
+    {src:"/images/gallery/image55.webp", coord:"38°32′03″N 00°07′53″W", location:"benidorm"},
+    {src:"/images/gallery/image56.webp", coord:"36°31′46″N 05°46′04″W", location:"cadiz"},
+    {src:"/images/gallery/image57.webp", coord:"36°25′00″N 06°09′00″W", location:"chiclana"},
+    {src:"/images/gallery/image58.webp", coord:"36°25′00″N 06°09′00″W", location:"chiclana"},
+    {src:"/images/gallery/image59.webp", coord:"36°25′00″N 06°09′00″W", location:"chiclana"},
+    {src:"/images/gallery/image60.webp", coord:"36°25′00″N 06°09′00″W", location:"chiclana"},
+    {src:"/images/gallery/image61.webp", coord:"39°37'27″N 19°55'12″E", location:"corfu"},
+    // {src:"/images/gallery/image62.webp", coord:"39°37'27″N 19°55'12″E", location:"corfu"},
+    {src:"/images/gallery/image63.webp", coord:"39°37'27″N 19°55'12″E", location:"corfu"},
+    {src:"/images/gallery/image64.webp", coord:"35°18′35″N 24°53′36″E", location:"creta"},
+    {src:"/images/gallery/image65.webp", coord:"35°18′35″N 24°53′36″E", location:"creta"},
+    {src:"/images/gallery/image66.webp", coord:"35°18′35″N 24°53′36″E", location:"creta"},
+    {src:"/images/gallery/image67.webp", coord:"38°32′03″N 00°07′53″W", location:"benidorm"},
 
   ],
   johnny_de_noche: [

@@ -4,12 +4,6 @@
 import Project4 from "@/components/work/project4";
 import ProjectMobile from "./projectMobile";
 import useIsMobile from "@/hooks/useIsMobile";
-import WorkMenu4 from "./index4";
-import WorkMenu5 from "./index5";
-import WorkMenu6 from "./index6";
-import WorkMenu7 from "./index7";
-import WorkMenu8 from "./index8";
-import WorkMenu3 from "./index3";
 
 const projects = [
 
@@ -47,7 +41,7 @@ const projects = [
     id: "costas_de_sol",
     title1: "costas",
     title2: "de sol",
-    src: "image21.webp"
+    src: "image65.webp"
   },
 
   {
@@ -65,14 +59,13 @@ const WorkMenu10 = () => {
   
   return (
     <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center -space-y-5 md:space-y-0">
-      {/* {projects.map((project) =>
+      {projects.map((project) =>
         isMobile ? (
           <ProjectMobile key={project.id} project={project} />
         ) : (
           <Project4 key={project.id} project={project} />
         )
-      )} */}
-      <WorkMenu5 />
+      )}
     </div>
   );
 }
