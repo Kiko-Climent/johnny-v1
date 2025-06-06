@@ -16,11 +16,11 @@ export default function ProjectMobile({ project }) {
       className="w-full flex flex-col -space-y-8 items-center justify-center cursor-pointer text-center"
     >
       <div className="flex">
-        <p className="text-[8vh] uppercase">{title1}</p>
+        <p className="text-[6vh] uppercase">{title1}</p>
       </div>
       <div className="flex flex-row gap-1">
-        <p className="flex text-[6.5vh] uppercase">{title2}</p>
-        <p className="flex text-[6.5vh] uppercase">{title3}</p>
+        <p className="flex text-[6vh] uppercase">{title2}</p>
+        <p className="flex text-[6vh] uppercase">{title3}</p>
       </div>
       
     </div>
