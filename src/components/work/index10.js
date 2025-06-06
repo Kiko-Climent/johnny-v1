@@ -8,6 +8,8 @@ import WorkMenu4 from "./index4";
 import WorkMenu5 from "./index5";
 import WorkMenu6 from "./index6";
 import WorkMenu7 from "./index7";
+import WorkMenu8 from "./index8";
+import WorkMenu3 from "./index3";
 
 const projects = [
 
@@ -70,7 +72,7 @@ const WorkMenu10 = () => {
           <Project4 key={project.id} project={project} />
         )
       )} */}
-      <WorkMenu7 />
+      <WorkMenu5 />
     </div>
   );
 }
