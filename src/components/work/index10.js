@@ -7,6 +7,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import WorkMenu4 from "./index4";
 import WorkMenu5 from "./index5";
 import WorkMenu6 from "./index6";
+import WorkMenu7 from "./index7";
 
 const projects = [
 
@@ -69,7 +70,7 @@ const WorkMenu10 = () => {
           <Project4 key={project.id} project={project} />
         )
       )} */}
-      <WorkMenu6 />
+      <WorkMenu7 />
     </div>
   );
 }
