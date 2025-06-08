@@ -50,7 +50,7 @@ const Slider4 = ({ images, id }) => {
       className="flex flex-col justify-center items-center w-full overflow-hidden"
       style={{ height: "calc(var(--vh, 1vh) * 100)" }} // ✅ Solución al 100vh
     >
-      <div className="flex flex-col items-center justify-center h-full w-full px-3 gap-4 pb-3">
+      <div className="flex flex-col items-center justify-center h-full w-full px-3 gap-0 md:gap-4 pb-3">
         {/* Imagen */}
         <div className="flex items-center justify-center w-full flex-grow relative">
           <Swiper
