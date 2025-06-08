@@ -4,10 +4,10 @@
 
 @font-face {
   font-family: 'MyFont';
-  src: url('/fonts/my-font/PPNeueMontreal-Regular.woff2') format('woff2'),
-       url('/fonts/my-font/PPNeueMontreal-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+  src: url('/fonts/my-font/PPNeueMontreal-Medium.woff2') format('woff2'),
+       url('/fonts/my-font/PPNeueMontreal-Medium.woff') format('woff');
+  font-weight: medium;
+  font-style: medium;
   font-display: swap;
 }
 

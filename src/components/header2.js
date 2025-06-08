@@ -55,15 +55,15 @@ const Header2 = () => {
         onClick={handleNavigation("/")}/>
         <div className="flex flex-row gap-2">
           <AnimatedLink href="/work" text="work" 
-            className={`flex text ${currentPath === "/work" ? "text-gray-400" : ""}`}
+            className={`flex text ${["/orbital", "/index"].includes(currentPath) ? "text-gray-400" : ""}`}
             onClick={handleNavigation("/work")} />
           {showIndexLink && (
-            <AnimatedLink href="/index" text="index" 
-              className={`flex text ${currentPath === "/index" ? "text-gray-400" : ""}`} />
+            <AnimatedLink href="/index" text="canvas" 
+              className={`flex text ${currentPath === "/index" ? "" : "text-gray-400"}`} />
           )}
           {showOrbitalLink && (
             <AnimatedLink href="/orbital" text="orbital" 
-              className={`flex text ${currentPath === "/orbital" ? "text-gray-400" : ""}`} />
+              className={`flex text ${currentPath === "/orbital" ? "" : "text-gray-400"}`} />
           )}
         </div>
       </div>
