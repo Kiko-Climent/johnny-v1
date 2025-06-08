@@ -1,10 +1,11 @@
 "use client"
 
-// import { useState } from "react";
+import { useState } from "react";
 // import Project4 from "@/components/work/project4";
 import Project5 from "@/components/work/project5";
 import ProjectMobile from "./projectMobile";
 import useIsMobile from "@/hooks/useIsMobile";
+import ProjectMobile2 from "./projectMobile2";
 
 const projects = [
 
@@ -57,12 +58,18 @@ const projects = [
 
 const WorkMenu10 = () => {
   const isMobile = useIsMobile();
-  
+  const [selectedId, setSelectedId] = useState(null);
+
   return (
     <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center -space-y-5 md:space-y-0">
       {projects.map((project) =>
         isMobile ? (
-          <ProjectMobile key={project.id} project={project} />
+          <ProjectMobile2
+          key={project.id}
+          project={project}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
         ) : (
           <Project5 key={project.id} project={project} />
         )

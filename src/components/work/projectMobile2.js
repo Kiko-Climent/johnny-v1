@@ -1,54 +1,57 @@
+"use client";
 
+import { useRouter } from "next/router";
+import { useRef } from "react";
+import Image from "next/image";
 
-export default function ProjectMobile2 () {
+export default function ProjectMobile2({ project, selectedId, setSelectedId }) {
+  const router = useRouter();
+  const { title1, title2, title3, id, src } = project;
+  const wasSelectedRef = useRef(false);
+  const isSelected = selectedId === id;
 
-  return(
-    <div className="w-full tracking-tighter flex flex-col items-center justify-between cursor-pointer text-5xl text-center uppercase gap-3">
-      
-      {/* first gallery */}
-      <div className="flex flex-col -space-y-3 items-center justify-center">
-        <div className="flex flex-row gap-2">
-          <div className="flex">paradise</div>
-          <div className="flex">is</div>
+  const handleClick = () => {
+    if (isSelected && wasSelectedRef.current) {
+      router.push(`/work/${id}`);
+    } else {
+      setSelectedId(id);
+      wasSelectedRef.current = true;
+
+      setTimeout(() => {
+        wasSelectedRef.current = false;
+      }, 1000);
+    }
+  };
+
+  return (
+    <div className="relative w-full">
+      {/* Imagen fullscreen debajo del texto */}
+      {isSelected && (
+        <div className="fixed top-0 left-0 w-screen h-screen z-0">
+          <Image
+            src={`/images/gallery/${src}`}
+            alt={id}
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
-        <div className="flex flex-row gap-2">
-          <div className="flex">really</div>
-          <div className="flex">nice</div>
-        </div>
-      </div>
+      )}
 
-      {/* second gallery */}
-      <div className="flex flex-col -space-y-3 items-center justify-center">
-        <div className="flex">johnny</div>
-        <div className="flex">color</div>
-      </div>
-
-      {/* Third gallery */}
-      <div className="flex flex-col -space-y-3 items-center justify-center">
-        <div className="flex flex-row gap-2">
-          <div className="flex">leak</div>
-          <div className="flex">of</div>
+      <div
+        onClick={handleClick}
+        className={`relative z-10 w-full flex flex-col -space-y-8 items-center justify-center cursor-pointer text-center transition-all duration-300 ${
+          selectedId && !isSelected ? "text-gray-400" : ""
+        }`}
+      >
+        <div className="flex">
+          <p className="text-[6vh] uppercase">{title1}</p>
         </div>
-        <div className="flex">dreams</div>
-      </div>
-
-      {/* Forth gallery */}
-      <div className="flex flex-col -space-y-3 items-center justify-center">
-        <div className="flex">costas</div>
-        <div className="flex flex-row gap-2">
-          <div className="flex">de</div>
-          <div className="flex">sol</div>
+        <div className="flex flex-row gap-1">
+          <p className="text-[6vh] uppercase">{title2}</p>
+          <p className="text-[6vh] uppercase">{title3}</p>
         </div>
-      </div>
-
-      {/* Fifth gallery */}
-      <div className="flex flex-col -space-y-3 items-center justify-center">
-        <div className="flex flex-row gap-2">
-          <div className="flex">johnny</div>
-          <div className="flex">de</div>
-        </div>
-        <div className="flex">noche</div>
       </div>
     </div>
-  )
+  );
 }
