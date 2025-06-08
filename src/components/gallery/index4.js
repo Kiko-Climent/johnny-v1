@@ -38,7 +38,7 @@ const Slider4 = ({images, id}) => {
 
   return(
     <div onClick={handleClick} className="flex flex-col justify-center items-center w-full h-screen overflow-hidden">
-    <div className="flex flex-col items-center justify-center h-full w-full px-3 gap-4">
+    <div className="flex flex-col items-center justify-center h-full w-full px-3 pb-3 gap-4">
     
       {/* Imagen */}
       <div className="flex items-center justify-center w-full flex-grow relative">
@@ -70,7 +70,8 @@ const Slider4 = ({images, id}) => {
       </div>
 
       {/* Texto debajo */}
-      <div className="flex flex-col items-center text-center -space-y-1 whitespace-nowrap">
+      <div style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      className="flex flex-col items-center text-center -space-y-1 whitespace-nowrap">
         <div className="flex flex-row gap-x-1 text-lg uppercase">
           <div>{formatTitle(id)}</div>
           <div className="custom-pagination text-black" />
