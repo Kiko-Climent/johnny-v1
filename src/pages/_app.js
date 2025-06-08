@@ -9,29 +9,14 @@ import "@/styles/Work.module.css";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import ProgressBar from "nextjs-progressbar"
-import { useEffect } from "react";
-
 
 
 export default function App({ Component, pageProps }) {
-
-  useEffect(() => {
-    const setVH = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-
-    setVH();
-    window.addEventListener("resize", setVH);
-    return () => window.removeEventListener("resize", setVH);
-  }, []);
-  
   const router = useRouter()
   
   return (
     // <div className="w-screen h-screen flex flex-col">
-      <div className="w-screen flex flex-col relative overflow-hidden"
-      style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
+      <div className="w-screen h-screen flex flex-col relative overflow-hidden">
       <ProgressBar color="#000" startPosition={0.2} height={2} stopDelayMs={200}/>
       <Header2 />
       <AnimatePresence mode="wait" initial={false}>

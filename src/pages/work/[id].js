@@ -1,5 +1,6 @@
 // import Slider3 from "@/components/gallery/index3";
-import Slider4 from "@/components/gallery/index4";
+// import Slider4 from "@/components/gallery/index4";
+import Slider6 from "@/components/gallery/index6";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -91,16 +92,28 @@ const Gallery = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    setVH();
+    window.addEventListener("resize", setVH);
+    return () => window.removeEventListener("resize", setVH);
+  }, []);
+
+  useEffect(() => {
     if (id && galleries[id]) {
       setImages(galleries[id]);
     }
   }, [id]);
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
+    <div className="w-screen flex flex-col items-center justify-center"
+    style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
       {images.length > 0 ? (
         <div className="w-full">
-          <Slider4 images={images} id={id} />
+          <Slider6 images={images} id={id} />
         </div>
       ) : (
         <p className="text-white">Charging images...</p>
