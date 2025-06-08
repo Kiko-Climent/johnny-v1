@@ -1,7 +1,8 @@
 "use client"
 
 // import { useState } from "react";
-import Project4 from "@/components/work/project4";
+// import Project4 from "@/components/work/project4";
+import Project5 from "@/components/work/project5";
 import ProjectMobile from "./projectMobile";
 import useIsMobile from "@/hooks/useIsMobile";
 
@@ -63,7 +64,7 @@ const WorkMenu10 = () => {
         isMobile ? (
           <ProjectMobile key={project.id} project={project} />
         ) : (
-          <Project4 key={project.id} project={project} />
+          <Project5 key={project.id} project={project} />
         )
       )}
     </div>
