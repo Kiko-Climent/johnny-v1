@@ -46,24 +46,24 @@ const Header2 = () => {
     <nav
     className={`w-full h-auto flex flex-row justify-between uppercase text-lg px-2 py-4 whitespace-nowrap ${
       currentPath === "/index"
-        ? "fixed top-0 left-0 z-40 bg-transparent text-black"
-        : "relative bg-white text-black z-40"
+        ? "top-0 left-0 fixed z-40 bg-transparent text-black"
+        : "top-0 left-0 fixed z-40 bg-white text-black"
     }`}
     >
       <div className="flex flex-col items-start leading-tight">
         <AnimatedLink href="/" className="flex text" text="johnny carretes" 
         onClick={handleNavigation("/")}/>
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-2">
           <AnimatedLink href="/work" text="work" 
-            className={`flex text ${currentPath === "/work" ? "text-gray-500" : ""}`}
+            className={`flex text ${currentPath === "/work" ? "text-gray-400" : ""}`}
             onClick={handleNavigation("/work")} />
           {showIndexLink && (
             <AnimatedLink href="/index" text="index" 
-              className={`flex text ${currentPath === "/index" ? "text-gray-500" : ""}`} />
+              className={`flex text ${currentPath === "/index" ? "text-gray-400" : ""}`} />
           )}
           {showOrbitalLink && (
             <AnimatedLink href="/orbital" text="orbital" 
-              className={`flex text ${currentPath === "/orbital" ? "text-gray-500" : ""}`} />
+              className={`flex text ${currentPath === "/orbital" ? "text-gray-400" : ""}`} />
           )}
         </div>
       </div>

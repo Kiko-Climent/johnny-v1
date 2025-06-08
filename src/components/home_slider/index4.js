@@ -224,7 +224,7 @@ gsap.to(newSlideImg, {
         </div>
       </div>
       <div
-        className="slider-content absolute left-0 bottom-4 flex justify-center items-center text-white  w-full h-1/2 overflow-hidden"
+        className="slider-content absolute left-0 bottom-4 flex justify-center items-center text-white w-full h-1/2 overflow-hidden"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         }}

@@ -16,11 +16,11 @@ export default function App({ Component, pageProps }) {
   
   return (
     // <div className="w-screen h-screen flex flex-col">
-      <div className="w-screen min-h-screen flex flex-col relative overflow-hidden">
+      <div className="w-screen h-screen flex flex-col relative overflow-hidden">
       <ProgressBar color="#000" startPosition={0.2} height={2} stopDelayMs={200}/>
       <Header2 />
       <AnimatePresence mode="wait" initial={false}>
-        <div key={router.pathname} className="flex-1 overflow-hidden">
+        <div key={router.pathname} className="flex-1">
         {/* <div key={router.pathname} className=""> */}
           <PageTransitionWrapper7 key={router.pathname}>
             <Component {...pageProps} />

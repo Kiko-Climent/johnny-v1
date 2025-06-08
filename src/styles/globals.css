@@ -39,7 +39,7 @@ body {
 }
 
 .text .block:last-child {
-  color: gray;
+  color: #9ca3af;
   text-transform: uppercase;
   position: absolute;
   top: 100%;

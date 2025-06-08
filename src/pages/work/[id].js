@@ -97,7 +97,7 @@ const Gallery = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center justify-center">
+    <div className="h-screen w-screen flex flex-col items-center justify-center">
       {images.length > 0 ? (
         <div className="w-full">
           <Slider4 images={images} id={id} />
