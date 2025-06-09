@@ -278,29 +278,29 @@ export default function IndexGallery2() {
       }
     });
 
-    // const viewportWidth = window.innerWidth;
-    // const targetWidth = viewportWidth * 0.4;
-    // const targetHeight = targetWidth * 1.2;
+    const viewportWidth = window.innerWidth;
+    const targetWidth = viewportWidth * 0.4;
+    const targetHeight = targetWidth * 1.2;
 
-    // gsap.delayedCall(0.5, animateTitleIn);
+    gsap.delayedCall(0.5, animateTitleIn);
 
-    // gsap.fromTo(
-    //   expandedItem,
-    //   {
-    //     width: itemWidth,
-    //     height: itemHeight,
-    //     x: rect.left + itemWidth / 2 - window.innerWidth / 2,
-    //     y: rect.top + itemHeight / 2 - window.innerHeight / 2,
-    //   },
-    //   {
-    //     width: targetWidth,
-    //     height: targetHeight,
-    //     x: 0,
-    //     y: 0,
-    //     duration: 1,
-    //     ease: "hop",
-    //   }
-    // );
+    gsap.fromTo(
+      expandedItem,
+      {
+        width: itemWidth,
+        height: itemHeight,
+        x: rect.left + itemWidth / 2 - window.innerWidth / 2,
+        y: rect.top + itemHeight / 2 - window.innerHeight / 2,
+      },
+      {
+        width: targetWidth,
+        height: targetHeight,
+        x: 0,
+        y: 0,
+        duration: 1,
+        ease: "hop",
+      }
+    );
 
     img.src = targetImg;
     img.onload = () => {

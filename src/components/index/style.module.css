@@ -119,3 +119,9 @@
   transform: translateY(0%);
   will-change: transform;
 }
+
+.zoomed {
+  transform: scale(2); /* o el tamaño real */
+  transition: transform 0.3s ease;
+  z-index: 10;
+}

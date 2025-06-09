@@ -40,16 +40,16 @@ export default function ProjectMobile2({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col -space-y-8 items-center justify-center cursor-pointer text-center transition-all duration-300 ${
+        className={`relative z-10 -space-y-8 w-full flex flex-col items-center justify-center cursor-pointer text-center transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >
         <div className="flex">
-          <p className="text-[6vh] uppercase">{title1}</p>
+          <p className="text-[5vh] uppercase">{title1}</p>
         </div>
-        <div className="flex flex-row gap-1">
-          <p className="text-[6vh] uppercase">{title2}</p>
-          <p className="text-[6vh] uppercase">{title3}</p>
+        <div className="flex flex-row gap-3">
+          <p className="text-[5vh] uppercase">{title2}</p>
+          <p className="text-[5vh] uppercase">{title3}</p>
         </div>
       </div>
     </div>

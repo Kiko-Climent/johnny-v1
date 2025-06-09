@@ -6,6 +6,7 @@ import Project5 from "@/components/work/project5";
 import ProjectMobile from "./projectMobile";
 import useIsMobile from "@/hooks/useIsMobile";
 import ProjectMobile2 from "./projectMobile2";
+import ProjectMobile3 from "./ProjectMobile3";
 
 const projects = [
 
@@ -14,10 +15,14 @@ const projects = [
     title1: "paradise",
     title2: "is really",
     title3: "nice",
+    mobileTitle1: "paradise",
+    mobileTitle2: "is",
+    mobileTitle3: "really",
+    mobileTitle4: "nice",
     mobileLayout: [
-      ["title1", "title2"],
-      ["title3"]
-    ],
+      ["mobileTitle1", "mobileTitle2"],
+      ["mobileTitle3", "mobileTitle4"]
+  ],
     src: "image31.webp"
   },
   {
@@ -32,10 +37,6 @@ const projects = [
     title1: "leak",
     title2: "of",
     title3: "dreams",
-    mobileLayout: [
-      ["title1", "title2"],
-      ["title3"]
-    ],
     src: "image14.webp"
   },
 
@@ -61,10 +62,10 @@ const WorkMenu10 = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center -space-y-5 md:space-y-0">
+    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center">
       {projects.map((project) =>
         isMobile ? (
-          <ProjectMobile2
+          <ProjectMobile3
           key={project.id}
           project={project}
           selectedId={selectedId}
