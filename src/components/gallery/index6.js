@@ -4,10 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import AnimatedText from "../tools/AnimatedText";
+// import AnimatedText from "../tools/AnimatedText";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import AnimatedText2 from "../tools/AnimatedText2";
 
 const Slider6 = ({images, id}) => {
   
@@ -51,7 +52,7 @@ const Slider6 = ({images, id}) => {
       className="flex flex-col justify-center items-center w-full overflow-hidden gap-0 md:gap-2 pb-2"
       style={{ height: "calc(var(--vh, 1vh) * 100)" }} // ✅ Solución al 100vh
     >
-      <div className="flex w-full grow relative px-3">
+      <div className="flex w-full grow relative px-2">
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
@@ -89,9 +90,10 @@ const Slider6 = ({images, id}) => {
           <div className="custom-pagination text-black" />
         </div>
         <div>
-          <AnimatedText
+          <AnimatedText2
             text={images[activeIndex].coord}
             hoverText={images[activeIndex].location}
+            resetTrigger={activeIndex}
             className="text-lg"
           />
         </div>
