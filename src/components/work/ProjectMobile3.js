@@ -39,17 +39,17 @@ export default function ProjectMobile3({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col items-center justify-center cursor-pointer text-center transition-all duration-300 ${
+        className={`relative z-10 w-full flex flex-col items-end justify-center cursor-pointer text-justify transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >
         {/* Layout especial si se define mobileLayout */}
         {mobileLayout ? (
-          <div className="flex flex-col items-center justify-center -space-y-2 md:hidden">
+          <div className="flex flex-col items-end justify-center -space-y-2 md:hidden pr-3">
             {mobileLayout.map((row, rowIndex) => (
               <div key={rowIndex} className="flex flex-row gap-2">
                 {row.map((key, colIndex) => (
-                  <p key={colIndex} className="text-3xl uppercase">
+                  <p key={colIndex} className="text-4xl uppercase">
                     {project[key]}
                   </p>
                 ))}
@@ -59,9 +59,9 @@ export default function ProjectMobile3({ project, selectedId, setSelectedId }) {
         ) : (
           // Layout por defecto
           <div className="flex flex-row gap-2 whitespace-nowrap md:hidden">
-            <p className="text-3xl uppercase">{title1}</p>
-            <p className="text-3xl uppercase">{title2}</p>
-            <p className="text-3xl uppercase">{title3}</p>
+            <p className="text-4xl uppercase">{title1}</p>
+            <p className="text-4xl uppercase">{title2}</p>
+            <p className="text-4xl uppercase">{title3}</p>
           </div>
         )}
       </div>

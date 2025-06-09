@@ -37,6 +37,13 @@ const projects = [
     title1: "leak",
     title2: "of",
     title3: "dreams",
+    mobileTitle1: "leak",
+    mobileTitle2: "of",
+    mobileTitle3: "dreams",
+    mobileLayout: [
+      ["mobileTitle1", "mobileTitle2"],
+      ["mobileTitle3"]
+  ],
     src: "image14.webp"
   },
 
@@ -52,6 +59,13 @@ const projects = [
     title1: "johnny", 
     title2: "de", 
     title3: "noche",
+    mobileTitle1: "johnny",
+    mobileTitle2: "de",
+    mobileTitle3: "noche",
+    mobileLayout: [
+      ["mobileTitle1", "mobileTitle2"],
+      ["mobileTitle3"]
+  ],
     src: "image50.webp"
   },
 ]
