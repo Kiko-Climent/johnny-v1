@@ -48,7 +48,7 @@ export default function AboutModal2({isOpen, onClose}) {
     >
       <div
         ref={modalRef}
-        className="absolute flex flex-col top-1/2 text-base text-justify left-1/2 z-50 w-[95vw] md:w-[60vw] -translate-x-1/2 -translate-y-1/2 
+        className="absolute flex flex-col top-1/2 text-sm md:text-base text-justify left-1/2 z-50 w-[95vw] md:w-[60vw] -translate-x-1/2 -translate-y-1/2 
                    bg-white/90 backdrop-blur-sm text-black px-3 md:px-24 py-8 md:py-16 gap-2 md:gap-4"
       >
         <div className="flex flex-col uppercase">

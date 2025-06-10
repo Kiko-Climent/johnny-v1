@@ -45,8 +45,8 @@ const AnimatedText2 = ({ text = "", hoverText = "", className = "", resetTrigger
       // ⏱️ Quitamos la clase .play después de 3 segundos
       timeoutRef.current = setTimeout(() => {
         element.classList.remove("play");
-      }, 3000);
-    }, 6000); // Espera total de 6s (3s on + 3s off)
+      }, 1800);
+    }, 3600); // Espera total de 6s (3s on + 3s off)
 
     // 🎯 Hover manual: también activa el efecto
     const handleMouseOver = () => {
