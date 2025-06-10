@@ -3,10 +3,11 @@
 import { useState } from "react";
 // import Project4 from "@/components/work/project4";
 import Project5 from "@/components/work/project5";
-import ProjectMobile from "./projectMobile";
+// import ProjectMobile from "./projectMobile";
 import useIsMobile from "@/hooks/useIsMobile";
-import ProjectMobile2 from "./projectMobile2";
-import ProjectMobile3 from "./ProjectMobile3";
+// import ProjectMobile2 from "./projectMobile2";
+// import ProjectMobile3 from "./ProjectMobile3";
+import ProjectMobile4 from "./ProjectMobile4";
 
 const projects = [
 
@@ -79,7 +80,7 @@ const WorkMenu10 = () => {
     <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center">
       {projects.map((project) =>
         isMobile ? (
-          <ProjectMobile3
+          <ProjectMobile4
           key={project.id}
           project={project}
           selectedId={selectedId}
