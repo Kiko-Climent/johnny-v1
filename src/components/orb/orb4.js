@@ -8,7 +8,7 @@ const Orb4 = ({
   totalImages = 22,
   totalItems = 100,
   baseWidth = 1,
-  baseHeight = 0.6,
+  baseHeight = 0.8,
   sphereRadius = 4.3,
   backgroundColor = "FFFFFF"
 }) => {
@@ -18,7 +18,7 @@ const Orb4 = ({
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      80,
+      22,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
@@ -197,9 +197,30 @@ const Orb4 = ({
     backgroundColor
   ])
 
-  return(
-    <div className="orb" ref={orbRef}></div>
-  )
+  return (
+    <div className="orb-container" style={{ position: 'relative' }}>
+      <div className="orb" ref={orbRef}></div>
+      <div style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems:"center",
+        whitespace: 'nowrap',
+        textTransform: 'uppercase',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        fontSize: '1.3rem',
+        color: 'black',
+        pointerEvents: 'none'
+      }}>
+        analog photography
+      </div>
+    </div>
+  );
+  
 }
 
 export default Orb4;
