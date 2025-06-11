@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 // import Project4 from "@/components/work/project4";
-import Project5 from "@/components/work/project5";
+// import Project5 from "@/components/work/project5";
+import Project6 from "@/components/work/project6";
 // import ProjectMobile from "./projectMobile";
 import useIsMobile from "@/hooks/useIsMobile";
 // import ProjectMobile2 from "./projectMobile2";
@@ -87,7 +88,7 @@ const WorkMenu10 = () => {
           setSelectedId={setSelectedId}
         />
         ) : (
-          <Project5 key={project.id} project={project} />
+          <Project6 key={project.id} project={project} />
         )
       )}
     </div>

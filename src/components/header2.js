@@ -17,22 +17,27 @@ const Header2 = () => {
 
   useEffect(() => {
     const handleRouteChangeComplete = (url) => {
-      // Solo mostramos el link "index" si estamos ya en /work o /index después del cambio completo
-      setShowIndexLink(["/work", "/index"].includes(url));
-      setShowOrbitalLink(["/work", "/index", "/orbital"].includes(url));
+      const isCanvasOrOrbital = ["/index", "/orbital"].includes(url);
+      const isWorkOrSlider = url.startsWith("/work");
+  
+      // Mostrar el link "canvas" si estamos en /work, /index, /orbital o en un slider
+      setShowIndexLink(isCanvasOrOrbital || isWorkOrSlider);
+  
+      // Mostrar el link "orbital" en las mismas condiciones
+      setShowOrbitalLink(isCanvasOrOrbital || isWorkOrSlider);
     };
-
-    // Activamos una vez si ya estamos ahí
+  
+    // Activamos una vez al montar el componente
     handleRouteChangeComplete(router.pathname);
-
-    // Escuchamos cuando el cambio de ruta termine
+  
+    // Escuchamos cambios de ruta
     router.events.on("routeChangeComplete", handleRouteChangeComplete);
-
-    // Cleanup
+  
     return () => {
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
   }, [router]);
+  
 
   const currentPath = router.pathname;
   const handleNavigation = (path) => (e) => {
@@ -45,7 +50,7 @@ const Header2 = () => {
     <>
     <nav
     className={`w-full h-auto flex flex-row justify-between uppercase text-lg px-2 py-4 whitespace-nowrap ${
-      currentPath === "/index"
+      ["/index", "/orbital"].includes(currentPath)
         ? "top-0 left-0 fixed z-40 bg-transparent text-black"
         : "top-0 left-0 fixed z-40 bg-white text-black"
     }`}

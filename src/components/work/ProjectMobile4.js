@@ -34,7 +34,7 @@ export default function ProjectMobile4({ project, selectedId, setSelectedId }) {
   }, [isSelected]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full mb-3">
       {isSelected && (
         <div className="fixed top-0 left-0 w-screen h-screen z-0">
           <Image
