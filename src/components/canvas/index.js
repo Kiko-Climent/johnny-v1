@@ -41,8 +41,6 @@ export default function CanvasGallery() {
       };
     };
   }
-  
-  
 
   useEffect(() => {
     const importSplitType = async () => {
@@ -289,17 +287,17 @@ export default function CanvasGallery() {
   
     const expandedItem = document.createElement("div");
     expandedItem.classList.add(styles.expandedItem);
+    expandedItem.style.visibility = "hidden";
   
     const img = document.createElement("img");
     img.src = targetImg;
     img.className = styles.image;
     const titleLink = document.createElement("a");
     titleLink.href = galleryLink;
-    titleLink.target = "_self";
+    titleLink.className = styles.galleryTitleLink;
+    titleLink.addEventListener("click", e => e.stopPropagation());
 
     expandedItem.appendChild(titleLink);
-
-  
     expandedItem.appendChild(img);
     expandedItem.addEventListener("click", closeExpandedItem);
     document.body.appendChild(expandedItem);
@@ -317,6 +315,7 @@ export default function CanvasGallery() {
     });
   
     img.onload = () => {
+      expandedItem.style.visibility = "visible";
       const naturalWidth = img.naturalWidth;
       const naturalHeight = img.naturalHeight;
     
