@@ -59,7 +59,7 @@ const Header2 = () => {
         <AnimatedLink href="/" className="flex text" text="johnny carretes" 
         onClick={handleNavigation("/")}/>
         <div className="flex flex-row gap-2">
-          <AnimatedLink href="/work" text="work" 
+          <AnimatedLink href="/work" text="index" 
             className={`flex text ${["/orbital", "/index"].includes(currentPath) ? "text-gray-400" : ""}`}
             onClick={handleNavigation("/work")} />
           {showIndexLink && (

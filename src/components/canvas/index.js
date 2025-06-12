@@ -9,7 +9,7 @@ import styles from "@/components/index/style.module.css"
 
 let SplitType;
 
-export default function IndexGallery2() {
+export default function CanvasGallery() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const overlayRef = useRef(null);
@@ -18,6 +18,30 @@ export default function IndexGallery2() {
   const expandedItemRef = useRef(null);
 
   const [initialized, setInitialized] = useState(false);
+
+  function loadImageWithFallback(basePath, itemNum, callback) {
+    const img = new Image();
+    const webpSrc = `${basePath}/image${itemNum}.webp`;
+    const jpegSrc = `${basePath}/image${itemNum}.jpeg`;
+  
+    img.src = webpSrc;
+  
+    img.onload = () => {
+      callback(webpSrc);
+    };
+  
+    img.onerror = () => {
+      // Si falla el .webp, probamos con .jpeg
+      img.src = jpegSrc;
+      img.onload = () => {
+        callback(jpegSrc);
+      };
+      img.onerror = () => {
+        console.error(`Image not found: image${itemNum}.webp or .jpeg`);
+      };
+    };
+  }
+  
   
 
   useEffect(() => {
@@ -64,7 +88,7 @@ export default function IndexGallery2() {
   }, []);
   
 
-  const itemCount = 54;
+  const itemCount = 34;
   const itemGap = 150;
   const columns = 4;
   const itemWidth = 120;
@@ -186,10 +210,16 @@ export default function IndexGallery2() {
         item.dataset.row = row;
 
         const itemNum = (Math.abs(row * columns + col) % itemCount) + 1;
-        const img = document.createElement("img");
-        img.src = `/assets/orb/image${itemNum}.webp`;
-        img.alt = `Image ${itemNum}`;
-        item.appendChild(img);
+        const basePath = "/assets/orb";
+
+        loadImageWithFallback(basePath, itemNum, (finalSrc) => {
+          const img = document.createElement("img");
+          img.src = finalSrc;
+          img.alt = `Image ${itemNum}`;
+          img.loading = "lazy";
+          item.appendChild(img);
+        });
+
 
         item.addEventListener("click", (e) => {
           if (state.mouseHasMoved || state.isDragging) return;
@@ -227,47 +257,46 @@ export default function IndexGallery2() {
     const state = stateRef.current;
     const container = containerRef.current;
     const overlay = overlayRef.current;
-
+  
     state.isExpanded = true;
     state.activeItem = item;
     state.activeItemId = item.id;
     state.canDrag = false;
     container.style.cursor = "auto";
-
+  
     const imgSrc = item.querySelector("img").src;
     const imgMatch = imgSrc.match(/\/image(\d+)\.jpeg/);
     const imgNum = imgMatch ? parseInt(imgMatch[1]) : 1;
     const titleIndex = (imgNum - 1) % items.length;
-
+  
     setAndAnimateTitle(items[titleIndex]);
     item.style.visibility = "hidden";
-
+  
     const rect = item.getBoundingClientRect();
     const targetImg = item.querySelector("img").src;
     gsap.delayedCall(0.5, animateTitleIn);
-
+  
     state.originalPosition = {
       id: item.id,
       rect: rect,
       imgSrc: targetImg,
     };
-
+  
     overlay.classList.add(styles.active);
-
+  
     const expandedItem = document.createElement("div");
     expandedItem.classList.add(styles.expandedItem);
-    expandedItem.style.width = `${itemWidth}px`;
-    expandedItem.style.height = `${itemHeight}px`;
-
+  
     const img = document.createElement("img");
     img.src = targetImg;
     img.className = styles.image;
+  
     expandedItem.appendChild(img);
     expandedItem.addEventListener("click", closeExpandedItem);
     document.body.appendChild(expandedItem);
-
     state.expandedItem = expandedItem;
-
+  
+    // Ocultar otros elementos
     document.querySelectorAll(".item").forEach((el) => {
       if (el !== state.activeItem) {
         gsap.to(el, {
@@ -277,85 +306,77 @@ export default function IndexGallery2() {
         });
       }
     });
-
-    const viewportWidth = window.innerWidth;
-    const targetWidth = viewportWidth * 0.4;
-    const targetHeight = targetWidth * 1.2;
-
-    gsap.delayedCall(0.5, animateTitleIn);
-
-    gsap.fromTo(
-      expandedItem,
-      {
-        width: itemWidth,
-        height: itemHeight,
-        x: rect.left + itemWidth / 2 - window.innerWidth / 2,
-        y: rect.top + itemHeight / 2 - window.innerHeight / 2,
-      },
-      {
-        width: targetWidth,
-        height: targetHeight,
-        x: 0,
-        y: 0,
-        duration: 1,
-        ease: "hop",
-      }
-    );
-
-    img.src = targetImg;
+  
     img.onload = () => {
       const naturalWidth = img.naturalWidth;
       const naturalHeight = img.naturalHeight;
-
+    
       const aspectRatio = naturalWidth / naturalHeight;
       const maxWidth = window.innerWidth * 0.8;
       const maxHeight = window.innerHeight * 0.8;
-
+    
       let targetWidth = naturalWidth;
       let targetHeight = naturalHeight;
-
-      // Escalamos si excede los límites de pantalla
+    
       if (targetWidth > maxWidth) {
         targetWidth = maxWidth;
         targetHeight = targetWidth / aspectRatio;
       }
-
+    
       if (targetHeight > maxHeight) {
         targetHeight = maxHeight;
         targetWidth = targetHeight * aspectRatio;
       }
-
+    
+      expandedItem.style.width = `${targetWidth}px`;
+      expandedItem.style.height = `${targetHeight}px`;
+    
+      // Calcular transformaciones
+      const fromX = rect.left + rect.width / 2 - window.innerWidth / 2;
+      const fromY = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const scaleX = rect.width / targetWidth;
+      const scaleY = rect.height / targetHeight;
+      const initialScale = Math.min(scaleX, scaleY);
+    
+      // Guardamos los valores para la animación inversa
+      state.expandedTransform = {
+        fromX,
+        fromY,
+        toX: 0,
+        toY: 0,
+        scale: initialScale,
+      };
+    
       gsap.fromTo(
         expandedItem,
         {
-          width: itemWidth,
-          height: itemHeight,
-          x: rect.left + itemWidth / 2 - window.innerWidth / 2,
-          y: rect.top + itemHeight / 2 - window.innerHeight / 2,
+          x: fromX,
+          y: fromY,
+          scale: initialScale,
         },
         {
-          width: targetWidth,
-          height: targetHeight,
           x: 0,
           y: 0,
+          scale: 1,
           duration: 1,
-          ease: "hop",
+          ease: "power2.out",
         }
       );
     };
-  };
+    
+  };  
 
   const closeExpandedItem = () => {
     const state = stateRef.current;
     const container = containerRef.current;
     const overlay = overlayRef.current;
-
-    if (!state.expandedItem || !state.originalPosition) return;
-
+  
+    if (!state.expandedItem || !state.originalPosition || !state.expandedTransform) return;
+  
     animateTitleOut();
     overlay.classList.remove(styles.active);
-    const originalRect = state.originalPosition.rect;
-
+    const originalItem = document.getElementById(state.activeItemId);
+  
     document.querySelectorAll(".item").forEach((el) => {
       if (el.id !== state.activeItemId) {
         gsap.to(el, {
@@ -366,30 +387,31 @@ export default function IndexGallery2() {
         });
       }
     });
-
-    const originalItem = document.getElementById(state.activeItemId);
-
+  
+    const { fromX, fromY, scale } = state.expandedTransform;
+  
     gsap.to(state.expandedItem, {
-      width: itemWidth,
-      height: itemHeight,
-      x: originalRect.left + itemWidth / 2 - window.innerWidth / 2,
-      y: originalRect.top + itemHeight / 2 - window.innerHeight / 2,
+      x: fromX,
+      y: fromY,
+      scale: scale,
       duration: 1,
-      ease: "hop",
+      ease: "power2.inOut",
       onComplete: () => {
         if (state.expandedItem && state.expandedItem.parentNode) {
           document.body.removeChild(state.expandedItem);
         }
-
+  
         if (originalItem) {
           originalItem.style.visibility = "visible";
         }
-
+  
+        // Limpiar estado
         state.expandedItem = null;
         state.isExpanded = false;
         state.activeItem = null;
         state.originalPosition = null;
         state.activeItemId = null;
+        state.expandedTransform = null;
         state.canDrag = true;
         container.style.cursor = "grab";
         state.dragVelocityX = 0;
@@ -397,6 +419,7 @@ export default function IndexGallery2() {
       },
     });
   };
+  
 
   const animate = () => {
     const state = stateRef.current;
