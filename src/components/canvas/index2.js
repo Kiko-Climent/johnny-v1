@@ -9,7 +9,7 @@ import styles from "@/components/index/style.module.css"
 
 let SplitType;
 
-export default function CanvasGallery() {
+export default function CanvasGallery2() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const overlayRef = useRef(null);
@@ -61,31 +61,6 @@ export default function CanvasGallery() {
     }
   
     importSplitType();
-    const canvas = canvasRef.current;
-    if (canvas) {
-      // 👇 Empezamos "lejos"
-      gsap.set(canvas, {
-        scale: 0.6,
-        z: -500, // simulamos que está "atrás" en un plano 3D
-      });
-    }
-
-    // 👇 Zoom in al primer click
-    const handleInitialZoom = () => {
-      const state = stateRef.current;
-      if (!state.zoomedIn) {
-        state.zoomedIn = true;
-
-        gsap.to(canvasRef.current, {
-          scale: 1,
-          z: 0, // vuelve al plano 0
-          duration: 1.6,
-          ease: "power4.out",
-        });
-      }
-    };
-
-    window.addEventListener("click", handleInitialZoom, { once: true });
   
     return () => {
       if (containerRef.current) {
@@ -98,7 +73,6 @@ export default function CanvasGallery() {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("click", handleInitialZoom);
   
       if (stateRef.current.animationFrameId) {
         cancelAnimationFrame(stateRef.current.animationFrameId);
@@ -143,7 +117,6 @@ export default function CanvasGallery() {
     activeItemId: null,
     titleSplit: null,
     animationFrameId: null,
-    zoomedIn: false,
   });
 
   const setAndAnimateTitle = (title) => {
@@ -467,10 +440,7 @@ export default function CanvasGallery() {
       state.currentX += (state.targetX - state.currentX) * ease;
       state.currentY += (state.targetY - state.currentY) * ease;
 
-      gsap.set(canvas, {
-        x: state.currentX,
-        y: state.currentY,
-      });
+      canvas.style.transform = `translate(${state.currentX}px, ${state.currentY}px)`;
 
       const now = Date.now();
       const distMoved = Math.sqrt(

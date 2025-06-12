@@ -4,11 +4,13 @@
   height: 100vh;
   overflow: hidden;
   cursor: grab;
+  perspective: 800px;
 }
 
 .canvas {
   position: absolute;
   will-change: transform;
+  transform-style: preserve-3d;
 }
 
 /* .item {

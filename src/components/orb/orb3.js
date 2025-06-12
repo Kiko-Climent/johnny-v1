@@ -84,7 +84,6 @@ const Orb = ({
     const getRandomImagePath = () => {
       const index = Math.floor(Math.random() * imagePool.length);
       const selectedImage = `/assets/orb/${imagePool[index]}`;
-      console.log("➡️ Imagen seleccionada para cargar:", selectedImage); // ✅ Aquí
       return selectedImage;
     };
     
