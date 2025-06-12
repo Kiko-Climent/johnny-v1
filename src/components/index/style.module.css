@@ -53,7 +53,7 @@
 .image {
   width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   z-index: 1;
 }
 
@@ -109,6 +109,7 @@
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   mix-blend-mode: difference;
 }
+
 
 .word {
   position: relative;

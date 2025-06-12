@@ -89,10 +89,11 @@ export default function CanvasGallery() {
   
 
   const itemCount = 34;
-  const itemGap = 150;
-  const columns = 4;
-  const itemWidth = 120;
-  const itemHeight = 160;
+  const horizontalGap = 80;
+  const verticalGap = 105;
+  const columns = 6;
+  const itemWidth = 85;
+  const itemHeight = 140;
 
   const stateRef = useRef({
     isDragging: false,
@@ -172,24 +173,25 @@ export default function CanvasGallery() {
 
     const startCol = Math.floor(
       (-state.currentX - viewWidth / 2 + (movingRight ? directionBufferX : 0)) /
-        (itemWidth + itemGap)
+        (itemWidth + horizontalGap)
     );
     const endCol = Math.ceil(
       (-state.currentX +
         viewWidth * 1.5 +
         (!movingRight ? directionBufferX : 0)) /
-        (itemWidth + itemGap)
+        (itemWidth + horizontalGap)
     );
     const startRow = Math.floor(
       (-state.currentY - viewHeight / 2 + (movingDown ? directionBufferY : 0)) /
-        (itemHeight + itemGap)
+        (itemHeight + verticalGap)
     );
     const endRow = Math.ceil(
       (-state.currentY +
         viewHeight * 1.5 +
         (!movingDown ? directionBufferY : 0)) /
-        (itemHeight + itemGap)
+        (itemHeight + verticalGap)
     );
+    
 
     const currentItems = new Set();
 
@@ -204,8 +206,8 @@ export default function CanvasGallery() {
         const item = document.createElement("div");
         item.classList.add(styles.item);
         item.id = itemId;
-        item.style.left = `${col * (itemWidth + itemGap)}px`;
-        item.style.top = `${row * (itemHeight + itemGap)}px`;
+        item.style.left = `${col * (itemWidth + horizontalGap)}px`;
+        item.style.top = `${row * (itemHeight + verticalGap)}px`;
         item.dataset.col = col;
         item.dataset.row = row;
 
@@ -269,7 +271,8 @@ export default function CanvasGallery() {
     const imgNum = imgMatch ? parseInt(imgMatch[1]) : 1;
     const titleIndex = (imgNum - 1) % items.length;
   
-    setAndAnimateTitle(items[titleIndex]);
+    const { label, galleryLink } = items[titleIndex];
+    setAndAnimateTitle(label);
     item.style.visibility = "hidden";
   
     const rect = item.getBoundingClientRect();
@@ -290,6 +293,12 @@ export default function CanvasGallery() {
     const img = document.createElement("img");
     img.src = targetImg;
     img.className = styles.image;
+    const titleLink = document.createElement("a");
+    titleLink.href = galleryLink;
+    titleLink.target = "_self";
+
+    expandedItem.appendChild(titleLink);
+
   
     expandedItem.appendChild(img);
     expandedItem.addEventListener("click", closeExpandedItem);
