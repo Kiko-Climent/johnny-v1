@@ -112,6 +112,10 @@
   mix-blend-mode: difference;
 }
 
+.projectTextLink {
+  pointer-events: auto;
+}
+
 
 .word {
   position: relative;

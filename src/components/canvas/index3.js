@@ -85,7 +85,6 @@ export default function CanvasGallery3() {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("click", handleInitialZoom);
   
       if (stateRef.current.animationFrameId) {
         cancelAnimationFrame(stateRef.current.animationFrameId);
@@ -133,22 +132,34 @@ export default function CanvasGallery3() {
     zoomedIn: false,
   });
 
-  const setAndAnimateTitle = (title) => {
+  const setAndAnimateTitle = (label, galleryLink) => {
     const { titleSplit } = stateRef.current;
     const projectTitleElement = projectTextRef.current;
   
     if (titleSplit) titleSplit.revert();
-    projectTitleElement.textContent = title;
+  
+    // Limpiamos el nodo antes de insertar
+    projectTitleElement.innerHTML = "";
+  
+    const link = document.createElement("a");
+    link.href = galleryLink;
+    link.textContent = label;
+    link.className = styles.projectTextLink; // le podés dar estilos extra si querés
+    projectTitleElement.addEventListener("click", e => e.stopPropagation()); // para evitar que se cierre al clickear
+  
+    projectTitleElement.appendChild(link);
   
     stateRef.current.titleSplit = new SplitType(projectTitleElement, {
       types: "words",
     });
-
+  
     stateRef.current.titleSplit.words.forEach(word => {
       word.classList.add(styles.word);
     });
+  
     gsap.set(stateRef.current.titleSplit.words, { y: "100%" });
   };
+  
   
 
   const animateTitleIn = () => {
@@ -284,7 +295,7 @@ export default function CanvasGallery3() {
     const titleIndex = (imgNum - 1) % items.length;
   
     const { label, galleryLink } = items[titleIndex];
-    setAndAnimateTitle(label);
+    setAndAnimateTitle(label, galleryLink);
     item.style.visibility = "hidden";
   
     const rect = item.getBoundingClientRect();
