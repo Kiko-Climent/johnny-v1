@@ -30,7 +30,7 @@ const sliderImages = [
 ];
 
 
-const HomeSlider4 = () => {
+const HomeSlider5 = () => {
   const { showNav, setShowNav } = useNavigation();
   const [currentImageIndex, setCurrentImageIndex] = useState(2);
   const [currentContentIndex, setCurrentContentIndex] = useState(1);
@@ -50,10 +50,11 @@ const HomeSlider4 = () => {
   };
 
   const handleClick = () => {
+
     if (!showNav) {
       setShowNav(true);
     }
-    
+
     if (isAnimating) return;
     setIsAnimating(true);
 
@@ -199,12 +200,17 @@ gsap.to(newSlideImg, {
         className="absolute top-0 left-0 w-screen h-screen overflow-hidden"
         ref={sliderRef}
       >
-        <div className="slide-active absolute w-full h-full">
+        <div
+          className={`slide-active absolute w-full h-full ${
+            showNav ? "opacity-100" : "opacity-0"
+          } transition-opacity duration-700`}
+        >
           <img
             src={`/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
             className="w-full h-full object-cover"
           />
         </div>
+
         <div className="slide-next absolute w-full h-full flex justify-center items-center">
           <div
             className="slide-next-img max-h-[50vh] aspect-[4/5]"
@@ -248,4 +254,4 @@ gsap.to(newSlideImg, {
   );
 };
 
-export default HomeSlider4;
+export default HomeSlider5;
