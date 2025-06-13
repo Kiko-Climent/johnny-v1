@@ -94,6 +94,26 @@ export default function CanvasGallery3() {
       if (el && containerRef.current?.contains(el) === false) {
         containerRef.current?.appendChild(el);
       }
+      if (stateRef.current.titleSplit) {
+        stateRef.current.titleSplit.revert();
+        stateRef.current.titleSplit = null;
+      }
+      
+      // 🧹 Eliminar título si se movió al body
+      if (projectTitleRef.current && projectTitleRef.current.parentNode === document.body) {
+        document.body.removeChild(projectTitleRef.current);
+      }
+      
+      // 🧼 Eliminar expandedItem colgado
+      if (stateRef.current.expandedItem && document.body.contains(stateRef.current.expandedItem)) {
+        document.body.removeChild(stateRef.current.expandedItem);
+        stateRef.current.expandedItem = null;
+      }
+      
+      // 🚫 Ocultar el título por si queda visible
+      if (projectTitleRef.current) {
+        projectTitleRef.current.style.display = "none";
+      }
     };
   }, []);
   
@@ -295,6 +315,13 @@ export default function CanvasGallery3() {
     const titleIndex = (imgNum - 1) % items.length;
   
     const { label, galleryLink } = items[titleIndex];
+  
+    // ⬇️ Aseguramos que el título esté visible y clicable
+    if (projectTitleRef.current) {
+      projectTitleRef.current.style.pointerEvents = "auto";
+      projectTitleRef.current.style.opacity = "1";
+    }
+  
     setAndAnimateTitle(label, galleryLink);
     item.style.visibility = "hidden";
   
@@ -317,18 +344,20 @@ export default function CanvasGallery3() {
     const img = document.createElement("img");
     img.src = targetImg;
     img.className = styles.image;
+  
     const titleLink = document.createElement("a");
     titleLink.href = galleryLink;
     titleLink.className = styles.galleryTitleLink;
-    titleLink.addEventListener("click", e => e.stopPropagation());
-
+    titleLink.addEventListener("click", (e) => e.stopPropagation());
+  
     expandedItem.appendChild(titleLink);
     expandedItem.appendChild(img);
     expandedItem.addEventListener("click", closeExpandedItem);
+  
     document.body.appendChild(expandedItem);
     state.expandedItem = expandedItem;
   
-    // Ocultar otros elementos
+    // ⬇️ Ocultar otros elementos
     document.querySelectorAll(".item").forEach((el) => {
       if (el !== state.activeItem) {
         gsap.to(el, {
@@ -341,37 +370,35 @@ export default function CanvasGallery3() {
   
     img.onload = () => {
       expandedItem.style.visibility = "visible";
+  
       const naturalWidth = img.naturalWidth;
       const naturalHeight = img.naturalHeight;
-    
       const aspectRatio = naturalWidth / naturalHeight;
       const maxWidth = window.innerWidth * 0.8;
       const maxHeight = window.innerHeight * 0.8;
-    
+  
       let targetWidth = naturalWidth;
       let targetHeight = naturalHeight;
-    
+  
       if (targetWidth > maxWidth) {
         targetWidth = maxWidth;
         targetHeight = targetWidth / aspectRatio;
       }
-    
+  
       if (targetHeight > maxHeight) {
         targetHeight = maxHeight;
         targetWidth = targetHeight * aspectRatio;
       }
-    
+  
       expandedItem.style.width = `${targetWidth}px`;
       expandedItem.style.height = `${targetHeight}px`;
-    
-      // Calcular transformaciones
+  
       const fromX = rect.left + rect.width / 2 - window.innerWidth / 2;
       const fromY = rect.top + rect.height / 2 - window.innerHeight / 2;
       const scaleX = rect.width / targetWidth;
       const scaleY = rect.height / targetHeight;
       const initialScale = Math.min(scaleX, scaleY);
-    
-      // Guardamos los valores para la animación inversa
+  
       state.expandedTransform = {
         fromX,
         fromY,
@@ -379,7 +406,7 @@ export default function CanvasGallery3() {
         toY: 0,
         scale: initialScale,
       };
-    
+  
       gsap.fromTo(
         expandedItem,
         {
@@ -396,15 +423,20 @@ export default function CanvasGallery3() {
         }
       );
     };
-    
-  };  
+  };
+   
 
   const closeExpandedItem = () => {
     const state = stateRef.current;
     const container = containerRef.current;
     const overlay = overlayRef.current;
   
-    if (!state.expandedItem || !state.originalPosition || !state.expandedTransform) return;
+    if (
+      !state.expandedItem ||
+      !state.originalPosition ||
+      !state.expandedTransform
+    )
+      return;
   
     animateTitleOut();
     overlay.classList.remove(styles.active);
@@ -438,7 +470,16 @@ export default function CanvasGallery3() {
           originalItem.style.visibility = "visible";
         }
   
-        // Limpiar estado
+        // ⬇️ Limpia el contenido del título y evita eventos
+        const titleEl = projectTextRef.current;
+        if (titleEl) titleEl.innerHTML = "";
+  
+        if (projectTitleRef.current) {
+          projectTitleRef.current.style.pointerEvents = "none";
+          projectTitleRef.current.style.opacity = "0";
+        }
+  
+        // ⬇️ Limpiar estado
         state.expandedItem = null;
         state.isExpanded = false;
         state.activeItem = null;
@@ -452,6 +493,7 @@ export default function CanvasGallery3() {
       },
     });
   };
+  
   
 
   const animate = () => {
