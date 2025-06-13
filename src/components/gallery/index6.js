@@ -50,7 +50,7 @@ const Slider6 = ({images, id}) => {
     <div
       onClick={handleClick}
       className="flex flex-col justify-center items-center w-full overflow-hidden gap-0 md:gap-2 pb-2"
-      style={{ height: "calc(var(--vh, 1vh) * 100)" }} // ✅ Solución al 100vh
+      style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
       <div className="flex w-full grow relative px-2">
         <Swiper
@@ -83,7 +83,7 @@ const Slider6 = ({images, id}) => {
         {/* Texto debajo */}
       <div
         className="flex flex-col items-center text-center -space-y-1 whitespace-nowrap"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }} // ✅ Protección barra navegación
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <div className="flex flex-row gap-x-1 text-lg uppercase">
           <div>{formatTitle(id)}</div>
