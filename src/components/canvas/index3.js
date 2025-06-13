@@ -99,18 +99,18 @@ export default function CanvasGallery3() {
         stateRef.current.titleSplit = null;
       }
       
-      // 🧹 Eliminar título si se movió al body
+      // Eliminar título si se movió al body
       if (projectTitleRef.current && projectTitleRef.current.parentNode === document.body) {
         document.body.removeChild(projectTitleRef.current);
       }
       
-      // 🧼 Eliminar expandedItem colgado
+      // Eliminar expandedItem colgado
       if (stateRef.current.expandedItem && document.body.contains(stateRef.current.expandedItem)) {
         document.body.removeChild(stateRef.current.expandedItem);
         stateRef.current.expandedItem = null;
       }
       
-      // 🚫 Ocultar el título por si queda visible
+      // Ocultar el título por si queda visible
       if (projectTitleRef.current) {
         projectTitleRef.current.style.display = "none";
       }
@@ -316,7 +316,7 @@ export default function CanvasGallery3() {
   
     const { label, galleryLink } = items[titleIndex];
   
-    // ⬇️ Aseguramos que el título esté visible y clicable
+    // Aseguramos que el título esté visible y clicable
     if (projectTitleRef.current) {
       projectTitleRef.current.style.pointerEvents = "auto";
       projectTitleRef.current.style.opacity = "1";
@@ -357,7 +357,7 @@ export default function CanvasGallery3() {
     document.body.appendChild(expandedItem);
     state.expandedItem = expandedItem;
   
-    // ⬇️ Ocultar otros elementos
+    // Ocultar otros elementos
     document.querySelectorAll(".item").forEach((el) => {
       if (el !== state.activeItem) {
         gsap.to(el, {
@@ -470,7 +470,7 @@ export default function CanvasGallery3() {
           originalItem.style.visibility = "visible";
         }
   
-        // ⬇️ Limpia el contenido del título y evita eventos
+        // Limpia el contenido del título y evita eventos
         const titleEl = projectTextRef.current;
         if (titleEl) titleEl.innerHTML = "";
   
@@ -479,7 +479,7 @@ export default function CanvasGallery3() {
           projectTitleRef.current.style.opacity = "0";
         }
   
-        // ⬇️ Limpiar estado
+        // Limpiar estado
         state.expandedItem = null;
         state.isExpanded = false;
         state.activeItem = null;
