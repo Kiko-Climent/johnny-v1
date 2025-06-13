@@ -3,7 +3,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import AnimatedLink from "./tools/AnimatedLink";
-// import AboutModal from "./about_modal";
 import AboutModal2 from "./about_modal/index2";
 import AnimatedButton from "./tools/AnimatedButon";
 

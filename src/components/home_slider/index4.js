@@ -1,6 +1,8 @@
 'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { useNavigation } from '../tools/NavigationContext';
 
 const sliderContentList = [
   "35°18'35″N 24°53'36″E",
@@ -14,17 +16,6 @@ const sliderContentList = [
   "43°21'09″N 19°73'77″W",
 ];
 
-// const sliderImages = [
-//   "image6.jpeg",
-//   "image7.jpeg",
-//   "image10.jpeg",
-//   "image3.jpeg",
-//   "image4.jpeg",
-//   "image12.jpeg",
-//   "image5.jpeg",
-//   "image8.jpeg",
-//   "image9.jpeg",
-// ];
 
 const sliderImages = [
   "image1.webp",
@@ -40,6 +31,7 @@ const sliderImages = [
 
 
 const HomeSlider4 = () => {
+  const { showNav, setShowNav } = useNavigation();
   const [currentImageIndex, setCurrentImageIndex] = useState(2);
   const [currentContentIndex, setCurrentContentIndex] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -58,6 +50,11 @@ const HomeSlider4 = () => {
   };
 
   const handleClick = () => {
+    
+    if (!showNav) {
+      setShowNav(true);
+    }
+
     if (isAnimating) return;
     setIsAnimating(true);
 
