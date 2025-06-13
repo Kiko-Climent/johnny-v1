@@ -59,7 +59,7 @@ export default function ProjectMobile4({ project, selectedId, setSelectedId }) {
             {mobileLayout.map((row, rowIndex) => (
               <div key={rowIndex} className="flex flex-row gap-2">
                 {row.map((key, colIndex) => (
-                  <p key={colIndex} className="text-4xl uppercase">
+                  <p key={colIndex} className="text-3xl uppercase">
                     {project[key]}
                   </p>
                 ))}
@@ -69,9 +69,9 @@ export default function ProjectMobile4({ project, selectedId, setSelectedId }) {
         ) : (
           // Layout por defecto
           <div className="flex flex-row gap-2 whitespace-nowrap md:hidden">
-            <p className="text-4xl uppercase">{title1}</p>
-            <p className="text-4xl uppercase">{title2}</p>
-            <p className="text-4xl uppercase">{title3}</p>
+            <p className="text-3xl uppercase">{title1}</p>
+            <p className="text-3xl uppercase">{title2}</p>
+            <p className="text-3xl uppercase">{title3}</p>
           </div>
         )}
       </div>

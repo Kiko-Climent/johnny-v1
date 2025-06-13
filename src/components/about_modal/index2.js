@@ -48,8 +48,8 @@ export default function AboutModal2({isOpen, onClose}) {
     >
       <div
         ref={modalRef}
-        className="absolute flex flex-col top-1/2 text-sm md:text-base text-justify left-1/2 z-50 w-[95vw] md:w-[60vw] -translate-x-1/2 -translate-y-1/2 
-                   bg-white/90 backdrop-blur-sm text-black px-3 md:px-4 py-8 md:py-12 gap-2 md:gap-4"
+        className="absolute flex flex-col top-1/2 text-sm md:text-base text-justify left-1/2 z-50 w-[95vw] md:w-[40vw] -translate-x-1/2 -translate-y-1/2 
+                   bg-white/90 backdrop-blur-sm text-black px-3 md:px-4 py-8 md:py-4 gap-2 md:gap-4"
       >
         <div className="flex flex-col uppercase">
           <p className="flex leading-tight">
@@ -67,6 +67,10 @@ export default function AboutModal2({isOpen, onClose}) {
           <p className="flex">
           johnny.carretes@gmail.com
           </p>
+        </div>
+        <div className="text-xs flex flex-col self-center mt-4 uppercase">
+          <h2 className="flex">Creative direction, design and code by j. diaz and k. climent (Allthatjazz)</h2>
+          
         </div>
       </div>
     </div>

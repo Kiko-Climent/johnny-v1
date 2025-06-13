@@ -113,8 +113,8 @@ export default function CanvasGallery() {
   
 
   const itemCount = 34;
-  const horizontalGap = 80;
-  const verticalGap = 105;
+  const horizontalGap = 145;
+  const verticalGap = 145;
   const columns = 6;
   const itemWidth = 85;
   const itemHeight = 140;
