@@ -19,10 +19,10 @@ const Header3 = () => {
 
   useEffect(() => {
     const handleRouteChangeComplete = (url) => {
-      const isCanvasOrOrbital = ["/index", "/orbital"].includes(url);
+      const isCanvasOrOrbital = ["/canvas", "/orbital"].includes(url);
       const isWorkOrSlider = url.startsWith("/work");
   
-      // Mostrar el link "canvas" si estamos en /work, /index, /orbital o en un slider
+      // Mostrar el link "canvas" si estamos en /work, /canvas, /orbital o en un slider
       setShowIndexLink(isCanvasOrOrbital || isWorkOrSlider);
   
       // Mostrar el link "orbital" en las mismas condiciones
@@ -57,7 +57,7 @@ const Header3 = () => {
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, ease: "easeOut" }}
     className={`w-full h-auto flex flex-row justify-between uppercase text-lg px-2 py-4 whitespace-nowrap ${
-      ["/index", "/orbital"].includes(currentPath)
+      ["/canvas", "/orbital"].includes(currentPath)
         ? "top-0 left-0 fixed z-40 bg-transparent text-black"
         : "top-0 left-0 fixed z-40 bg-white text-black"
     }`}
@@ -67,11 +67,11 @@ const Header3 = () => {
         onClick={handleNavigation("/")}/>
         <div className="flex flex-row gap-2">
           <AnimatedLink href="/work" text="index" 
-            className={`flex text ${["/orbital", "/index"].includes(currentPath) ? "text-gray-400" : ""}`}
+            className={`flex text ${["/orbital", "/canvas"].includes(currentPath) ? "text-gray-400" : ""}`}
             onClick={handleNavigation("/work")} />
           {showIndexLink && (
-            <AnimatedLink href="/index" text="canvas" 
-              className={`flex text ${currentPath === "/index" ? "" : "text-gray-400"}`} />
+            <AnimatedLink href="/canvas" text="canvas" 
+              className={`flex text ${currentPath === "/canvas" ? "" : "text-gray-400"}`} />
           )}
           {showOrbitalLink && (
             <AnimatedLink href="/orbital" text="orbital" 
