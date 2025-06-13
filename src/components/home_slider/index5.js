@@ -35,6 +35,8 @@ const HomeSlider5 = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(2);
   const [currentContentIndex, setCurrentContentIndex] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
+  const hasStartedRef = useRef(false); // ⚠️ para evitar múltiples disparos
+
 
   const sliderRef = useRef(null);
   const contentRef = useRef(null);
@@ -49,12 +51,18 @@ const HomeSlider5 = () => {
     element.innerHTML = html;
   };
 
-  const handleClick = () => {
+  const startAnimation = () => {
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+
+    if (!showNav) setShowNav(true);
+    if (isAnimating) return;
+    setIsAnimating(true);
 
     if (!showNav) {
       setShowNav(true);
     }
-
+    
     if (isAnimating) return;
     setIsAnimating(true);
 
@@ -76,6 +84,7 @@ const HomeSlider5 = () => {
         });
       },
     });
+    
     
 
   // Crear nuevo texto
@@ -183,6 +192,7 @@ gsap.to(newSlideImg, {
   }, 1300); // mismo tiempo que la animación de expansión
 
     };
+    
 
     // Primer efecto inicial
     useEffect(() => {
@@ -194,23 +204,36 @@ gsap.to(newSlideImg, {
       });
     }, []);
 
+    const handleClick = () => {
+      startAnimation();
+    }
+
+    useEffect(() => {
+      const handleScroll = () => {
+        if (!hasStartedRef.current) {
+          startAnimation();
+        }
+      };
+    
+      window.addEventListener("wheel", handleScroll, { passive: true });
+      return () => {
+        window.removeEventListener("wheel", handleScroll);
+      };
+    }, []);
+    
+
   return (
     <div className="w-screen h-screen" onClick={handleClick}>
       <div
         className="absolute top-0 left-0 w-screen h-screen overflow-hidden"
         ref={sliderRef}
       >
-        <div
-          className={`slide-active absolute w-full h-full ${
-            showNav ? "opacity-100" : "opacity-0"
-          } transition-opacity duration-700`}
-        >
+        <div className="slide-active absolute w-full h-full">
           <img
             src={`/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
             className="w-full h-full object-cover"
           />
         </div>
-
         <div className="slide-next absolute w-full h-full flex justify-center items-center">
           <div
             className="slide-next-img max-h-[50vh] aspect-[4/5]"

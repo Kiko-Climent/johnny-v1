@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
     <NavigationProvider>
       <div className="w-screen h-screen flex flex-col relative overflow-hidden">
         <ProgressBar color="#000" startPosition={0.2} height={2} stopDelayMs={200}/>
-        <Header2 />
+        <Header3 />
         <AnimatePresence mode="wait" initial={false}>
           <div key={router.pathname} className="flex-1">
             <PageTransitionWrapper7 key={router.pathname}>
