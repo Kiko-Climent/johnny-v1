@@ -1,6 +1,6 @@
 "use client";
 
-// con zoom inicial
+// con zoom dinamico
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -11,13 +11,15 @@ import styles from "@/components/index/style.module.css"
 
 let SplitType;
 
-export default function CanvasGallery() {
+export default function CanvasGallery3() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const overlayRef = useRef(null);
   const projectTitleRef = useRef(null);
   const projectTextRef = useRef(null);
   const expandedItemRef = useRef(null);
+  const [zoomedIn, setZoomedIn] = useState(false);
+
 
   const [initialized, setInitialized] = useState(false);
 
@@ -71,23 +73,6 @@ export default function CanvasGallery() {
         z: -500, // simulamos que está "atrás" en un plano 3D
       });
     }
-
-    // 👇 Zoom in al primer click
-    const handleInitialZoom = () => {
-      const state = stateRef.current;
-      if (!state.zoomedIn) {
-        state.zoomedIn = true;
-
-        gsap.to(canvasRef.current, {
-          scale: 1,
-          z: 0, // vuelve al plano 0
-          duration: 1.6,
-          ease: "power4.out",
-        });
-      }
-    };
-
-    window.addEventListener("click", handleInitialZoom, { once: true });
   
     return () => {
       if (containerRef.current) {
@@ -631,6 +616,28 @@ export default function CanvasGallery() {
         <div className={styles.canvas} id="canvas" ref={canvasRef}></div>
         <div className={styles.overlay} id="overlay" ref={overlayRef}></div>
       </div>
+
+      <button
+        className={styles.zoomToggle}
+        onClick={() => {
+          const canvas = canvasRef.current;
+          const nextZoomed = !zoomedIn;
+          setZoomedIn(nextZoomed);
+
+          gsap.to(canvas, {
+            scale: nextZoomed ? 1 : 0.6,
+            z: nextZoomed ? 0 : -500,
+            duration: 1.4,
+            ease: "power4.out",
+          });
+
+          // Actualizamos también en el stateRef para coherencia
+          stateRef.current.zoomedIn = nextZoomed;
+        }}
+      >
+        {zoomedIn ? "ZOOM OUT" : "ZOOM IN"}
+      </button>
+
 
       <div className={styles.projectTitle} ref={projectTitleRef}>
         <p className={styles.projectText} ref={projectTextRef}></p>

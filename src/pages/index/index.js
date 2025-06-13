@@ -1,4 +1,5 @@
-import CanvasGallery from "@/components/canvas";
+// import CanvasGallery from "@/components/canvas";
+import CanvasGallery3 from "@/components/canvas/index3";
 // import IndexGallery from "@/components/index";
 // import IndexGallery2 from "@/components/index/index2";
 import Head from "next/head";
@@ -14,7 +15,7 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <CanvasGallery />
+        <CanvasGallery3 />
       </div>
     </>
   );

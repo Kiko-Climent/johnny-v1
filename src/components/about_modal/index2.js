@@ -69,8 +69,7 @@ export default function AboutModal2({isOpen, onClose}) {
           </p>
         </div>
         <div className="text-xs flex flex-col self-center mt-4 uppercase">
-          <h2 className="flex">Creative direction, design and code by j. diaz and k. climent (Allthatjazz)</h2>
-          
+          <h2 className="flex">Creative direction, design and code by j. diaz and k. climent (Allthatjazz)</h2>  
         </div>
       </div>
     </div>
