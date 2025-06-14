@@ -35,9 +35,6 @@ const HomeSlider5 = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(2);
   const [currentContentIndex, setCurrentContentIndex] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
-  const hasStartedRef = useRef(false); // ⚠️ para evitar múltiples disparos
-
-
   const sliderRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -83,8 +80,6 @@ const HomeSlider5 = () => {
       },
     });
     
-    
-
   // Crear nuevo texto
   const nextContentText = sliderContentList[(currentContentIndex + 1) % sliderContentList.length];
   const newContentDiv = document.createElement('div');
@@ -101,7 +96,7 @@ const HomeSlider5 = () => {
   // Animar entrada de texto
   gsap.to(newContentDiv, {
     top: "0px",
-    duration: 1.125,
+    duration: 1.05,
     ease: "power3.out",
     onComplete: () => {
       contentRef.current.querySelector(".slider-content-active")?.remove();
@@ -110,9 +105,9 @@ const HomeSlider5 = () => {
 
       gsap.to(nextSpans, {
         top: 0,
-        stagger: 0.05,
+        stagger: 0.03,
         ease: "power3.out",
-        duration: 0.5,
+        duration: 0.2,
       });
 
       setCurrentContentIndex((prev) => (prev + 1) % sliderContentList.length);
@@ -191,7 +186,6 @@ gsap.to(newSlideImg, {
 
     };
     
-
     // Primer efecto inicial
     useEffect(() => {
       gsap.to(".slide-next-img", {
@@ -248,9 +242,6 @@ gsap.to(newSlideImg, {
         window.removeEventListener("touchend", handleTouchEnd);
       };
     }, [isAnimating]);
-    
-    
-    
 
   return (
     <div className="w-screen h-screen" onClick={handleClick}>
