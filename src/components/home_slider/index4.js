@@ -93,7 +93,7 @@ const HomeSlider4 = () => {
   // Animar entrada de texto
   gsap.to(newContentDiv, {
     top: "0px",
-    duration: 1.125,
+    duration: 1.05,
     ease: "power3.out",
     onComplete: () => {
       contentRef.current.querySelector(".slider-content-active")?.remove();
@@ -102,9 +102,9 @@ const HomeSlider4 = () => {
 
       gsap.to(nextSpans, {
         top: 0,
-        stagger: 0.05,
+        stagger: 0.02,
         ease: "power3.out",
-        duration: 0.5,
+        duration: 0.3,
       });
 
       setCurrentContentIndex((prev) => (prev + 1) % sliderContentList.length);
@@ -182,6 +182,17 @@ gsap.to(newSlideImg, {
   }, 1300); // mismo tiempo que la animación de expansión
 
     };
+
+    useEffect(() => {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.height = '';
+      };
+    }, []);
+    
 
     // Primer efecto inicial
     useEffect(() => {
