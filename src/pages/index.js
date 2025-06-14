@@ -39,7 +39,7 @@ export default function Home() {
           {/* <HomeGallery9 src={images[currentIndex]}/> */}
           {/* <div className="revealer"></div> */}
           {/* <Splash2 /> */}
-          <HomeSlider4 />
+          <HomeSlider5 />
           {/* <HomeGallery11 images={images}/> */}
           {/* <HomeGallery12/> */}
         {/* </div> */}

@@ -52,8 +52,6 @@ const HomeSlider5 = () => {
   };
 
   const startAnimation = () => {
-    if (hasStartedRef.current) return;
-    hasStartedRef.current = true;
 
     if (!showNav) setShowNav(true);
     if (isAnimating) return;
@@ -209,17 +207,49 @@ gsap.to(newSlideImg, {
     }
 
     useEffect(() => {
-      const handleScroll = () => {
-        if (!hasStartedRef.current) {
+      let lastScroll = 0;
+    
+      const handleScroll = (e) => {
+        const deltaY = e.deltaY;
+    
+        // Si el scroll es hacia abajo y no estamos animando
+        if (deltaY > 0 && !isAnimating) {
           startAnimation();
         }
+    
+        lastScroll = deltaY;
       };
     
       window.addEventListener("wheel", handleScroll, { passive: true });
       return () => {
         window.removeEventListener("wheel", handleScroll);
       };
-    }, []);
+    }, [isAnimating]);
+
+    useEffect(() => {
+      const handleTouchStart = (e) => {
+        touchStartYRef.current = e.touches[0].clientY;
+      };
+    
+      const handleTouchEnd = (e) => {
+        const deltaY = touchStartYRef.current - e.changedTouches[0].clientY;
+        if (deltaY > 20 && !isAnimating) {
+          startAnimation();
+        }
+      };
+    
+      const touchStartYRef = { current: 0 };
+    
+      window.addEventListener("touchstart", handleTouchStart, { passive: true });
+      window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    
+      return () => {
+        window.removeEventListener("touchstart", handleTouchStart);
+        window.removeEventListener("touchend", handleTouchEnd);
+      };
+    }, [isAnimating]);
+    
+    
     
 
   return (
