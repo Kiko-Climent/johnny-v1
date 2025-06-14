@@ -194,7 +194,7 @@ gsap.to(newSlideImg, {
     }, []);
 
   return (
-    <div className="w-screen" onClick={handleClick}
+    <div className="w-screen overflow-hidden" onClick={handleClick}
     style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
       <div
         className="absolute top-0 left-0 w-screen h-full overflow-hidden"
