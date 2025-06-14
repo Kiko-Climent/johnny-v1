@@ -186,10 +186,18 @@ gsap.to(newSlideImg, {
     useEffect(() => {
       document.body.style.overflow = 'hidden';
       document.body.style.height = '100vh';
+      document.documentElement.style.overflowX = 'clip';
+      document.body.style.overflowX = 'clip';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     
       return () => {
         document.body.style.overflow = '';
         document.body.style.height = '';
+        document.documentElement.style.overflowX = '';
+        document.body.style.overflowX = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
       };
     }, []);
     
