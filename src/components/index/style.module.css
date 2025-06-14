@@ -5,6 +5,11 @@
   overflow: hidden;
   cursor: grab;
   perspective: 800px;
+
+  /* previene drag */
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none;  
 }
 
 .canvas {
@@ -135,16 +140,23 @@
 
 .zoomToggle {
   position: fixed;
-  top: 50%;
+  bottom: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99999;
   background: white;
-  border: none;
+  /* border: none; */
   font-size: 20px;
   padding: 10px 16px;
   cursor: pointer;
   mix-blend-mode: difference;
   color: black;
 }
+
+.noselect {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none;     /* IE 10+ */
+}
+
 
