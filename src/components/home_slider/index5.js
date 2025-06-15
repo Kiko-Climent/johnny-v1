@@ -6,7 +6,7 @@ import { useNavigation } from '../tools/NavigationContext';
 
 const sliderContentList = [
   "35°18'35″N 24°53'36″E",
-  "JOHNNY CARRETES",
+  "35°18'35″N 24°53'36″E",
   "43°21'09″N 19°73'77″W",
   "35°18'35″N 24°53'36″E",
   "61°10'45″N 71°93'65″E",
@@ -126,7 +126,7 @@ const HomeSlider5 = () => {
     </div>`;
   sliderRef.current.appendChild(newSlide);
 
-  const newSlideImg = newSlide.querySelector(".slide-next-img"); // 👈 referenciar correctamente
+  const newSlideImg = newSlide.querySelector(".slide-next-img"); // referenciar correctamente
 
   // Clip path reveal
   gsap.to(newSlideImg, {

@@ -4,18 +4,18 @@ import Head from "next/head";
 // import HomeSlider6 from "@/components/home_slider/index6";
 import HomeSlider5 from "@/components/home_slider/index5";
 
-const images = [
-  { src: "/images/image00001.webp", coordinates: "35°18′35″N 24°53′36″E" },
-  { src: "/images/image00002.webp", coordinates: "19°28′35″N 24°53′36″W" },
-  { src: "/images/image00003.webp", coordinates: "35°68′35″N 24°53′36″E" },
-  { src: "/images/image00007.webp", coordinates: "55°88′35″N 14°53′36″W" },
-  { src: "/images/image00029.webp", coordinates: "75°78′35″N 57°54′36″E" },
-  { src: "/images/image00014.webp", coordinates: "35°48′35″N 24°53′36″E" },
-  { src: "/images/image00017.webp", coordinates: "35°17′35″N 12°53′36″E" },
-  { src: "/images/image00023.webp", coordinates: "35°10′35″N 24°53′36″E" },
-  { src: "/images/image00038.webp", coordinates: "35°18′35″N 11°53′36″E" },
-  { src: "/images/image00035.webp", coordinates: "35°18′35″N 24°53′36″W" },
-];
+// const images = [
+//   { src: "/images/image00001.webp", coordinates: "35°18′35″N 24°53′36″E" },
+//   { src: "/images/image00002.webp", coordinates: "19°28′35″N 24°53′36″W" },
+//   { src: "/images/image00003.webp", coordinates: "35°68′35″N 24°53′36″E" },
+//   { src: "/images/image00007.webp", coordinates: "55°88′35″N 14°53′36″W" },
+//   { src: "/images/image00029.webp", coordinates: "75°78′35″N 57°54′36″E" },
+//   { src: "/images/image00014.webp", coordinates: "35°48′35″N 24°53′36″E" },
+//   { src: "/images/image00017.webp", coordinates: "35°17′35″N 12°53′36″E" },
+//   { src: "/images/image00023.webp", coordinates: "35°10′35″N 24°53′36″E" },
+//   { src: "/images/image00038.webp", coordinates: "35°18′35″N 11°53′36″E" },
+//   { src: "/images/image00035.webp", coordinates: "35°18′35″N 24°53′36″W" },
+// ];
 
 export default function Home() {
   
@@ -28,9 +28,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
 
         {/* Preload de todas las imágenes */}
-        {images.map((img, i) => (
+        {/* {images.map((img, i) => (
           <link key={i} rel="preload" href={img} as="image" />
-        ))}
+        ))} */}
         
       </Head>
       <HomeSlider5 />
