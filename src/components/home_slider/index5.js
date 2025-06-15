@@ -29,6 +29,9 @@ const sliderImages = [
   "image9.webp",
 ];
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+
 
 const HomeSlider5 = () => {
   const { showNav, setShowNav } = useNavigation();
@@ -120,10 +123,11 @@ const HomeSlider5 = () => {
   const newSlide = document.createElement("div");
   newSlide.className = "slide-next absolute w-full h-full flex justify-center items-center";
   newSlide.innerHTML = `
-    <div class="slide-next-img w-[250px] h-[350px]" 
-    style="clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)">
-      <img src="/assets/${sliderImages[newIndex % sliderImages.length]}" class="w-full h-full object-cover"/>
-    </div>`;
+  <div class="slide-next-img w-[250px] h-[350px]" 
+  style="clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)">
+    <img src="${basePath}/assets/${sliderImages[newIndex % sliderImages.length]}" class="w-full h-full object-cover"/>
+  </div>`;
+
   sliderRef.current.appendChild(newSlide);
 
   const newSlideImg = newSlide.querySelector(".slide-next-img"); // 👈 referenciar correctamente
@@ -148,10 +152,11 @@ const HomeSlider5 = () => {
   const newMiniSlide = document.createElement("div");
   newMiniSlide.className = "slide-next absolute w-full h-full flex justify-center items-center";
   newMiniSlide.innerHTML = `
-    <div class="slide-next-img max-h-[50vh] aspect-[4/5]" 
-    style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)">
-      <img src="/assets/${sliderImages[upcomingIndex]}" class="w-full h-full object-cover"/>
-    </div>`;
+  <div class="slide-next-img max-h-[50vh] aspect-[4/5]" 
+  style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)">
+    <img src="${basePath}/assets/${sliderImages[upcomingIndex]}" class="w-full h-full object-cover"/>
+  </div>`;
+
   sliderRef.current.appendChild(newMiniSlide);
 
 // Animar la aparición de la mini-slide nueva
@@ -244,18 +249,17 @@ gsap.to(newSlideImg, {
     }, [isAnimating]);
 
   return (
-    <div className="w-screen"
-    style={{ height: "calc(var(--vh, 1vh) * 100)" }}
-     onClick={handleClick}>
+    <div className="w-screen h-screen" onClick={handleClick}>
       <div
-        className="absolute top-0 left-0 w-screen h-full overflow-hidden"
+        className="absolute top-0 left-0 w-screen h-screen overflow-hidden"
         ref={sliderRef}
       >
         <div className="slide-active absolute w-full h-full">
-          <img
-            src={`/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
-            className="w-full h-full object-cover"
-          />
+        <img
+          src={`${basePath}/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
+          className="w-full h-full object-cover"
+        />
+
         </div>
         <div className="slide-next absolute w-full h-full flex justify-center items-center">
           <div
@@ -265,9 +269,10 @@ gsap.to(newSlideImg, {
             }}
           >
             <img
-              src={`/assets/${sliderImages[(currentImageIndex + 1) % sliderImages.length]}`}
+              src={`${basePath}/assets/${sliderImages[(currentImageIndex + 1) % sliderImages.length]}`}
               className="w-full h-full object-cover"
             />
+
           </div>
         </div>
       </div>
