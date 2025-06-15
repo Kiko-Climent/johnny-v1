@@ -17,16 +17,28 @@ const sliderContentList = [
 ];
 
 
+// const sliderImages = [
+//   "image1.webp",
+//   "image2.webp",
+//   "image3.webp",
+//   "image4.webp",
+//   "image5.webp",
+//   "image6.webp",
+//   "image7.webp",
+//   "image8.webp",
+//   "image9.webp",
+// ];
+
 const sliderImages = [
-  "image1.webp",
-  "image2.webp",
-  "image3.webp",
-  "image4.webp",
-  "image5.webp",
-  "image6.webp",
-  "image7.webp",
-  "image8.webp",
-  "image9.webp",
+  "image3.jpeg",
+  "image4.jpeg",
+  "image5.jpeg",
+  "image6.jpeg",
+  "image7.jpeg",
+  "image8.jpeg",
+  "image9.jpeg",
+  "image10.jpeg",
+  "image12.jpeg",
 ];
 
 
@@ -163,28 +175,28 @@ const HomeSlider5 = () => {
     delay: 0.35,
   });
 
-// Iniciar animación de expansión del slide principal
-gsap.to(newSlideImg, {
-  width: "100vw",
-  height: "100vh",
-    duration: 1.3,
-    delay: 0.0,
-    ease: "power3.out",
-  });
+  // Iniciar animación de expansión del slide principal
+  gsap.to(newSlideImg, {
+    width: "100vw",
+    height: "100vh",
+      duration: 1.3,
+      delay: 0.0,
+      ease: "power3.out",
+    });
 
-  setTimeout(() => {
-    sliderRef.current.querySelector(".slide-active")?.remove();
-    newSlide.classList.remove("slide-next");
-    newSlide.classList.add("slide-active");
+    setTimeout(() => {
+      sliderRef.current.querySelector(".slide-active")?.remove();
+      newSlide.classList.remove("slide-next");
+      newSlide.classList.add("slide-active");
 
-    newSlideImg?.classList.remove("slide-next-img");
-    newSlideImg?.classList.add("slide-expanded-img");
+      newSlideImg?.classList.remove("slide-next-img");
+      newSlideImg?.classList.add("slide-expanded-img");
 
-    setCurrentImageIndex(newIndex % sliderImages.length);
-    setIsAnimating(false);
-  }, 1300); // mismo tiempo que la animación de expansión
+      setCurrentImageIndex(newIndex % sliderImages.length);
+      setIsAnimating(false);
+    }, 1300); // mismo tiempo que la animación de expansión
 
-    };
+  };
     
     // Primer efecto inicial
     useEffect(() => {
