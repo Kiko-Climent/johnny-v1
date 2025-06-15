@@ -1,8 +1,8 @@
 "use client";
 
 import Head from "next/head";
-// import HomeSlider5 from "@/components/home_slider/index5";
-import HomeSlider6 from "@/components/home_slider/index6";
+// import HomeSlider6 from "@/components/home_slider/index6";
+import HomeSlider5 from "@/components/home_slider/index5";
 
 const images = [
   { src: "/images/image00001.webp", coordinates: "35°18′35″N 24°53′36″E" },
@@ -33,7 +33,7 @@ export default function Home() {
         ))}
         
       </Head>
-      <HomeSlider6 />
+      <HomeSlider5 />
     </>
   );
 }
