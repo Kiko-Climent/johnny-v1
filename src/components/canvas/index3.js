@@ -17,11 +17,10 @@ export default function CanvasGallery3() {
   const overlayRef = useRef(null);
   const projectTitleRef = useRef(null);
   const projectTextRef = useRef(null);
-  const expandedItemRef = useRef(null);
   const [zoomedIn, setZoomedIn] = useState(false);
 
 
-  const [initialized, setInitialized] = useState(false);
+  // const [initialized, setInitialized] = useState(false);
 
   function loadImageWithFallback(basePath, itemNum, callback) {
     const img = new Image();
@@ -52,7 +51,7 @@ export default function CanvasGallery3() {
       SplitType = SplitTypeModule.default;
   
       initializeGallery();
-      setInitialized(true);
+      // setInitialized(true);
     };
   
     gsap.registerPlugin(CustomEase);
