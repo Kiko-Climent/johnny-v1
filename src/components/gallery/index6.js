@@ -8,6 +8,20 @@ import "swiper/css";
 import "swiper/css/pagination";
 import AnimatedText2 from "../tools/AnimatedText2";
 
+const formatTitle = (id) => {
+  return typeof id === "string" ? id.replace(/_/g, " ") : "";
+};
+
+const setVH = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
+
+const checkIsDesktop = (setIsDesktop) => {
+  setIsDesktop(window.innerWidth >= 738);
+};
+
+
 const Slider6 = ({images, id}) => {
   
   const [activeIndex, setActiveIndex] = useState(0);
@@ -18,30 +32,18 @@ const Slider6 = ({images, id}) => {
 
   // Set --vh custom property
   useEffect(() => {
-    const setVH = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-
     setVH();
     window.addEventListener("resize", setVH);
     return () => window.removeEventListener("resize", setVH);
   }, []);
-
-  // Utlizar solo en desktop
+  
   useEffect(() => {
-    const checkIsDesktop = () => {
-      setIsDesktop(window.innerWidth >= 738);
-    };
-
-    checkIsDesktop();
-    window.addEventListener("resize", checkIsDesktop)
-    return() => window.removeEventListener("resize", checkIsDesktop);
+    checkIsDesktop(setIsDesktop);
+    const handler = () => checkIsDesktop(setIsDesktop);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
   }, []);
-
-  const formatTitle = (id) => {
-    return typeof id === "string" ? id.replace(/_/g, " ") : "";
-  };
+  
 
   const handleClick = (e) => {
     const clickX = e.clientX;

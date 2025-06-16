@@ -19,9 +19,6 @@ export default function CanvasGallery3() {
   const projectTextRef = useRef(null);
   const [zoomedIn, setZoomedIn] = useState(false);
 
-
-  // const [initialized, setInitialized] = useState(false);
-
   function loadImageWithFallback(basePath, itemNum, callback) {
     const img = new Image();
     const jpegSrc = `${basePath}/image${itemNum}.jpeg`;

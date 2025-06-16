@@ -1,5 +1,3 @@
-// import Slider3 from "@/components/gallery/index3";
-// import Slider4 from "@/components/gallery/index4";
 import Slider6 from "@/components/gallery/index6";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -66,23 +64,23 @@ const galleries = {
 
   ],
   johnny_de_noche: [
-    {src:"/images/gallery/image37.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image39.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image40.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image41.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image42.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image43.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image44.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image45.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image46.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image47.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image48.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image49.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image50.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image51.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image52.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image53.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
-    {src:"/images/gallery/image54.webp", coord:"35°18′35″N 24°53′36″E", location:"almeria"},
+    {src:"/images/gallery/image37.webp", coord:"52°31'12″N 13º24'36 E", location:"berlin-mitte"},
+    {src:"/images/gallery/image39.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image40.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image41.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image42.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image43.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image44.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image45.webp", coord:"52°29'08″N 13°22'60″E", location:"berlin-kreuzberg"},
+    {src:"/images/gallery/image46.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image47.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image48.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image49.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image50.webp", coord:"35°18′35″N 24°53′36″E", location:"madrid"},
+    {src:"/images/gallery/image51.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image52.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image53.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
+    {src:"/images/gallery/image54.webp", coord:"52°30′16″N 13°16′49″E", location:"icc-berlin"},
   ]
 };
 
