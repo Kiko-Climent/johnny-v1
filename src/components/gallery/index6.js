@@ -11,6 +11,9 @@ import AnimatedText2 from "../tools/AnimatedText2";
 const Slider6 = ({images, id}) => {
   
   const [activeIndex, setActiveIndex] = useState(0);
+  const [cursorDirection, setCursorDirection] = useState("right");
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isDesktop, setIsDesktop] = useState(false);
   const swiperRef = useRef(null);
 
   // Set --vh custom property
@@ -23,6 +26,17 @@ const Slider6 = ({images, id}) => {
     setVH();
     window.addEventListener("resize", setVH);
     return () => window.removeEventListener("resize", setVH);
+  }, []);
+
+  // Utlizar solo en desktop
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 738);
+    };
+
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop)
+    return() => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
   const formatTitle = (id) => {
@@ -42,14 +56,37 @@ const Slider6 = ({images, id}) => {
     }
   };
 
+  const handleMouseMove = (e) => {
+    const screenWidth = window.innerWidth;
+    setCursorDirection(e.clientX > screenWidth / 2 ? "right" : "left");
+    setCursorPos({x: e.clientX, y: e.clientY});
+  }
+
   if (!images || images.length === 0) return null;
 
   return(
     <div
       onClick={handleClick}
+      onMouseMove={isDesktop ? handleMouseMove : undefined}
       className="flex flex-col justify-center items-center w-full overflow-hidden gap-0 md:gap-2 pb-2"
-      style={{ height: "calc(var(--vh, 1vh) * 100)" }}
+      style={{ 
+        height: "calc(var(--vh, 1vh) * 100)",
+        cursor: isDesktop ? "none" : "default"
+       }}
     >
+      {isDesktop && (
+        <div
+          className="pointer-events-none fixed z-50 text-2xl text-black transition-transform duration-75"
+          style={{
+            top: cursorPos.y,
+            left: cursorPos.x,
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {cursorDirection === "right" ? "→" : "←"}
+        </div>
+      )}
+      
       <div className="flex w-full grow relative px-2">
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
