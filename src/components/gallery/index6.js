@@ -4,8 +4,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-// import AnimatedText from "../tools/AnimatedText";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import AnimatedText2 from "../tools/AnimatedText2";
