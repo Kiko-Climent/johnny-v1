@@ -18,7 +18,6 @@ const sliderContentList = [
 
 
 const sliderImages = [
-  // "homeimage1.jpeg",
   "homeimage5.jpeg",
   "homeimage3.jpeg",
   "homeimage7.jpeg",

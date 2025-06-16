@@ -177,8 +177,8 @@ const Orb = ({
   ])
 
   return(
-    <div className="orb-container min-h-screen" style={{ position: 'relative' }}>
-      <div className="orb absolute w-full h-full" ref={orbRef}></div>
+    <div className="orb-container" style={{ position: 'relative', height: "calc(var(--vh, 1vh) * 100)"}}>
+      <div className="orb absolute top-0 left-0 w-full h-full" ref={orbRef}></div>
       <div style={{
         width: "100%",
         height: "100%",
