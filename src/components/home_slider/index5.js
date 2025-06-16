@@ -30,6 +30,7 @@ const sliderContentList = [
 // ];
 
 const sliderImages = [
+  "image12.jpeg",
   "image3.jpeg",
   "image4.jpeg",
   "image5.jpeg",
@@ -38,7 +39,6 @@ const sliderImages = [
   "image8.jpeg",
   "image9.jpeg",
   "image10.jpeg",
-  "image12.jpeg",
 ];
 
 
