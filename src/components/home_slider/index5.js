@@ -134,7 +134,7 @@ const HomeSlider5 = () => {
   newSlide.innerHTML = `
     <div class="slide-next-img w-[250px] h-[350px]" 
     style="clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)">
-      <img src="/assets/${sliderImages[newIndex % sliderImages.length]}" class="w-full h-full object-cover"/>
+      <img src="assets/${sliderImages[newIndex % sliderImages.length]}" class="w-full h-full object-cover"/>
     </div>`;
   sliderRef.current.appendChild(newSlide);
 
@@ -162,7 +162,7 @@ const HomeSlider5 = () => {
   newMiniSlide.innerHTML = `
     <div class="slide-next-img max-h-[50vh] aspect-[4/5]" 
     style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)">
-      <img src="/assets/${sliderImages[upcomingIndex]}" class="w-full h-full object-cover"/>
+      <img src="assets/${sliderImages[upcomingIndex]}" class="w-full h-full object-cover"/>
     </div>`;
   sliderRef.current.appendChild(newMiniSlide);
 
@@ -263,7 +263,7 @@ const HomeSlider5 = () => {
       >
         <div className="slide-active absolute w-full h-full">
           <img
-            src={`/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
+            src={`assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
             className="w-full h-full object-cover"
           />
         </div>
@@ -275,7 +275,7 @@ const HomeSlider5 = () => {
             }}
           >
             <img
-              src={`/assets/${sliderImages[(currentImageIndex + 1) % sliderImages.length]}`}
+              src={`assets/${sliderImages[(currentImageIndex + 1) % sliderImages.length]}`}
               className="w-full h-full object-cover"
             />
           </div>
