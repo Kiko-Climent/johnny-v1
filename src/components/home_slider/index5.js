@@ -17,28 +17,16 @@ const sliderContentList = [
 ];
 
 
-// const sliderImages = [
-//   "image1.webp",
-//   "image2.webp",
-//   "image3.webp",
-//   "image4.webp",
-//   "image5.webp",
-//   "image6.webp",
-//   "image7.webp",
-//   "image8.webp",
-//   "image9.webp",
-// ];
-
 const sliderImages = [
-  "image12.jpeg",
-  "image3.jpeg",
-  "image4.jpeg",
-  "image5.jpeg",
-  "image6.jpeg",
-  "image7.jpeg",
-  "image8.jpeg",
-  "image9.jpeg",
-  "image10.jpeg",
+  "homeimage1.jpeg",
+  "homeimage2.jpeg",
+  "homeimage3.jpeg",
+  "homeimage4.jpeg",
+  "homeimage5.jpeg",
+  "homeimage6.jpeg",
+  "homeimage7.jpeg",
+  "homeimage8.jpeg",
+  "homeimage9.jpeg",
 ];
 
 
