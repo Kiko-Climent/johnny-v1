@@ -18,15 +18,16 @@ const sliderContentList = [
 
 
 const sliderImages = [
-  "homeimage1.jpeg",
-  "homeimage2.jpeg",
-  "homeimage3.jpeg",
-  "homeimage4.jpeg",
+  // "homeimage1.jpeg",
   "homeimage5.jpeg",
-  "homeimage6.jpeg",
+  "homeimage3.jpeg",
   "homeimage7.jpeg",
+  "homeimage2.jpeg",
+  "homeimage6.jpeg",
+  "homeimage4.jpeg",
   "homeimage8.jpeg",
   "homeimage9.jpeg",
+  "homeimage10.jpeg",
 ];
 
 

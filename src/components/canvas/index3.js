@@ -24,24 +24,16 @@ export default function CanvasGallery3() {
 
   function loadImageWithFallback(basePath, itemNum, callback) {
     const img = new Image();
-    const webpSrc = `${basePath}/image${itemNum}.webp`;
     const jpegSrc = `${basePath}/image${itemNum}.jpeg`;
-  
-    img.src = webpSrc;
-  
+
+    img.src = jpegSrc;
+
     img.onload = () => {
-      callback(webpSrc);
+      callback(jpegSrc);
     };
-  
+
     img.onerror = () => {
-      // Si falla el .webp, probamos con .jpeg
-      img.src = jpegSrc;
-      img.onload = () => {
-        callback(jpegSrc);
-      };
-      img.onerror = () => {
-        console.error(`Image not found: image${itemNum}.webp or .jpeg`);
-      };
+      console.error(`Image not found: image${itemNum}.jpeg`);
     };
   }
 
@@ -117,10 +109,10 @@ export default function CanvasGallery3() {
   }, []);
   
 
-  const itemCount = 34;
+  const itemCount = 42;
   const horizontalGap = 145;
   const verticalGap = 145;
-  const columns = 6;
+  const columns = 17;
   const itemWidth = 85;
   const itemHeight = 140;
 
