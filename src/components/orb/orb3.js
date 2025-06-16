@@ -5,7 +5,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 const Orb = ({
-  totalImages = 22,
+  totalImages = 20,
   totalItems = 75,
   baseWidth = 1.7,
   baseHeight = 1.1,
@@ -52,7 +52,7 @@ const Orb = ({
     let loadedCount = 0
 
     const imagePool = [
-      "image9.jpeg",
+      "image3.jpeg",
       "image5.jpeg",
       "image7.jpeg",
       "image8.jpeg",
@@ -72,8 +72,6 @@ const Orb = ({
       "image40.jpeg",
       "image41.jpeg",
       "image42.jpeg",
-      "image10.jpeg",
-      "image16.jpeg",
     ];
     
     const getRandomImagePath = () => {
@@ -177,8 +175,8 @@ const Orb = ({
   ])
 
   return(
-    <div className="orb-container" style={{ position: 'relative', height: "calc(var(--vh, 1vh) * 100)"}}>
-      <div className="orb absolute top-0 left-0 w-full h-full" ref={orbRef}></div>
+    <div className="orb-container" style={{ position: 'relative' }}>
+      <div className="orb" ref={orbRef}></div>
       <div style={{
         width: "100%",
         height: "100%",
