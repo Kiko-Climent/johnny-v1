@@ -66,7 +66,7 @@ export default function CanvasGallery3() {
     importSplitType();
     const canvas = canvasRef.current;
     if (canvas) {
-      // 👇 Empezamos "lejos"
+      // Empezamos "lejos"
       gsap.set(canvas, {
         scale: 0.6,
         z: -500, // simulamos que está "atrás" en un plano 3D
@@ -178,8 +178,6 @@ export default function CanvasGallery3() {
   
     gsap.set(stateRef.current.titleSplit.words, { y: "100%" });
   };
-  
-  
 
   const animateTitleIn = () => {
     gsap.to(stateRef.current.titleSplit.words, {
@@ -234,7 +232,6 @@ export default function CanvasGallery3() {
         (itemHeight + verticalGap)
     );
     
-
     const currentItems = new Set();
 
     for (let row = startRow; row <= endRow; row++) {
