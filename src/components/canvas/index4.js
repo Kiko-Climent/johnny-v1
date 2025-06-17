@@ -11,7 +11,7 @@ import styles from "@/components/index/style.module.css"
 
 let SplitType;
 
-export default function CanvasGallery3() {
+export default function CanvasGallery4() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const overlayRef = useRef(null);
@@ -167,6 +167,7 @@ export default function CanvasGallery3() {
     });
   
     gsap.set(stateRef.current.titleSplit.words, { y: "100%" });
+    animateTitleIn();
   };
 
   const animateTitleIn = () => {
@@ -295,41 +296,37 @@ export default function CanvasGallery3() {
     state.canDrag = false;
     container.style.cursor = "auto";
   
-    const imgSrc = item.querySelector("img").src;
+    // posición original visible para cálculo
+    const img = item.querySelector("img");
+    const rect = img.getBoundingClientRect();
+  
+    const imgSrc = img.src;
     const imgMatch = imgSrc.match(/\/image(\d+)\.jpeg/);
     const imgNum = imgMatch ? parseInt(imgMatch[1]) : 1;
-    const titleIndex = (imgNum - 1) % items.length;
+    const { label, galleryLink } = items[(imgNum - 1) % items.length];
   
-    const { label, galleryLink } = items[titleIndex];
-  
-    // Aseguramos que el título esté visible y clicable
-    if (projectTitleRef.current) {
-      projectTitleRef.current.style.pointerEvents = "auto";
-      projectTitleRef.current.style.opacity = "1";
-    }
-  
+    projectTitleRef.current.style.pointerEvents = "auto";
+    projectTitleRef.current.style.opacity = "1";
     setAndAnimateTitle(label, galleryLink);
     item.style.visibility = "hidden";
-    
-    const rect = item.getBoundingClientRect();
-    const targetImg = item.querySelector("img").src;
-    gsap.delayedCall(0.5, animateTitleIn);
-  
-    state.originalPosition = {
-      id: item.id,
-      rect: rect,
-      imgSrc: targetImg,
-    };
   
     overlay.classList.add(styles.active);
   
     const expandedItem = document.createElement("div");
     expandedItem.classList.add(styles.expandedItem);
-    expandedItem.style.visibility = "hidden";
   
-    const img = document.createElement("img");
-    img.src = targetImg;
-    img.className = styles.image;
+    // ✅ EMPIEZA invisible pero en layout
+    expandedItem.style.opacity = "0";
+    expandedItem.style.position = "fixed";
+    expandedItem.style.left = `${rect.left}px`;
+    expandedItem.style.top = `${rect.top}px`;
+    expandedItem.style.width = `${rect.width}px`;
+    expandedItem.style.height = `${rect.height}px`;
+    expandedItem.style.zIndex = "1000";
+  
+    const imgEl = document.createElement("img");
+    imgEl.src = imgSrc;
+    imgEl.className = styles.image;
   
     const titleLink = document.createElement("a");
     titleLink.href = galleryLink;
@@ -337,79 +334,49 @@ export default function CanvasGallery3() {
     titleLink.addEventListener("click", (e) => e.stopPropagation());
   
     expandedItem.appendChild(titleLink);
-    expandedItem.appendChild(img);
+    expandedItem.appendChild(imgEl);
     expandedItem.addEventListener("click", closeExpandedItem);
-  
     document.body.appendChild(expandedItem);
     state.expandedItem = expandedItem;
+
+    state.originalPosition = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+    state.expandedTransform = { fromX: 0, fromY: 0, scale: 1 };
+
   
-    // Ocultar otros elementos
-    document.querySelectorAll(".item").forEach((el) => {
-      if (el !== state.activeItem) {
-        gsap.to(el, {
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
-    });
+    imgEl.onload = () => {
+      expandedItem.style.opacity = "1";
   
-    img.onload = () => {
-      expandedItem.style.visibility = "visible";
+      const ar = imgEl.naturalWidth / imgEl.naturalHeight;
+      const maxW = window.innerWidth * 0.8;
+      const maxH = window.innerHeight * 0.8;
+      let w = imgEl.naturalWidth, h = imgEl.naturalHeight;
   
-      const naturalWidth = img.naturalWidth;
-      const naturalHeight = img.naturalHeight;
-      const aspectRatio = naturalWidth / naturalHeight;
-      const maxWidth = window.innerWidth * 0.8;
-      const maxHeight = window.innerHeight * 0.8;
+      if (w > maxW) { w = maxW; h = w / ar; }
+      if (h > maxH) { h = maxH; w = h * ar; }
   
-      let targetWidth = naturalWidth;
-      let targetHeight = naturalHeight;
-  
-      if (targetWidth > maxWidth) {
-        targetWidth = maxWidth;
-        targetHeight = targetWidth / aspectRatio;
-      }
-  
-      if (targetHeight > maxHeight) {
-        targetHeight = maxHeight;
-        targetWidth = targetHeight * aspectRatio;
-      }
-  
-      expandedItem.style.width = `${targetWidth}px`;
-      expandedItem.style.height = `${targetHeight}px`;
-  
-      const fromX = rect.left + rect.width / 2 - window.innerWidth / 2;
-      const fromY = rect.top + rect.height / 2 - window.innerHeight / 2;
-      const scaleX = rect.width / targetWidth;
-      const scaleY = rect.height / targetHeight;
-      const initialScale = Math.min(scaleX, scaleY);
-  
-      state.expandedTransform = {
-        fromX,
-        fromY,
-        toX: 0,
-        toY: 0,
-        scale: initialScale,
-      };
+      const finalLeft = window.innerWidth / 2 - w / 2;
+      const finalTop = window.innerHeight / 2 - h / 2;
   
       gsap.fromTo(
         expandedItem,
         {
-          x: fromX,
-          y: fromY,
-          scale: initialScale,
+          left: rect.left,
+          top: rect.top,
+          width: rect.width,
+          height: rect.height,
         },
         {
-          x: 0,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          ease: "power2.out",
+          left: finalLeft,
+          top: finalTop,
+          width: w,
+          height: h,
+          duration: 0.8,
+          ease: "power3.inOut",
         }
       );
     };
   };
+  ;
    
 
   const closeExpandedItem = () => {
@@ -419,8 +386,7 @@ export default function CanvasGallery3() {
   
     if (
       !state.expandedItem ||
-      !state.originalPosition ||
-      !state.expandedTransform
+      !state.originalPosition
     )
       return;
   
@@ -439,14 +405,16 @@ export default function CanvasGallery3() {
       }
     });
   
-    const { fromX, fromY, scale } = state.expandedTransform;
+    const { left, top, width, height } = state.originalPosition;
   
+    // Animamos left, top, width y height igual que en la apertura, pero al revés
     gsap.to(state.expandedItem, {
-      x: fromX,
-      y: fromY,
-      scale: scale,
-      duration: 1,
-      ease: "power2.inOut",
+      left,
+      top,
+      width,
+      height,
+      duration: 0.8,
+      ease: "power3.inOut",
       onComplete: () => {
         if (state.expandedItem && state.expandedItem.parentNode) {
           document.body.removeChild(state.expandedItem);
@@ -479,6 +447,7 @@ export default function CanvasGallery3() {
       },
     });
   };
+  
   
   const animate = () => {
     const state = stateRef.current;
