@@ -108,11 +108,11 @@ export default function CanvasGallery4() {
   
 
   const itemCount = 42;
-  const horizontalGap = 145;
-  const verticalGap = 145;
+  const horizontalGap = 70;
+  const verticalGap = 70;
   const columns = 17;
-  const itemWidth = 85;
-  const itemHeight = 140;
+  const itemWidth = 120;
+  const itemHeight = 160;
 
   const stateRef = useRef({
     isDragging: false,
@@ -307,7 +307,6 @@ export default function CanvasGallery4() {
   
     projectTitleRef.current.style.pointerEvents = "auto";
     projectTitleRef.current.style.opacity = "1";
-    setAndAnimateTitle(label, galleryLink);
     item.style.visibility = "hidden";
   
     overlay.classList.add(styles.active);
@@ -347,8 +346,8 @@ export default function CanvasGallery4() {
       expandedItem.style.opacity = "1";
   
       const ar = imgEl.naturalWidth / imgEl.naturalHeight;
-      const maxW = window.innerWidth * 0.8;
-      const maxH = window.innerHeight * 0.8;
+      const maxW = window.innerWidth * 0.7;
+      const maxH = window.innerHeight * 0.7;
       let w = imgEl.naturalWidth, h = imgEl.naturalHeight;
   
       if (w > maxW) { w = maxW; h = w / ar; }
@@ -372,12 +371,14 @@ export default function CanvasGallery4() {
           height: h,
           duration: 0.8,
           ease: "power3.inOut",
+          onComplete: () => {
+            // 👇 Título aparece solo cuando ya terminó la expansión
+            setAndAnimateTitle(label, galleryLink);
+          },
         }
       );
     };
   };
-  ;
-   
 
   const closeExpandedItem = () => {
     const state = stateRef.current;

@@ -27,8 +27,8 @@
 } */
 
 .item {
-  width: 85px;
-  height: 140px;
+  width: 120px;
+  height: 160px;
   position: absolute;
   overflow: hidden;
   display: flex;
