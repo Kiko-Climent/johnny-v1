@@ -117,6 +117,7 @@ export default function CanvasGallery5() {
 
   const stateRef = useRef({
     isDragging: false,
+    scale: 0.6,
     startX: 0,
     startY: 0,
     targetX: 0,
@@ -462,6 +463,7 @@ export default function CanvasGallery5() {
   const animate = () => {
     const state = stateRef.current;
     const canvas = canvasRef.current;
+  
     if (!canvas) return;
   
     if (state.canDrag) {
@@ -469,11 +471,11 @@ export default function CanvasGallery5() {
       state.currentX += (state.targetX - state.currentX) * ease;
       state.currentY += (state.targetY - state.currentY) * ease;
   
-      // Uso de GSAP con x, y y force3D para forzar renderizado por GPU
       gsap.set(canvas, {
         x: state.currentX,
         y: state.currentY,
-        force3D: true,
+        scale: state.zoomedIn ? 1 : 0.6,
+        z: state.zoomedIn ? 0 : -500,
       });
   
       const now = Date.now();
@@ -496,10 +498,13 @@ export default function CanvasGallery5() {
   const handleMouseDown = (e) => {
     const state = stateRef.current;
     if (!state.canDrag) return;
+  
+    const scale = state.zoomedIn ? 1 : 0.6;
+  
     state.isDragging = true;
     state.mouseHasMoved = false;
-    state.startX = e.clientX;
-    state.startY = e.clientY;
+    state.startX = e.clientX / scale;
+    state.startY = e.clientY / scale;
     containerRef.current.style.cursor = "grabbing";
   };
   
@@ -507,8 +512,12 @@ export default function CanvasGallery5() {
     const state = stateRef.current;
     if (!state.isDragging || !state.canDrag) return;
   
-    const dx = e.clientX - state.startX;
-    const dy = e.clientY - state.startY;
+    const scale = state.zoomedIn ? 1 : 0.6;
+    const currentX = e.clientX / scale;
+    const currentY = e.clientY / scale;
+  
+    const dx = currentX - state.startX;
+    const dy = currentY - state.startY;
   
     if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
       state.mouseHasMoved = true;
@@ -524,11 +533,11 @@ export default function CanvasGallery5() {
     state.targetX += dx;
     state.targetY += dy;
   
-    state.startX = e.clientX;
-    state.startY = e.clientY;
+    state.startX = currentX;
+    state.startY = currentY;
   };
   
-  const handleMouseUp = () => {
+  const handleMouseUp = (e) => {
     const state = stateRef.current;
     if (!state.isDragging) return;
     state.isDragging = false;
@@ -550,18 +559,26 @@ export default function CanvasGallery5() {
   const handleTouchStart = (e) => {
     const state = stateRef.current;
     if (!state.canDrag) return;
+  
+    const scale = state.zoomedIn ? 1 : 0.6;
+  
     state.isDragging = true;
     state.mouseHasMoved = false;
-    state.startX = e.touches[0].clientX;
-    state.startY = e.touches[0].clientY;
+    state.startX = e.touches[0].clientX / scale;
+    state.startY = e.touches[0].clientY / scale;
   };
   
   const handleTouchMove = (e) => {
     const state = stateRef.current;
     if (!state.isDragging || !state.canDrag) return;
   
-    const dx = e.touches[0].clientX - state.startX;
-    const dy = e.touches[0].clientY - state.startY;
+    const scale = state.zoomedIn ? 1 : 0.6;
+  
+    const currentX = e.touches[0].clientX / scale;
+    const currentY = e.touches[0].clientY / scale;
+  
+    const dx = currentX - state.startX;
+    const dy = currentY - state.startY;
   
     if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
       state.mouseHasMoved = true;
@@ -570,8 +587,8 @@ export default function CanvasGallery5() {
     state.targetX += dx;
     state.targetY += dy;
   
-    state.startX = e.touches[0].clientX;
-    state.startY = e.touches[0].clientY;
+    state.startX = currentX;
+    state.startY = currentY;
   };
   
   const handleTouchEnd = () => {
@@ -604,21 +621,14 @@ export default function CanvasGallery5() {
   const initializeGallery = () => {
     const container = containerRef.current;
     const overlay = overlayRef.current;
+  
     if (!container || !overlay) return;
   
     container.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
-  
-    container.addEventListener("touchstart", handleTouchStart, {
-      passive: true,
-    });
-  
-    // ⚠️ Safari puede fallar con `passive: true` si necesitas control del scroll
-    window.addEventListener("touchmove", handleTouchMove, {
-      passive: false, // cambia a false si usas preventDefault en algún momento
-    });
-  
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("resize", handleResize);
     overlay.addEventListener("click", handleOverlayClick);
@@ -626,6 +636,7 @@ export default function CanvasGallery5() {
     updateVisibleItems();
     animate();
   };
+  
   
 
   return (
@@ -651,6 +662,7 @@ export default function CanvasGallery5() {
 
           // Actualizamos también en el stateRef para coherencia
           stateRef.current.zoomedIn = nextZoomed;
+          stateRef.current.scale = nextZoomed ? 1 : 0.6;
         }}
       >
         {zoomedIn ? "ZOOM OUT" : "ZOOM IN"}
