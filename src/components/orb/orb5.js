@@ -73,6 +73,8 @@ const Orb5 = ({
       "image40.jpeg",
       "image41.jpeg",
       "image42.jpeg",
+      // "image10.jpeg",
+      // "image25.jpeg",
     ];
     
     const getRandomImage = () => {

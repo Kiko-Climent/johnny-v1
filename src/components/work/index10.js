@@ -3,8 +3,6 @@
 import { useState } from "react";
 import Project6 from "@/components/work/project6";
 import useIsMobile from "@/hooks/useIsMobile";
-// import ProjectMobile4 from "./ProjectMobile4";
-import ProjectMobile5 from "./ProjectMobile5";
 import ProjectMobile4 from "./ProjectMobile4";
 
 const projects = [
