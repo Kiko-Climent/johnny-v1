@@ -54,9 +54,12 @@
   top: 50%;
   left: 50%;
   /* transform: translate(-50%, -50%); */
+  will-change: left, top, width, height;
   overflow: hidden;
   cursor: pointer;
 }
+
+
 
 
 /* nuevo class image con aspect original de imagenes */

@@ -297,7 +297,6 @@ export default function CanvasGallery5() {
     state.canDrag = false;
     container.style.cursor = "auto";
   
-    // posición original visible para cálculo
     const img = item.querySelector("img");
     const scrollLeft = window.scrollX;
     const scrollTop = window.scrollY;
@@ -316,15 +315,15 @@ export default function CanvasGallery5() {
   
     const expandedItem = document.createElement("div");
     expandedItem.classList.add(styles.expandedItem);
-  
-    // ✅ EMPIEZA invisible pero en layout
-    expandedItem.style.opacity = "0";
+    expandedItem.style.willChange = "left, top, width, height";
     expandedItem.style.position = "absolute";
     expandedItem.style.left = `${rect.left + scrollLeft}px`;
     expandedItem.style.top = `${rect.top + scrollTop}px`;
     expandedItem.style.width = `${rect.width}px`;
     expandedItem.style.height = `${rect.height}px`;
+    expandedItem.style.opacity = "0";
     expandedItem.style.zIndex = "1000";
+    expandedItem.style.overflow = "hidden";
   
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -339,19 +338,20 @@ export default function CanvasGallery5() {
     expandedItem.appendChild(imgEl);
     expandedItem.addEventListener("click", closeExpandedItem);
     document.body.appendChild(expandedItem);
+  
+    // Forzamos reflow para asegurar que Safari renderiza antes de animar
     expandedItem.offsetHeight;
+  
     state.expandedItem = expandedItem;
-
     state.originalPosition = {
       left: rect.left,
       top: rect.top,
       width: rect.width,
       height: rect.height,
       scrollLeft,
-      scrollTop
-    }
+      scrollTop,
+    };
     state.expandedTransform = { fromX: 0, fromY: 0, scale: 1 };
-
   
     imgEl.onload = () => {
       if (!expandedItem.isConnected) return;
@@ -360,48 +360,46 @@ export default function CanvasGallery5() {
       const ar = imgEl.naturalWidth / imgEl.naturalHeight;
       const maxW = window.innerWidth * 0.7;
       const maxH = window.innerHeight * 0.7;
-      let w = imgEl.naturalWidth, h = imgEl.naturalHeight;
   
+      let w = imgEl.naturalWidth, h = imgEl.naturalHeight;
       if (w > maxW) { w = maxW; h = w / ar; }
       if (h > maxH) { h = maxH; w = h * ar; }
   
       const finalLeft = window.innerWidth / 2 - w / 2;
       const finalTop = window.innerHeight / 2 - h / 2;
   
-      gsap.fromTo(
-        expandedItem,
-        {
-          left: rect.left,
-          top: rect.top,
-          width: rect.width,
-          height: rect.height,
-        },
-        {
-          left: finalLeft,
-          top: finalTop,
-          width: w,
-          height: h,
-          duration: 0.8,
-          ease: "power3.inOut",
-          onComplete: () => {
-            // 👇 Título aparece solo cuando ya terminó la expansión
-            setAndAnimateTitle(label, galleryLink);
+      requestAnimationFrame(() => {
+        gsap.fromTo(
+          expandedItem,
+          {
+            left: rect.left + scrollLeft,
+            top: rect.top + scrollTop,
+            width: rect.width,
+            height: rect.height,
           },
-        }
-      );
+          {
+            left: finalLeft + scrollLeft,
+            top: finalTop + scrollTop,
+            width: w,
+            height: h,
+            duration: 0.8,
+            ease: "power3.inOut",
+            onComplete: () => {
+              setAndAnimateTitle(label, galleryLink);
+            },
+          }
+        );
+      });
     };
   };
+  
 
   const closeExpandedItem = () => {
     const state = stateRef.current;
     const container = containerRef.current;
     const overlay = overlayRef.current;
   
-    if (
-      !state.expandedItem ||
-      !state.originalPosition
-    )
-      return;
+    if (!state.expandedItem || !state.originalPosition) return;
   
     animateTitleOut();
     overlay.classList.remove(styles.active);
@@ -424,49 +422,50 @@ export default function CanvasGallery5() {
       width,
       height,
       scrollLeft,
-      scrollTop
+      scrollTop,
     } = state.originalPosition;
   
-    // Animamos left, top, width y height igual que en la apertura, pero al revés
-    gsap.to(state.expandedItem, {
-      left: left + scrollLeft,
-      top: top + scrollTop,
-      width,
-      height,
-      duration: 0.8,
-      ease: "power3.inOut",
-      onComplete: () => {
-        if (state.expandedItem && state.expandedItem.parentNode) {
-          document.body.removeChild(state.expandedItem);
-        }
+    requestAnimationFrame(() => {
+      gsap.to(state.expandedItem, {
+        left: left + scrollLeft,
+        top: top + scrollTop,
+        width,
+        height,
+        duration: 0.8,
+        ease: "power3.inOut",
+        onComplete: () => {
+          if (state.expandedItem && state.expandedItem.parentNode) {
+            document.body.removeChild(state.expandedItem);
+          }
   
-        if (originalItem) {
-          originalItem.style.visibility = "visible";
-        }
+          if (originalItem) {
+            originalItem.style.visibility = "visible";
+          }
   
-        // Limpia el contenido del título y evita eventos
-        const titleEl = projectTextRef.current;
-        if (titleEl) titleEl.innerHTML = "";
+          const titleEl = projectTextRef.current;
+          if (titleEl) titleEl.innerHTML = "";
   
-        if (projectTitleRef.current) {
-          projectTitleRef.current.style.pointerEvents = "none";
-          projectTitleRef.current.style.opacity = "0";
-        }
+          if (projectTitleRef.current) {
+            projectTitleRef.current.style.pointerEvents = "none";
+            projectTitleRef.current.style.opacity = "0";
+          }
   
-        // Limpiar estado
-        state.expandedItem = null;
-        state.isExpanded = false;
-        state.activeItem = null;
-        state.originalPosition = null;
-        state.activeItemId = null;
-        state.expandedTransform = null;
-        state.canDrag = true;
-        container.style.cursor = "grab";
-        state.dragVelocityX = 0;
-        state.dragVelocityY = 0;
-      },
+          // Limpiar estado
+          state.expandedItem = null;
+          state.isExpanded = false;
+          state.activeItem = null;
+          state.originalPosition = null;
+          state.activeItemId = null;
+          state.expandedTransform = null;
+          state.canDrag = true;
+          container.style.cursor = "grab";
+          state.dragVelocityX = 0;
+          state.dragVelocityY = 0;
+        },
+      });
     });
   };
+  
   
   
   const animate = () => {
