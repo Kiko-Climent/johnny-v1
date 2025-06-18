@@ -462,25 +462,26 @@ export default function CanvasGallery5() {
   const animate = () => {
     const state = stateRef.current;
     const canvas = canvasRef.current;
-
     if (!canvas) return;
-
+  
     if (state.canDrag) {
       const ease = 0.075;
       state.currentX += (state.targetX - state.currentX) * ease;
       state.currentY += (state.targetY - state.currentY) * ease;
-
+  
+      // Uso de GSAP con x, y y force3D para forzar renderizado por GPU
       gsap.set(canvas, {
         x: state.currentX,
         y: state.currentY,
+        force3D: true,
       });
-
+  
       const now = Date.now();
       const distMoved = Math.sqrt(
         Math.pow(state.currentX - state.lastX, 2) +
           Math.pow(state.currentY - state.lastY, 2)
       );
-
+  
       if (distMoved > 100 || now - state.lastUpdateTime > 120) {
         updateVisibleItems();
         state.lastX = state.currentX;
@@ -488,14 +489,12 @@ export default function CanvasGallery5() {
         state.lastUpdateTime = now;
       }
     }
-
+  
     state.animationFrameId = requestAnimationFrame(animate);
   };
   
-
   const handleMouseDown = (e) => {
     const state = stateRef.current;
-
     if (!state.canDrag) return;
     state.isDragging = true;
     state.mouseHasMoved = false;
@@ -503,42 +502,40 @@ export default function CanvasGallery5() {
     state.startY = e.clientY;
     containerRef.current.style.cursor = "grabbing";
   };
-
+  
   const handleMouseMove = (e) => {
     const state = stateRef.current;
-
     if (!state.isDragging || !state.canDrag) return;
-
+  
     const dx = e.clientX - state.startX;
     const dy = e.clientY - state.startY;
-
+  
     if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
       state.mouseHasMoved = true;
     }
-
+  
     const now = Date.now();
     const dt = Math.max(10, now - state.lastDragTime);
     state.lastDragTime = now;
-
+  
     state.dragVelocityX = dx / dt;
     state.dragVelocityY = dy / dt;
-
+  
     state.targetX += dx;
     state.targetY += dy;
-
+  
     state.startX = e.clientX;
     state.startY = e.clientY;
   };
-
-  const handleMouseUp = (e) => {
+  
+  const handleMouseUp = () => {
     const state = stateRef.current;
-
     if (!state.isDragging) return;
     state.isDragging = false;
-
+  
     if (state.canDrag) {
       containerRef.current.style.cursor = "grab";
-
+  
       if (
         Math.abs(state.dragVelocityX) > 0.1 ||
         Math.abs(state.dragVelocityY) > 0.1
@@ -549,52 +546,50 @@ export default function CanvasGallery5() {
       }
     }
   };
-
+  
   const handleTouchStart = (e) => {
     const state = stateRef.current;
-
     if (!state.canDrag) return;
     state.isDragging = true;
     state.mouseHasMoved = false;
     state.startX = e.touches[0].clientX;
     state.startY = e.touches[0].clientY;
   };
-
+  
   const handleTouchMove = (e) => {
     const state = stateRef.current;
-
     if (!state.isDragging || !state.canDrag) return;
-
+  
     const dx = e.touches[0].clientX - state.startX;
     const dy = e.touches[0].clientY - state.startY;
-
+  
     if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
       state.mouseHasMoved = true;
     }
-
+  
     state.targetX += dx;
     state.targetY += dy;
-
+  
     state.startX = e.touches[0].clientX;
     state.startY = e.touches[0].clientY;
   };
-
+  
   const handleTouchEnd = () => {
     stateRef.current.isDragging = false;
   };
-
+  
   const handleOverlayClick = () => {
     if (stateRef.current.isExpanded) closeExpandedItem();
   };
-
+  
   const handleResize = () => {
     const state = stateRef.current;
-
+  
     if (state.isExpanded && state.expandedItem) {
       const viewportWidth = window.innerWidth;
       const targetWidth = viewportWidth * 0.4;
       const targetHeight = targetWidth * 1.2;
-
+  
       gsap.to(state.expandedItem, {
         width: targetWidth,
         height: targetHeight,
@@ -605,27 +600,33 @@ export default function CanvasGallery5() {
       updateVisibleItems();
     }
   };
-
+  
   const initializeGallery = () => {
     const container = containerRef.current;
     const overlay = overlayRef.current;
-
     if (!container || !overlay) return;
-
+  
     container.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+  
     container.addEventListener("touchstart", handleTouchStart, {
       passive: true,
     });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+  
+    // ⚠️ Safari puede fallar con `passive: true` si necesitas control del scroll
+    window.addEventListener("touchmove", handleTouchMove, {
+      passive: false, // cambia a false si usas preventDefault en algún momento
+    });
+  
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("resize", handleResize);
     overlay.addEventListener("click", handleOverlayClick);
-
+  
     updateVisibleItems();
     animate();
   };
+  
 
   return (
     <>

@@ -15,6 +15,7 @@
 .canvas {
   position: absolute;
   will-change: transform;
+  touch-action: none;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
 }
