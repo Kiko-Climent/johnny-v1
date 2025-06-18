@@ -291,12 +291,14 @@ export default function CanvasGallery5() {
     const container = containerRef.current;
     const overlay = overlayRef.current;
   
+    // Estado inicial
     state.isExpanded = true;
     state.activeItem = item;
     state.activeItemId = item.id;
     state.canDrag = false;
     container.style.cursor = "auto";
   
+    // Elementos clave
     const img = item.querySelector("img");
     const scrollLeft = window.scrollX;
     const scrollTop = window.scrollY;
@@ -307,52 +309,49 @@ export default function CanvasGallery5() {
     const imgNum = imgMatch ? parseInt(imgMatch[1]) : 1;
     const { label, galleryLink } = items[(imgNum - 1) % items.length];
   
+    // Preparar título y overlay
     projectTitleRef.current.style.pointerEvents = "auto";
     projectTitleRef.current.style.opacity = "1";
     item.style.visibility = "hidden";
-  
     overlay.classList.add(styles.active);
   
+    // Crear div expandido
     const expandedItem = document.createElement("div");
-    expandedItem.classList.add(styles.expandedItem);
-    expandedItem.style.willChange = "left, top, width, height";
-    expandedItem.style.position = "absolute";
-    expandedItem.style.left = `${rect.left + scrollLeft}px`;
-    expandedItem.style.top = `${rect.top + scrollTop}px`;
-    expandedItem.style.width = `${rect.width}px`;
-    expandedItem.style.height = `${rect.height}px`;
-    expandedItem.style.opacity = "0";
-    expandedItem.style.zIndex = "1000";
-    expandedItem.style.overflow = "hidden";
+    expandedItem.className = styles.expandedItem;
+    Object.assign(expandedItem.style, {
+      opacity: "0",
+      position: "absolute",
+      left: `${rect.left + scrollLeft}px`,
+      top: `${rect.top + scrollTop}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
+      zIndex: "1000",
+    });
   
+    // Imagen grande
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
     imgEl.className = styles.image;
   
+    // Link a la galería
     const titleLink = document.createElement("a");
     titleLink.href = galleryLink;
     titleLink.className = styles.galleryTitleLink;
     titleLink.addEventListener("click", (e) => e.stopPropagation());
   
+    // Montaje
     expandedItem.appendChild(titleLink);
     expandedItem.appendChild(imgEl);
     expandedItem.addEventListener("click", closeExpandedItem);
     document.body.appendChild(expandedItem);
+    expandedItem.offsetHeight; // forzar reflow
   
-    // Forzamos reflow para asegurar que Safari renderiza antes de animar
-    expandedItem.offsetHeight;
-  
+    // Guardar referencias
     state.expandedItem = expandedItem;
-    state.originalPosition = {
-      left: rect.left,
-      top: rect.top,
-      width: rect.width,
-      height: rect.height,
-      scrollLeft,
-      scrollTop,
-    };
+    state.originalPosition = { left: rect.left, top: rect.top, width: rect.width, height: rect.height, scrollLeft, scrollTop };
     state.expandedTransform = { fromX: 0, fromY: 0, scale: 1 };
   
+    // Cargar imagen
     imgEl.onload = () => {
       if (!expandedItem.isConnected) return;
       expandedItem.style.opacity = "1";
@@ -360,40 +359,35 @@ export default function CanvasGallery5() {
       const ar = imgEl.naturalWidth / imgEl.naturalHeight;
       const maxW = window.innerWidth * 0.7;
       const maxH = window.innerHeight * 0.7;
-  
       let w = imgEl.naturalWidth, h = imgEl.naturalHeight;
+  
       if (w > maxW) { w = maxW; h = w / ar; }
       if (h > maxH) { h = maxH; w = h * ar; }
   
-      const finalLeft = window.innerWidth / 2 - w / 2;
-      const finalTop = window.innerHeight / 2 - h / 2;
+      const finalLeft = (window.innerWidth - w) / 2;
+      const finalTop = (window.innerHeight - h) / 2;
   
-      requestAnimationFrame(() => {
-        gsap.fromTo(
-          expandedItem,
-          {
-            left: rect.left + scrollLeft,
-            top: rect.top + scrollTop,
-            width: rect.width,
-            height: rect.height,
-          },
-          {
-            left: finalLeft + scrollLeft,
-            top: finalTop + scrollTop,
-            width: w,
-            height: h,
-            duration: 0.8,
-            ease: "power3.inOut",
-            onComplete: () => {
-              setAndAnimateTitle(label, galleryLink);
-            },
-          }
-        );
-      });
+      gsap.fromTo(
+        expandedItem,
+        {
+          left: rect.left + scrollLeft,
+          top: rect.top + scrollTop,
+          width: rect.width,
+          height: rect.height,
+        },
+        {
+          left: finalLeft,
+          top: finalTop,
+          width: w,
+          height: h,
+          duration: 0.8,
+          ease: "power3.inOut",
+          onComplete: () => setAndAnimateTitle(label, galleryLink),
+        }
+      );
     };
   };
   
-
   const closeExpandedItem = () => {
     const state = stateRef.current;
     const container = containerRef.current;
@@ -405,6 +399,7 @@ export default function CanvasGallery5() {
     overlay.classList.remove(styles.active);
     const originalItem = document.getElementById(state.activeItemId);
   
+    // Restaurar visibilidad de otras tarjetas
     document.querySelectorAll(".item").forEach((el) => {
       if (el.id !== state.activeItemId) {
         gsap.to(el, {
@@ -416,53 +411,49 @@ export default function CanvasGallery5() {
       }
     });
   
-    const {
-      left,
-      top,
+    const { left, top, width, height, scrollLeft, scrollTop } = state.originalPosition;
+  
+    // Animar reversión
+    gsap.to(state.expandedItem, {
+      left: left + scrollLeft,
+      top: top + scrollTop,
       width,
       height,
-      scrollLeft,
-      scrollTop,
-    } = state.originalPosition;
+      duration: 0.8,
+      ease: "power3.inOut",
+      onComplete: () => {
+        if (state.expandedItem?.parentNode) {
+          document.body.removeChild(state.expandedItem);
+        }
   
-    requestAnimationFrame(() => {
-      gsap.to(state.expandedItem, {
-        left: left + scrollLeft,
-        top: top + scrollTop,
-        width,
-        height,
-        duration: 0.8,
-        ease: "power3.inOut",
-        onComplete: () => {
-          if (state.expandedItem && state.expandedItem.parentNode) {
-            document.body.removeChild(state.expandedItem);
-          }
+        if (originalItem) {
+          originalItem.style.visibility = "visible";
+        }
   
-          if (originalItem) {
-            originalItem.style.visibility = "visible";
-          }
+        // Limpiar título
+        const titleEl = projectTextRef.current;
+        if (titleEl) titleEl.innerHTML = "";
   
-          const titleEl = projectTextRef.current;
-          if (titleEl) titleEl.innerHTML = "";
+        if (projectTitleRef.current) {
+          projectTitleRef.current.style.pointerEvents = "none";
+          projectTitleRef.current.style.opacity = "0";
+        }
   
-          if (projectTitleRef.current) {
-            projectTitleRef.current.style.pointerEvents = "none";
-            projectTitleRef.current.style.opacity = "0";
-          }
+        // Resetear estado
+        Object.assign(state, {
+          expandedItem: null,
+          isExpanded: false,
+          activeItem: null,
+          originalPosition: null,
+          activeItemId: null,
+          expandedTransform: null,
+          canDrag: true,
+          dragVelocityX: 0,
+          dragVelocityY: 0,
+        });
   
-          // Limpiar estado
-          state.expandedItem = null;
-          state.isExpanded = false;
-          state.activeItem = null;
-          state.originalPosition = null;
-          state.activeItemId = null;
-          state.expandedTransform = null;
-          state.canDrag = true;
-          container.style.cursor = "grab";
-          state.dragVelocityX = 0;
-          state.dragVelocityY = 0;
-        },
-      });
+        container.style.cursor = "grab";
+      },
     });
   };
   
