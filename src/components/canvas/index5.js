@@ -339,6 +339,7 @@ export default function CanvasGallery5() {
     expandedItem.appendChild(imgEl);
     expandedItem.addEventListener("click", closeExpandedItem);
     document.body.appendChild(expandedItem);
+    expandedItem.offsetHeight;
     state.expandedItem = expandedItem;
 
     state.originalPosition = {
@@ -353,6 +354,7 @@ export default function CanvasGallery5() {
 
   
     imgEl.onload = () => {
+      if (!expandedItem.isConnected) return;
       expandedItem.style.opacity = "1";
   
       const ar = imgEl.naturalWidth / imgEl.naturalHeight;
