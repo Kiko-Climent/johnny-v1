@@ -5,6 +5,7 @@
   overflow: hidden;
   cursor: grab;
   perspective: 800px;
+  -webkit-perspective: 800px;
 
   /* previene drag */
   user-select: none;
@@ -15,7 +16,6 @@
 .canvas {
   position: absolute;
   will-change: transform;
-  touch-action: none;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
 }
@@ -31,7 +31,6 @@
 .item {
   width: 120px;
   height: 160px;
-  aspect-ratio: 3 / 4;
   position: absolute;
   overflow: hidden;
   display: flex;
@@ -43,9 +42,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  max-width: none;
-  max-height: none;
 }
 
 
@@ -55,12 +51,9 @@
   top: 50%;
   left: 50%;
   /* transform: translate(-50%, -50%); */
-  will-change: left, top, width, height;
   overflow: hidden;
   cursor: pointer;
 }
-
-
 
 
 /* nuevo class image con aspect original de imagenes */
@@ -93,13 +86,11 @@
   height: 100%;
   background-color: white;
   backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
   mix-blend-mode: difference;
   pointer-events: none;
   transition: opacity 0.3s ease;
   opacity: 0;
   z-index: 2;
-  
 }
 
 .overlay.active {
@@ -143,9 +134,9 @@
 
 .zoomed {
   transform: scale(2); /* o el tamaño real */
-  transition: transform 0.3s ease;
+  -webkit-transform: scale(2);;
+  /* transition: transform 0.3s ease; */
   z-index: 10;
-  will-change: transform;
 }
 
 .zoomToggle {
@@ -153,7 +144,8 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 99999;
+  -webkit-transform: translate(-50%, -50%);
+  z-index: 999;
   background: white;
   /* border: none; */
   font-size: 20px;
