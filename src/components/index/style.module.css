@@ -4,8 +4,8 @@
   height: 100vh;
   overflow: hidden;
   cursor: grab;
-  perspective: 800px;
-  -webkit-perspective: 800px;
+  /* perspective: 500px;
+  -webkit-perspective: 500px; */
 
   /* previene drag */
   user-select: none;
@@ -15,13 +15,11 @@
 
 .canvas {
   position: absolute;
-  transform: scale(0.6);
   -webkit-transform: scale(0.6);
+  transform: scale(0.6);
   will-change: transform;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transform-origin: center center;
-  -webkit-transform-origin: center center;
 }
 
 /* .item {
@@ -110,7 +108,7 @@
   width: 100%;
   text-align: center;
   pointer-events: none;
-  z-index: 999;
+  z-index: 99999;
 }
 
 .projectText {
@@ -137,8 +135,8 @@
 }
 
 .zoomed {
-  transform: scale(1); /* o el tamaño real */
-  -webkit-transform: scale(1);;
+  transform: scale(2); /* o el tamaño real */
+  -webkit-transform: scale(2);;
   /* transition: transform 0.3s ease; */
   z-index: 10;
 }
