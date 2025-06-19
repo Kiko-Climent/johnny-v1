@@ -60,7 +60,7 @@ export default function CanvasGallery4() {
       // Empezamos "lejos"
       gsap.set(canvas, {
         scale: 0.6,
-        z: -500, // simulamos que está "atrás" en un plano 3D
+        z: -800, // simulamos que está "atrás" en un plano 3D
       });
     }
   
@@ -117,6 +117,7 @@ export default function CanvasGallery4() {
 
   const stateRef = useRef({
     isDragging: false,
+    scale: 0.6,
     startX: 0,
     startY: 0,
     targetX: 0,
@@ -635,7 +636,7 @@ export default function CanvasGallery4() {
 
           gsap.to(canvas, {
             scale: nextZoomed ? 1 : 0.6,
-            z: nextZoomed ? 0 : -500,
+            z: nextZoomed ? 0 : -800,
             duration: 1.4,
             ease: "power4.out",
           });
