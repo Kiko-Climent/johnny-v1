@@ -116,12 +116,12 @@ export default function Index7({ project, onHoverChange }) {
               <div className="flex flex-row items-center justify-center gap-1">
                 <p className="text-[6vh] md:text-[15.8vh] flex uppercase">{title1}</p>
                 {title3 ? (
-                  <div className={`${styles.doubleTitle} flex flex-row md:flex-col items-start justify-start text-[2.5vh] md:text-[7.5vh] leading-[3.0vh] md:leading-[6.0vh] whitespace-nowrap`}>
+                  <div className={`${styles.doubleTitle} flex flex-row md:flex-col items-start justify-start leading-[6.0vh] whitespace-nowrap`}>
                     <p className="text-left uppercase">{title2}</p>
                     <p className="text-left uppercase">{title3}</p>
                   </div>
                 ) : (
-                  <p className="text-[6vh] md:text-[15.8vh] flex whitespace-nowrap uppercase">{title2}</p>
+                  <p className="flex whitespace-nowrap uppercase">{title2}</p>
                 )}
               </div>
             </motion.div>
