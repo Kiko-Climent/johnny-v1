@@ -1,7 +1,8 @@
 .project{
     /* border-top: 2px solid black; */
     padding-top: 0.4vh;
-    height: 12.9vh;
+    /* height: 12.9vh; */
+    height: 16.5vh;
     cursor: pointer;
     width: 100%;
     display: flex;

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react";
-import Project6 from "@/components/work/project6";
+// import Project6 from "@/components/work/project6";
+import Project7 from "@/components/work/project7";
 import useIsMobile from "@/hooks/useIsMobile";
 import ProjectMobile4 from "./ProjectMobile4";
 
@@ -86,7 +87,7 @@ const WorkMenu10 = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center relative">
+    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center">
       {projects.map((project) =>
         isMobile ? (
           <ProjectMobile4
@@ -96,7 +97,7 @@ const WorkMenu10 = () => {
           setSelectedId={setSelectedId}
         />
         ) : (
-          <Project6 key={project.id} project={project} />
+          <Project7 key={project.id} project={project} />
         )
       )}
     </div>
