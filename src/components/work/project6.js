@@ -61,7 +61,7 @@ export default function Project6({ project, onHoverChange }) {
         onClick={handleClick}
         className={`${styles.project} flex flex-row items-center justify-center gap-0 -mb-2`}
       >
-        <p className="text-[6vh] md:text-[15.8vh] flex uppercase">{title1}</p>
+        <p className="text-[15.8vh] flex uppercase">{title1}</p>
 
         <motion.div
           ref={imgRef}
@@ -83,7 +83,7 @@ export default function Project6({ project, onHoverChange }) {
         )}
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence> */}
         {isExpanding && bounds && (
           <>
             <motion.div
@@ -135,7 +135,7 @@ export default function Project6({ project, onHoverChange }) {
             )}
           </>
         )}
-      </AnimatePresence>
+      {/* </AnimatePresence> */}
 
     </>
   );
