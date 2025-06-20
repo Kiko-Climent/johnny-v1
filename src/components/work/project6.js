@@ -2,7 +2,7 @@
 
 import styles from "@/components/work/style.module.css";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const anim = {
@@ -15,9 +15,16 @@ export default function Project6({ project, onHoverChange }) {
   const [isActive, setIsActive] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
   const [showCenterText, setShowCenterText] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const [bounds, setBounds] = useState(null);
   const imgRef = useRef(null);
   const router = useRouter();
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
 
   const { title1, title2, title3, src } = project;
 
