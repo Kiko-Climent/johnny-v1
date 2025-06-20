@@ -4,7 +4,7 @@ import Header3 from "@/components/header3";
 import PageTransitionWrapper7 from "@/components/Layout/PageTransitions/PageTransitionWraper/index7";
 import { NavigationProvider } from "@/components/tools/NavigationContext";
 import "@/styles/globals.css";
-// import "@/styles/Work.module.css";
+import "@/styles/Work.module.css";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import ProgressBar from "nextjs-progressbar"

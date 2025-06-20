@@ -37,7 +37,7 @@ const PageTransitionWrapper6 = ({ children }) => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="fixed top-0 left-0 w-screen h-screen"
+      // className="fixed top-0 left-0 w-screen h-screen"
     >
       {children}
     </motion.div>

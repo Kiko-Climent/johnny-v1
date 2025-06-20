@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react";
-// import Project6 from "@/components/work/project6";
-import Project7 from "@/components/work/project7";
+import Project6 from "@/components/work/project6";
+// import Project7 from "@/components/work/project7";
 import useIsMobile from "@/hooks/useIsMobile";
 import ProjectMobile4 from "./ProjectMobile4";
 
@@ -97,7 +97,7 @@ const WorkMenu10 = () => {
           setSelectedId={setSelectedId}
         />
         ) : (
-          <Project7 key={project.id} project={project} />
+          <Project6 key={project.id} project={project} />
         )
       )}
     </div>

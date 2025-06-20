@@ -10,15 +10,14 @@
 
 }
 
-/* .project p{
+.project p{
 
-    font-size: 15.8vh;
     text-transform: uppercase;
     margin: 0px;
 
-} */
+}
 
-.title1{
+/* .title1{
 
     font-size: 15.8vh;
     text-transform: uppercase;
@@ -32,7 +31,7 @@
     text-transform: uppercase;
     margin: 0;
     padding: 0;
-}
+} */
 
 .project p:nth-of-type(1){
 
