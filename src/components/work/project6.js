@@ -11,7 +11,7 @@ const anim = {
   closed: { width: 0 }
 };
 
-export default function Index6({ project, onHoverChange }) {
+export default function Project6({ project, onHoverChange }) {
   const [isActive, setIsActive] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
   const [showCenterText, setShowCenterText] = useState(false);

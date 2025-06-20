@@ -34,8 +34,7 @@ const PageTransitionWrapper6 = ({ children }) => {
   return (
     <motion.div
       variants={fadeVariants}
-      // initial="initial"
-      initial="animate"
+      initial="initial"
       animate="animate"
       exit="exit"
       className="fixed top-0 left-0 w-screen h-screen"
