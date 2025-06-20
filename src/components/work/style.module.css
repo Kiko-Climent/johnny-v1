@@ -1,8 +1,7 @@
 .project{
     /* border-top: 2px solid black; */
     padding-top: 0.4vh;
-    /* height: 12.9vh; */
-    height: 16.5vh;
+    height: 12.9vh;
     cursor: pointer;
     width: 100%;
     display: flex;
@@ -12,12 +11,28 @@
 
 }
 
-.project p{
+/* .project p{
 
-    /* font-size: 10.0vh; */
+    font-size: 15.8vh;
     text-transform: uppercase;
     margin: 0px;
 
+} */
+
+.title1{
+
+    font-size: 15.8vh;
+    text-transform: uppercase;
+    margin: 0px;
+
+}
+
+.title2, .title3 {
+    font-size: 6vh;
+    line-height: 1;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
 }
 
 .project p:nth-of-type(1){
@@ -30,9 +45,6 @@
     margin-left: 0.75vw;
 }
 
-/* .project:last-of-type{
-    border-bottom: 2px solid black;
-} */
 
 .doubleTitle p:nth-of-type(2) {
     margin-left: 0 !important;

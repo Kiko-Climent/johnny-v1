@@ -54,7 +54,7 @@ export default function Index7({ project, onHoverChange }) {
         onClick={handleClick}
         className={`${styles.project} flex flex-row items-center justify-center gap-0 -mb-2`}
       >
-        <p className="text-[10.2vw] flex uppercase">{title1}</p>
+        <p className={`flex uppercase ${styles.title1}`}>{title1}</p>
 
         <motion.div
           ref={imgRef}
@@ -67,12 +67,12 @@ export default function Index7({ project, onHoverChange }) {
         </motion.div>
 
         {title3 ? (
-          <div className={`${styles.doubleTitle} flex flex-row md:flex-col items-start justify-start text-[4.5vw] leading-[3.5vw] whitespace-nowrap`}>
-            <p className="text-left uppercase">{title2}</p>
-            <p className="text-left uppercase">{title3}</p>
+          <div className={`${styles.doubleTitle} flex flex-row md:flex-col items-start justify-start leading-[3.5vw] whitespace-nowrap`}>
+            <p className={`text-left uppercase ${styles.title2}`}>{title2}</p>
+            <p className={`text-left uppercase ${styles.title3}`}>{title3}</p>
           </div>
         ) : (
-          <p className="text-[10.2vw] flex whitespace-nowrap uppercase">{title2}</p>
+          <p className={`flex uppercase ${styles.title1}`}>{title2}</p>
         )}
       </div>
 
