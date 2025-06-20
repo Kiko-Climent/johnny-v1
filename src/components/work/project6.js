@@ -45,12 +45,15 @@ export default function Project6({ project, onHoverChange }) {
       setIsExpanding(true);
       setShowCenterText(true); // Mostrar texto central
     }
+    document.body.style.overflow = "hidden"; // Evita scroll glitch
+    document.body.classList.remove("overflow-hidden");
   };
   
 
   const handleAnimationComplete = () => {
     setShowCenterText(false); // Ocultamos antes de redirigir
     router.push(`/work/${project.id}`);
+    document.body.style.overflow = "auto"; // Reestablece
   };
 
   return (
@@ -83,7 +86,7 @@ export default function Project6({ project, onHoverChange }) {
         )}
       </div>
 
-      {/* <AnimatePresence> */}
+      <AnimatePresence>
         {isExpanding && bounds && (
           <>
             <motion.div
@@ -135,7 +138,7 @@ export default function Project6({ project, onHoverChange }) {
             )}
           </>
         )}
-      {/* </AnimatePresence> */}
+      </AnimatePresence>
 
     </>
   );
