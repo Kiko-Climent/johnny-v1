@@ -32,7 +32,7 @@ const projects = [
   //     ["mobileTitle1"],
   //     ["mobileTitle2"]
   // ],
-    src: "image6.webp"
+    src: "image2.webp"
   },
 
   {
@@ -86,7 +86,7 @@ const WorkMenu10 = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center">
+    <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center relative">
       {projects.map((project) =>
         isMobile ? (
           <ProjectMobile4

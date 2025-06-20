@@ -124,9 +124,7 @@ export default function Index6({ project, onHoverChange }) {
                   <p className="text-[6vh] md:text-[15.8vh] flex whitespace-nowrap uppercase">{title2}</p>
                 )}
               </div>
-              
             </motion.div>
-            
             )}
           </>
         )}

@@ -220,5 +220,10 @@ body {
   transition: opacity 0.7s ease-in-out;
 }
 
+.custom-cursor {
+  transition: opacity 0.3s ease;
+}
+
+
 
 

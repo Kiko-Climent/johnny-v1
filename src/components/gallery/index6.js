@@ -27,6 +27,7 @@ const Slider6 = ({images, id}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cursorDirection, setCursorDirection] = useState("right");
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isCursorInNavbarZone, setIsCursorInNavbarZone] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const swiperRef = useRef(null);
 
@@ -60,6 +61,10 @@ const Slider6 = ({images, id}) => {
 
   const handleMouseMove = (e) => {
     const screenWidth = window.innerWidth;
+    const y = e.clientY;
+    const navbarHeight = 80;
+    setIsCursorInNavbarZone(y < navbarHeight);
+
     setCursorDirection(e.clientX > screenWidth / 2 ? "right" : "left");
     setCursorPos({x: e.clientX, y: e.clientY});
   }
@@ -73,10 +78,14 @@ const Slider6 = ({images, id}) => {
       className="flex flex-col justify-center items-center w-full overflow-hidden gap-0 md:gap-2 pb-2"
       style={{ 
         height: "calc(var(--vh, 1vh) * 100)",
-        cursor: isDesktop ? "none" : "default"
+        cursor: isDesktop
+        ? isCursorInNavbarZone
+          ? "default"
+          : "none"
+        : "default"
        }}
     >
-      {isDesktop && (
+      {isDesktop && !isCursorInNavbarZone && (
         <div
           className="pointer-events-none fixed z-50 text-2xl text-black transition-transform duration-75"
           style={{
