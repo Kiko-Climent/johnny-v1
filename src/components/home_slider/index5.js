@@ -50,14 +50,6 @@ const HomeSlider5 = () => {
   const sliderRef = useRef(null);
   const contentRef = useRef(null);
 
-  useEffect(() => {
-    sliderImages.forEach((src) => {
-      const img = new Image();
-      img.src = `/assets/${src}`;
-    });
-  }, []);
-  
-
   const splitTextIntoSpans = (element) => {
     if (!element) return;
     const text = element.innerText;
@@ -221,7 +213,7 @@ const HomeSlider5 = () => {
     }
 
     useEffect(() => {
-      let lastScroll = 0;
+      // let lastScroll = 0;
     
       const handleScroll = (e) => {
         const deltaY = e.deltaY;
@@ -231,7 +223,7 @@ const HomeSlider5 = () => {
           startAnimation();
         }
     
-        lastScroll = deltaY;
+        // lastScroll = deltaY;
       };
     
       window.addEventListener("wheel", handleScroll, { passive: true });
