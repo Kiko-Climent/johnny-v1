@@ -5,6 +5,7 @@ import Project6 from "@/components/work/project6";
 // import Project7 from "@/components/work/project7";
 import useIsMobile from "@/hooks/useIsMobile";
 import ProjectMobile4 from "./ProjectMobile4";
+import Image from "next/image";
 
 const projects = [
 
@@ -81,6 +82,23 @@ const projects = [
   },
 ]
 
+const ImagePreloader = ({ projects }) => {
+  return (
+    <div className="hidden">
+      {projects.map((project) => (
+        <Image
+          key={project.id}
+          src={`/images/${project.src}`}
+          alt={project.id}
+          width={10} // tamaño mínimo para forzar carga
+          height={10}
+          priority
+        />
+      ))}
+    </div>
+  );
+};
+
 
 const WorkMenu10 = () => {
   const isMobile = useIsMobile();
@@ -90,6 +108,7 @@ const WorkMenu10 = () => {
     <div className="min-h-screen w-screen overflow-hidden text-black flex flex-col justify-center items-center"
     style={{ 
       height: "calc(var(--vh, 1vh) * 100)"}}>
+        <ImagePreloader projects={projects} />
       {projects.map((project) =>
         isMobile ? (
           <ProjectMobile4
@@ -98,6 +117,7 @@ const WorkMenu10 = () => {
           selectedId={selectedId}
           setSelectedId={setSelectedId}
         />
+        
         ) : (
           <Project6 key={project.id} project={project} />
         )

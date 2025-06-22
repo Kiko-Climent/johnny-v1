@@ -111,6 +111,7 @@ export default function Project6({ project, onHoverChange }) {
             >
               <img
                 src={`/images/${src}`}
+                loading="eager"
                 alt={title1}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />

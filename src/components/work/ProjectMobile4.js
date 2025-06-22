@@ -34,9 +34,9 @@ export default function ProjectMobile4({ project, selectedId, setSelectedId }) {
   }, [isSelected]);
 
   return (
-    <div className="relative w-full mb-3">
+    <div className="relative w-full mb-3 overflow-hidden">
       {isSelected && (
-        <div className="fixed top-0 left-0 w-screen h-screen z-0">
+        <div className="absolute inset-0 z-0">
           <Image
             src={`/images/${src}`}
             alt={id}
