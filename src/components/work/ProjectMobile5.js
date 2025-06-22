@@ -49,7 +49,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col items-center justify-center cursor-pointer text-center transition-all duration-300 ${
+        className={`relative z-10 w-full flex flex-col items-start justify-center cursor-pointer text-center transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >
@@ -63,7 +63,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
                     return (
                       <div key={colIndex} className="flex flex-col items-center gap-1">
                         {cell.map((key, innerIdx) => (
-                          <p key={innerIdx} className="text-5xl uppercase leading-none">
+                          <p key={innerIdx} className="text-[3.5rem] uppercase leading-none">
                             {project[key]}
                           </p>
                         ))}
@@ -71,7 +71,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
                     );
                   } else {
                     return (
-                      <p key={colIndex} className="text-[4rem] uppercase leading-[3rem]">
+                      <p key={colIndex} className="text-[3.5rem] uppercase leading-[3rem]">
                         {project[cell]}
                       </p>
                     );
@@ -83,9 +83,9 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
         ) : (
           // Layout por defecto
           <div className="flex flex-row gap-2 whitespace-nowrap md:hidden">
-            <p className="text-5xl uppercase">{title1}</p>
-            <p className="text-5xl uppercase">{title2}</p>
-            <p className="text-5xl uppercase">{title3}</p>
+            <p className="text-[3.5rem] uppercase">{title1}</p>
+            <p className="text-[3.5rem] uppercase">{title2}</p>
+            <p className="text-[3.5rem] uppercase">{title3}</p>
           </div>
         )}
 
