@@ -119,6 +119,7 @@ const Slider6 = ({images, id}) => {
                   fill
                   className="object-contain"
                   sizes="100vw"
+                  loading={index < 4 ? "eager" : "lazy"}
                 />
               </div>
             </SwiperSlide>
