@@ -4,7 +4,8 @@ import { useState } from "react";
 import Project6 from "@/components/work/project6";
 // import Project7 from "@/components/work/project7";
 import useIsMobile from "@/hooks/useIsMobile";
-import ProjectMobile4 from "./ProjectMobile4";
+// import ProjectMobile4 from "./ProjectMobile4";
+import ProjectMobile5 from "./ProjectMobile5";
 
 const projects = [
 
@@ -92,7 +93,7 @@ const WorkMenu10 = () => {
       height: "calc(var(--vh, 1vh) * 100)"}}>
       {projects.map((project) =>
         isMobile ? (
-          <ProjectMobile4
+          <ProjectMobile5
           key={project.id}
           project={project}
           selectedId={selectedId}

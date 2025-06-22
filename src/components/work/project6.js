@@ -19,6 +19,7 @@ export default function Project6({ project, onHoverChange }) {
   const [bounds, setBounds] = useState(null);
   const imgRef = useRef(null);
   const router = useRouter();
+  
 
   useEffect(() => {
     setHasMounted(true);

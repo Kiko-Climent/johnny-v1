@@ -63,6 +63,7 @@
 
 .imgContainer {
     pointer-events: none; /* IMPORTANTE */
+    overflow: hidden;
     
 }
 

@@ -17,16 +17,28 @@ const sliderContentList = [
 ];
 
 
+// const sliderImages = [
+//   "homeimage5.jpeg",
+//   "homeimage3.jpeg",
+//   "homeimage7.jpeg",
+//   "homeimage2.jpeg",
+//   "homeimage6.jpeg",
+//   "homeimage4.jpeg",
+//   "homeimage8.jpeg",
+//   "homeimage9.jpeg",
+//   "homeimage10.jpeg",
+// ];
+
 const sliderImages = [
-  "homeimage5.jpeg",
-  "homeimage3.jpeg",
-  "homeimage7.jpeg",
-  "homeimage2.jpeg",
-  "homeimage6.jpeg",
-  "homeimage4.jpeg",
-  "homeimage8.jpeg",
-  "homeimage9.jpeg",
-  "homeimage10.jpeg",
+  "homeimage15.jpeg",
+  "homeimage13.jpeg",
+  "homeimage17.jpeg",
+  "homeimage12.jpeg",
+  "homeimage16.jpeg",
+  "homeimage14.jpeg",
+  "homeimage18.jpeg",
+  "homeimage19.jpeg",
+  "homeimage11.jpeg",
 ];
 
 
@@ -37,6 +49,14 @@ const HomeSlider5 = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const sliderRef = useRef(null);
   const contentRef = useRef(null);
+
+  useEffect(() => {
+    sliderImages.forEach((src) => {
+      const img = new Image();
+      img.src = `/assets/${src}`;
+    });
+  }, []);
+  
 
   const splitTextIntoSpans = (element) => {
     if (!element) return;
@@ -122,7 +142,7 @@ const HomeSlider5 = () => {
   newSlide.innerHTML = `
     <div class="slide-next-img w-[250px] h-[350px]" 
     style="clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)">
-      <img src="/assets/${sliderImages[newIndex % sliderImages.length]}" class="w-full h-full object-cover"/>
+      <img src="/assets/${sliderImages[newIndex % sliderImages.length]}" loading="lazy" class="w-full h-full object-cover"/>
     </div>`;
   sliderRef.current.appendChild(newSlide);
 
@@ -150,7 +170,7 @@ const HomeSlider5 = () => {
   newMiniSlide.innerHTML = `
     <div class="slide-next-img max-h-[50vh] aspect-[4/5]" 
     style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)">
-      <img src="/assets/${sliderImages[upcomingIndex]}" class="w-full h-full object-cover"/>
+      <img src="/assets/${sliderImages[upcomingIndex]}" loading="lazy" class="w-full h-full object-cover"/>
     </div>`;
   sliderRef.current.appendChild(newMiniSlide);
 
