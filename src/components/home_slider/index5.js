@@ -264,6 +264,7 @@ const HomeSlider5 = () => {
         <div className="slide-active absolute w-full h-full">
           <img
             src={`/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
+            loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
@@ -276,6 +277,7 @@ const HomeSlider5 = () => {
           >
             <img
               src={`/assets/${sliderImages[(currentImageIndex + 1) % sliderImages.length]}`}
+              loading="eager"
               className="w-full h-full object-cover"
             />
           </div>
