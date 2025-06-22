@@ -74,7 +74,7 @@ export default function Project6({ project, onHoverChange }) {
           animate={isActive ? "open" : "closed"}
           className={`${styles.imgContainer} hidden md:block`}
         >
-          <img src={`/images/gallery/${src}`} alt={title1} />
+          <img src={`/images/${src}`} alt={title1} loading="eager" />
         </motion.div>
 
         {title3 ? (
@@ -110,7 +110,7 @@ export default function Project6({ project, onHoverChange }) {
               onAnimationComplete={handleAnimationComplete}
             >
               <img
-                src={`/images/gallery/${src}`}
+                src={`/images/${src}`}
                 alt={title1}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />

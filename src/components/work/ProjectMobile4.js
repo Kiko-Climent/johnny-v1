@@ -22,7 +22,7 @@ export default function ProjectMobile4({ project, selectedId, setSelectedId }) {
       // Espera un poco para mostrar la imagen antes de redirigir
       setTimeout(() => {
         router.push(`/work/${id}`);
-      }, 1300); // <- Cambia el delay si necesitas más tiempo de visualización
+      }, 1600); // <- Cambia el delay si necesitas más tiempo de visualización
     }
   };
 
@@ -38,7 +38,7 @@ export default function ProjectMobile4({ project, selectedId, setSelectedId }) {
       {isSelected && (
         <div className="fixed top-0 left-0 w-screen h-screen z-0">
           <Image
-            src={`/images/gallery/${src}`}
+            src={`/images/${src}`}
             alt={id}
             fill
             className="object-cover"

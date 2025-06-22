@@ -21,7 +21,7 @@ const projects = [
       ["mobileTitle1", "mobileTitle2"],
       ["mobileTitle3", "mobileTitle4"]
   ],
-    src: "image31.webp"
+    src: "imagemenu1.jpeg"
   },
   {
     id: "johnny_color",
@@ -33,7 +33,7 @@ const projects = [
   //     ["mobileTitle1"],
   //     ["mobileTitle2"]
   // ],
-    src: "image2.webp"
+    src: "imagemenu5.jpeg"
   },
 
   {
@@ -48,7 +48,7 @@ const projects = [
   //     ["mobileTitle1", "mobileTitle2"],
   //     ["mobileTitle3"]
   // ],
-    src: "image14.webp"
+    src: "imagemenu4.jpeg"
   },
 
   {
@@ -62,7 +62,7 @@ const projects = [
   //     ["mobileTitle1"],
   //     ["mobileTitle2", "mobileTitle3"]
   // ],
-    src: "image65.webp"
+    src: "imagemenu3.jpeg"
   },
 
   {
@@ -77,7 +77,7 @@ const projects = [
       ["mobileTitle1", "mobileTitle2"],
       ["mobileTitle3"]
   ],
-    src: "image50.webp"
+    src: "imagemenu2.jpeg"
   },
 ]
 
