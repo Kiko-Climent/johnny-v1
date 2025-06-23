@@ -113,8 +113,16 @@ export default function Project6({ project, onHoverChange }) {
                 src={`/images/${src}`}
                 loading="eager"
                 alt={title1}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  padding: 0,
+                  margin: 0,
+                  display: "block"
+                }}
               />
+
             </motion.div>
 
             {showCenterText && (

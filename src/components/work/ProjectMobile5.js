@@ -49,7 +49,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col pr-2 items-end justify-center cursor-pointer text-right transition-all duration-300 ${
+        className={`relative z-10 w-full flex flex-col leading-tighter pr-2 items-end justify-center cursor-pointer text-right transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >

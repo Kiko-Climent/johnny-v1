@@ -104,7 +104,7 @@ const WorkMenu10 = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <div className="w-screen overflow-hidden text-black flex flex-col justify-center items-center -space-y-2"
+    <div className="w-screen overflow-hidden text-black flex flex-col justify-center items-center"
     style={{ 
       height: "calc(var(--vh, 1vh) * 100)"}}>
         <ImagePreloader projects={projects} />
