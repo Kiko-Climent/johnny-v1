@@ -57,7 +57,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
       >
         {/* Layout especial si se define mobileLayout */}
         {mobileLayout ? (
-          <div className="flex flex-col items-end justify-center -space-y-7 md:hidden">
+          <div className="flex flex-col items-end justify-center">
             {mobileLayout.map((row, rowIndex) => (
               <div key={rowIndex} className="flex flex-row gap-1">
                 {row.map((key, colIndex) => (
