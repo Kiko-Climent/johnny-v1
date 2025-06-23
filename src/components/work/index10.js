@@ -102,6 +102,7 @@ const ImagePreloader = ({ projects }) => {
 const WorkMenu10 = () => {
 
   useEffect(() => {
+    setSelectedId(null);
     window.scrollTo(0, 0);
   }, []);
 
