@@ -49,17 +49,17 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col items-start pr-2 items-end justify-center cursor-pointer text-center transition-all duration-300 ${
+        className={`relative z-10 w-full flex flex-col pr-2 items-end justify-center cursor-pointer text-right transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >
         {/* Layout especial si se define mobileLayout */}
         {mobileLayout ? (
-          <div className="flex flex-col items-end justify-center -space-y-2 md:hidden">
+          <div className="flex flex-col items-end justify-center -space-y-7 md:hidden">
             {mobileLayout.map((row, rowIndex) => (
-              <div key={rowIndex} className="flex flex-row gap-2">
+              <div key={rowIndex} className="flex flex-row gap-1">
                 {row.map((key, colIndex) => (
-                  <p key={colIndex} className="text-5xl uppercase">
+                  <p key={colIndex} className="text-[clamp(2.5rem,12.7vw,5rem)] uppercase">
                     {project[key]}
                   </p>
                 ))}
@@ -69,9 +69,9 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
         ) : (
           // Layout por defecto
           <div className="flex flex-row gap-2 whitespace-nowrap md:hidden">
-            <p className="text-5xl uppercase">{title1}</p>
-            <p className="text-5xl uppercase">{title2}</p>
-            <p className="text-5xl uppercase">{title3}</p>
+            <p className="text-[clamp(2.5rem,12.7vw,5rem)] uppercase">{title1}</p>
+            <p className="text-[clamp(2.5rem,12.7vw,5rem)] uppercase">{title2}</p>
+            <p className="text-[clamp(2.5rem,12.7vw,5rem)] uppercase">{title3}</p>
           </div>
         )}
       </div>
