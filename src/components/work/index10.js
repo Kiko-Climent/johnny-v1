@@ -107,7 +107,7 @@ const WorkMenu10 = () => {
   return (
     <div className="w-full overflow-hidden text-black flex flex-col justify-center items-center"
     style={{ 
-      height: "calc(var(--vh, 1vh) * 100)"}}>
+      minHeight: "calc(var(--vh, 1vh) * 100)"}}>
         <ImagePreloader projects={projects} />
       {projects.map((project) =>
         isMobile ? (

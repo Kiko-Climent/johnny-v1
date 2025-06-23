@@ -11,7 +11,7 @@ const anim = {
   closed: { width: 0 }
 };
 
-export default function Index5({ project, onHoverChange }) {
+export default function Project5({ project, onHoverChange }) {
   const [isActive, setIsActive] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
   const [bounds, setBounds] = useState(null);
