@@ -32,12 +32,12 @@ const sliderContentList = [
 const sliderImages = [
   "homeimage15.jpeg",
   "homeimage13.jpeg",
-  "homeimage17.jpeg",
+  "homeimage19.jpeg",
   "homeimage12.jpeg",
   "homeimage16.jpeg",
   "homeimage14.jpeg",
   "homeimage18.jpeg",
-  "homeimage19.jpeg",
+  "homeimage20.jpeg",
   "homeimage11.jpeg",
 ];
 

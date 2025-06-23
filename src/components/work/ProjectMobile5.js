@@ -51,13 +51,13 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col leading-tighter pr-2 items-end justify-center cursor-pointer text-right transition-all duration-300 ${
+        className={`relative z-10 w-full flex flex-col leading-normal pr-2 items-end justify-center cursor-pointer text-right transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >
         {/* Layout especial si se define mobileLayout */}
         {mobileLayout ? (
-          <div className="flex flex-col items-end justify-center -space-y-7 md:hidden">
+          <div className="flex flex-col items-end justify-center -space-y-8 md:hidden">
             {mobileLayout.map((row, rowIndex) => (
               <div key={rowIndex} className="flex flex-row gap-1">
                 {row.map((key, colIndex) => (
