@@ -22,9 +22,9 @@ body {
   width: 100vw;
   height: 100vh;
   overflow-x: clip; /* Mejor que hidden */
+  /* overflow-x: hidden; */
   overflow-y: hidden;
   touch-action: none;
-  overflow-x: hidden;
   font-family: 'MyFont', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -147,7 +147,7 @@ body {
 
 
 /* text moving home */
-.slider-container {
+/* .slider-container {
   top: calc(100vh - 350px);
 }
 
@@ -167,12 +167,12 @@ body {
   left: 100%;
   top: 0;
 
-}
+} */
 
 /* animated text */
 
 /* text moving work */
-.slider-container-work {
+/* .slider-container-work {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -200,11 +200,11 @@ body {
   left: 100%;
   top: 0;
 
-}
+} */
 
 /* revealer */
 
-.revealer {
+/* .revealer {
   position: fixed;
   top: 0;
   left: 0;
@@ -214,7 +214,7 @@ body {
   background-color: black;
   pointer-events: none;
   z-index: 2;
-}
+} */
 
 #transition-overlay {
   transition: opacity 0.7s ease-in-out;
