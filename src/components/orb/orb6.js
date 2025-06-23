@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
-const Orb5 = ({
-  totalImages = 20,
-  totalItems = 75,
+const Orb6 = ({
+  totalImages = 26,
+  totalItems = 72,
   baseWidth = 1.7,
   baseHeight = 1.1,
   sphereRadius = 4.6,
@@ -15,6 +15,7 @@ const Orb5 = ({
 
   const orbRef = useRef()
   const imageUsageCount = {};
+  const imagePositions = {};
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -73,15 +74,45 @@ const Orb5 = ({
       "image40.jpeg",
       "image41.jpeg",
       "image42.jpeg",
-      // "image10.jpeg",
-      // "image25.jpeg",
+      "image10.jpeg",
+      "image25.jpeg",
+      "image39.jpeg",
+      "image4.jpeg",
+      "image9.jpeg",
+      "image1.jpeg",
     ];
+
+  
     
-    const getRandomImage = () => {
-      const index = Math.floor(Math.random() * imagePool.length);
-      const name = imagePool[index];
-      return { name, path: `/assets/orb/${name}` };
+    const getValidImage = (phi, theta) => {
+      const MAX_ATTEMPTS = 15;
+      const MIN_ANGULAR_DISTANCE = 0.7; // ajuste según lo que consideres "cerca"
+    
+      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+        const index = Math.floor(Math.random() * imagePool.length);
+        const name = imagePool[index];
+    
+        const previousPositions = imagePositions[name] || [];
+    
+        const isTooClose = previousPositions.some((prev) => {
+          const dPhi = phi - prev.phi;
+          const dTheta = theta - prev.theta;
+          const dist = Math.sqrt(dPhi * dPhi + dTheta * dTheta);
+          return dist < MIN_ANGULAR_DISTANCE;
+        });
+    
+        if (!isTooClose) {
+          return { name, path: `/assets/orb/${name}` };
+        }
+      }
+    
+      // fallback aleatorio si no encuentra posición válida
+      const fallbackIndex = Math.floor(Math.random() * imagePool.length);
+      const fallbackName = imagePool[fallbackIndex];
+      return { name: fallbackName, path: `/assets/orb/${fallbackName}` };
     };
+    
+    
     
     
 
@@ -100,71 +131,77 @@ const Orb5 = ({
     };
 
     const loadImageMesh = (phi, theta) => {
-      const { name, path } = getRandomImage();
-      
+      const pos = new THREE.Vector3(
+        sphereRadius * Math.cos(theta) * Math.sin(phi),
+        sphereRadius * Math.sin(theta) * Math.sin(phi),
+        sphereRadius * Math.cos(phi)
+      );
+    
+      const { name, path } = getValidImage(phi, theta);
       imageUsageCount[name] = (imageUsageCount[name] || 0) + 1;
       const usage = imageUsageCount[name];
     
-      textureLoader.load(path, (texture) => {
-        texture.generateMipmaps = false;
-        texture.minFilter = THREE.LinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        texture.encoding = THREE.linearEncoding;
+      textureLoader.load(
+        path,
+        (texture) => {
+          texture.generateMipmaps = false;
+          texture.minFilter = THREE.LinearFilter;
+          texture.magFilter = THREE.LinearFilter;
+          texture.encoding = THREE.linearEncoding;
     
-        // Inversión básica de textura si se repite +3 veces
-        if (usage > 3) {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
+          // Inversión si se usa 3ª vez o más
+          if (usage > 1) {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
     
-          canvas.width = texture.image.width;
-          canvas.height = texture.image.height;
-          ctx.drawImage(texture.image, 0, 0);
+            canvas.width = texture.image.width;
+            canvas.height = texture.image.height;
+            ctx.drawImage(texture.image, 0, 0);
     
-          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const data = imageData.data;
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
     
-          for (let i = 0; i < data.length; i += 4) {
-            data[i] = 255 - data[i];     // Red
-            data[i + 1] = 255 - data[i + 1]; // Green
-            data[i + 2] = 255 - data[i + 2]; // Blue
-            // alpha remains unchanged
+            for (let i = 0; i < data.length; i += 4) {
+              data[i] = 255 - data[i];
+              data[i + 1] = 255 - data[i + 1];
+              data[i + 2] = 255 - data[i + 2];
+            }
+    
+            ctx.putImageData(imageData, 0, 0);
+            const invertedTexture = new THREE.CanvasTexture(canvas);
+            invertedTexture.minFilter = THREE.LinearFilter;
+            invertedTexture.magFilter = THREE.LinearFilter;
+            texture = invertedTexture;
           }
     
-          ctx.putImageData(imageData, 0, 0);
-          const invertedTexture = new THREE.CanvasTexture(canvas);
-          invertedTexture.minFilter = THREE.LinearFilter;
-          invertedTexture.magFilter = THREE.LinearFilter;
-          texture = invertedTexture;
-        }
+          const geometry = createImagePlane(texture);
+          const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+            transparent: false,
+            depthWrite: true,
+            depthTest: true
+          });
     
-        const geometry = createImagePlane(texture);
-        const material = new THREE.MeshBasicMaterial({
-          map: texture,
-          side: THREE.DoubleSide,
-          transparent: false,
-          depthWrite: true,
-          depthTest: true
-        });
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.copy(pos);
+          mesh.lookAt(0, 0, 0);
+          mesh.rotateY(Math.PI);
     
-        const mesh = new THREE.Mesh(geometry, material);
+          scene.add(mesh);
     
-        mesh.position.x = sphereRadius * Math.cos(theta) * Math.sin(phi);
-        mesh.position.y = sphereRadius * Math.sin(theta) * Math.sin(phi);
-        mesh.position.z = sphereRadius * Math.cos(phi);
+          // Guarda posición
+          if (!imagePositions[name]) imagePositions[name] = [];
+          imagePositions[name].push({ phi, theta });
     
-        mesh.lookAt(0, 0, 0);
-        mesh.rotateY(Math.PI);
-    
-        scene.add(mesh);
-    
-        loadedCount++;
-        if (loadedCount === totalItems) {
-          animate();
-        }
-      },
-      undefined,
-      (error) => console.error(error));
+          loadedCount++;
+          if (loadedCount === totalItems) animate();
+        },
+        undefined,
+        (error) => console.error(error)
+      );
     };
+    
     
 
     const createSphere = () => {
@@ -232,4 +269,4 @@ const Orb5 = ({
   )
 }
 
-export default Orb5;
+export default Orb6;
