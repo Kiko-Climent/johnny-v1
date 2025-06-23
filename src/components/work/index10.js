@@ -105,10 +105,8 @@ const WorkMenu10 = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <div className="w-full overflow-hidden text-black flex flex-col justify-center items-center"
-    style={{ 
-      minHeight: "calc(var(--vh, 1vh) * 100)"}}>
-        <ImagePreloader projects={projects} />
+    <div className="w-screen min-h-screen overflow-hidden text-black flex flex-col justify-center items-center">
+      <ImagePreloader projects={projects} />
       {projects.map((project) =>
         isMobile ? (
           <ProjectMobile5
