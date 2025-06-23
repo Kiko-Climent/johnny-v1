@@ -19,6 +19,8 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
     if (!hasNavigatedRef.current) {
       hasNavigatedRef.current = true;
 
+      window.scrollTo(0, 0);
+
       // Espera un poco para mostrar la imagen antes de redirigir
       setTimeout(() => {
         router.push(`/work/${id}`);

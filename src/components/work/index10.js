@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Project6 from "@/components/work/project6";
 import useIsMobile from "@/hooks/useIsMobile";
 import Image from "next/image";
@@ -100,12 +100,7 @@ const ImagePreloader = ({ projects }) => {
 
 
 const WorkMenu10 = () => {
-
-  useEffect(() => {
-    setSelectedId(null);
-    window.scrollTo(0, 0);
-  }, []);
-
+  
   const isMobile = useIsMobile();
   const [selectedId, setSelectedId] = useState(null);
 
