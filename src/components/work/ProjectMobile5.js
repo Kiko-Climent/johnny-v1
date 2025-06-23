@@ -22,7 +22,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
       // Espera un poco para mostrar la imagen antes de redirigir
       setTimeout(() => {
         router.push(`/work/${id}`);
-      }, 1300); // <- Cambia el delay si necesitas más tiempo de visualización
+      }, 1700); // <- Cambia el delay si necesitas más tiempo de visualización
     }
   };
 
@@ -38,7 +38,7 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
       {isSelected && (
         <div className="fixed top-0 left-0 w-screen h-screen z-0">
           <Image
-            src={`/images/gallery/${src}`}
+            src={`/images/${src}`}
             alt={id}
             fill
             className="object-cover"
@@ -49,46 +49,31 @@ export default function ProjectMobile5({ project, selectedId, setSelectedId }) {
 
       <div
         onClick={handleClick}
-        className={`relative z-10 w-full flex flex-col items-start justify-center cursor-pointer text-center transition-all duration-300 ${
+        className={`relative z-10 w-full flex flex-col items-start pr-2 items-end justify-center cursor-pointer text-center transition-all duration-300 ${
           selectedId && !isSelected ? "text-gray-400" : ""
         }`}
       >
         {/* Layout especial si se define mobileLayout */}
         {mobileLayout ? (
-          <div className="flex flex-col items-center justify-center md:hidden">
+          <div className="flex flex-col items-end justify-center -space-y-2 md:hidden">
             {mobileLayout.map((row, rowIndex) => (
-              <div key={rowIndex} className="flex flex-row gap-4 items-center">
-                {row.map((cell, colIndex) => {
-                  if (Array.isArray(cell)) {
-                    return (
-                      <div key={colIndex} className="flex flex-col items-center gap-1">
-                        {cell.map((key, innerIdx) => (
-                          <p key={innerIdx} className="text-[3.5rem] uppercase leading-none">
-                            {project[key]}
-                          </p>
-                        ))}
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <p key={colIndex} className="text-[3.5rem] uppercase leading-[3rem]">
-                        {project[cell]}
-                      </p>
-                    );
-                  }
-                })}
+              <div key={rowIndex} className="flex flex-row gap-2">
+                {row.map((key, colIndex) => (
+                  <p key={colIndex} className="text-5xl uppercase">
+                    {project[key]}
+                  </p>
+                ))}
               </div>
             ))}
           </div>
         ) : (
           // Layout por defecto
           <div className="flex flex-row gap-2 whitespace-nowrap md:hidden">
-            <p className="text-[3.5rem] uppercase">{title1}</p>
-            <p className="text-[3.5rem] uppercase">{title2}</p>
-            <p className="text-[3.5rem] uppercase">{title3}</p>
+            <p className="text-5xl uppercase">{title1}</p>
+            <p className="text-5xl uppercase">{title2}</p>
+            <p className="text-5xl uppercase">{title3}</p>
           </div>
         )}
-
       </div>
     </div>
   );

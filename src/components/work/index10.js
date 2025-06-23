@@ -4,7 +4,8 @@ import { useState } from "react";
 import Project6 from "@/components/work/project6";
 import useIsMobile from "@/hooks/useIsMobile";
 import Image from "next/image";
-import ProjectMobile4 from "./ProjectMobile4";
+// import ProjectMobile4 from "./ProjectMobile4";
+import ProjectMobile5 from "./ProjectMobile5";
 
 const projects = [
 
@@ -27,12 +28,11 @@ const projects = [
     id: "johnny_color",
     title1: "johnny",
     title2: "color",
-  //   mobileTitle1: "johnny",
-  //   mobileTitle2: "color",
-  //   mobileLayout: [
-  //     ["mobileTitle1"],
-  //     ["mobileTitle2"]
-  // ],
+    mobileTitle1: "johnny",
+    mobileTitle2: "color",
+    mobileLayout: [
+      ["mobileTitle1", "mobileTitle2"]
+  ],
     src: "imagemenu5.jpeg"
   },
 
@@ -41,13 +41,13 @@ const projects = [
     title1: "leak",
     title2: "of",
     title3: "dreams",
-  //   mobileTitle1: "leak",
-  //   mobileTitle2: "of",
-  //   mobileTitle3: "dreams",
-  //   mobileLayout: [
-  //     ["mobileTitle1", "mobileTitle2"],
-  //     ["mobileTitle3"]
-  // ],
+    mobileTitle1: "leak",
+    mobileTitle2: "of",
+    mobileTitle3: "dreams",
+    mobileLayout: [
+      ["mobileTitle1"],
+      ["mobileTitle2", "mobileTitle3"]
+  ],
     src: "imagemenu4.jpeg"
   },
 
@@ -55,13 +55,13 @@ const projects = [
     id: "costas_de_sol",
     title1: "costas",
     title2: "de sol",
-  //   mobileTitle1: "costas",
-  //   mobileTitle2: "de",
-  //   mobileTitle3: "sol",
-  //   mobileLayout: [
-  //     ["mobileTitle1"],
-  //     ["mobileTitle2", "mobileTitle3"]
-  // ],
+    mobileTitle1: "costas",
+    mobileTitle2: "de",
+    mobileTitle3: "sol",
+    mobileLayout: [
+      ["mobileTitle1", "mobileTitle2"],
+      ["mobileTitle3"]
+  ],
     src: "imagemenu3.jpeg"
   },
 
@@ -110,7 +110,7 @@ const WorkMenu10 = () => {
         <ImagePreloader projects={projects} />
       {projects.map((project) =>
         isMobile ? (
-          <ProjectMobile4
+          <ProjectMobile5
           key={project.id}
           project={project}
           selectedId={selectedId}
