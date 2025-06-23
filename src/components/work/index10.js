@@ -104,6 +104,8 @@ const WorkMenu10 = () => {
   const isMobile = useIsMobile();
   const [selectedId, setSelectedId] = useState(null);
 
+  if (isMobile === null) return null;
+
   return (
     <div className="w-screen min-h-screen overflow-hidden text-black flex flex-col justify-center items-center">
       <ImagePreloader projects={projects} />
