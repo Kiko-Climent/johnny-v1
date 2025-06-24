@@ -73,8 +73,8 @@ const projects = [
     mobileTitle2: "de",
     mobileTitle3: "noche",
     mobileLayout: [
-      ["mobileTitle1", "mobileTitle2"],
-      ["mobileTitle3"]
+      ["mobileTitle1"],
+      ["mobileTitle2", "mobileTitle3"]
   ],
     src: "imagemenu2.jpeg"
   },

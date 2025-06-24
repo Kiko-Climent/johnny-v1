@@ -72,21 +72,33 @@ const Orb6 = ({
     const getValidImage = (phi, theta) => {
       const MAX_ATTEMPTS = 15;
       const MIN_ANGULAR_DISTANCE = 0.7;
-
+    
       for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
         const index = Math.floor(Math.random() * imagePool.length);
         const name = imagePool[index];
         const previousPositions = imagePositions[name] || [];
-        const isTooClose = isTooCloseToOthers(phi, theta, previousPositions, MIN_ANGULAR_DISTANCE);
         const usage = imageUsageCount[name] || 0;
-        if (!isTooClose && usage < 3) {
+    
+        const tooClose = previousPositions.some((pos) => {
+          const dPhi = phi - pos.phi;
+          const dTheta = theta - pos.theta;
+          const dist = Math.sqrt(dPhi * dPhi + dTheta * dTheta);
+          return dist < MIN_ANGULAR_DISTANCE;
+        });
+    
+        const isAllowedThirdUsage = usage < 3 && (usage < 2 || imagePool.slice(0, 18).includes(name));
+    
+        if (!tooClose && isAllowedThirdUsage) {
           return { name, path: `/assets/orb/${name}` };
         }
       }
+    
+      // Fallback
       const fallbackIndex = Math.floor(Math.random() * imagePool.length);
       const fallbackName = imagePool[fallbackIndex];
       return { name: fallbackName, path: `/assets/orb/${fallbackName}` };
     };
+    
 
     const createImagePlane = (texture) => {
       const imageAspect = texture.image.width / texture.image.height;
@@ -119,7 +131,8 @@ const Orb6 = ({
           texture.magFilter = THREE.LinearFilter;
           texture.encoding = THREE.linearEncoding;
 
-          if (usage > 1) {
+          if (usage === 2) {
+            // Filtro tipo mix-blend-difference (ya implementado)
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = texture.image.width;
@@ -128,16 +141,30 @@ const Orb6 = ({
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
             for (let i = 0; i < data.length; i += 4) {
-              data[i] = 255 - data[i];
-              data[i + 1] = 255 - data[i + 1];
-              data[i + 2] = 255 - data[i + 2];
+              data[i] = 255 - data[i];         // R
+              data[i + 1] = 255 - data[i + 1]; // G
+              data[i + 2] = 255 - data[i + 2]; // B
             }
             ctx.putImageData(imageData, 0, 0);
-            const invertedTexture = new THREE.CanvasTexture(canvas);
-            invertedTexture.minFilter = THREE.LinearFilter;
-            invertedTexture.magFilter = THREE.LinearFilter;
-            texture = invertedTexture;
+            texture = new THREE.CanvasTexture(canvas);
+          } else if (usage === 3 && imagePool.slice(0, 18).includes(name)) {
+            // Filtro psicodélico
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = texture.image.width;
+            canvas.height = texture.image.height;
+            ctx.drawImage(texture.image, 0, 0);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+              // Canal R lo dejamos, canal G lo desplazamos, canal B lo posterizamos
+              data[i + 1] = data[i];                  // G toma valor de R
+              data[i + 2] = Math.floor(data[i + 2] / 64) * 64; // posterizar B
+            }
+            ctx.putImageData(imageData, 0, 0);
+            texture = new THREE.CanvasTexture(canvas);
           }
+          
 
           const geometry = createImagePlane(texture);
           const material = new THREE.MeshBasicMaterial({

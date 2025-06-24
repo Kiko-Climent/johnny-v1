@@ -65,7 +65,7 @@ export default function AboutModal2({isOpen, onClose}) {
         <div className="flex flex-col -space-y-1 uppercase text-justify">
           <h2 className="flex">REQUESTS</h2>
           <p className="flex">
-          johnny.carretes@gmail.com
+          carretes.johnny@gmail.com
           </p>
         </div>
         <div className="text-[9px] md:text-xs flex flex-col self-center text-center mt-4 uppercase leading-3">
