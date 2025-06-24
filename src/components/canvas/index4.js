@@ -155,8 +155,8 @@ export default function CanvasGallery4() {
     const link = document.createElement("a");
     link.href = galleryLink;
     link.textContent = label;
-    link.className = styles.projectTextLink; // le podés dar estilos extra si querés
-    projectTitleElement.addEventListener("click", e => e.stopPropagation()); // para evitar que se cierre al clickear
+    link.className = styles.projectTextLink;
+    projectTitleElement.addEventListener("click", e => e.stopPropagation());
   
     projectTitleElement.appendChild(link);
   

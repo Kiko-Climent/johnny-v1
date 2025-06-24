@@ -76,6 +76,7 @@ body {
 .text .letter {
   display: inline-block;
   transition: transform 0.6s cubic-bezier(0.76, 0, 0.024, 1);
+  transform: translateY(0%);
 }
 
 
@@ -141,80 +142,8 @@ body {
   transition-delay: 0.57s;
 }
 .letter:nth-child(21) {
-  transition-delay: 0.69s;
+  transition-delay: 0.59s;
 }
-
-
-
-/* text moving home */
-/* .slider-container {
-  top: calc(100vh - 350px);
-}
-
-.first{
-
-  position: relative;
-  margin: 0px;
-  color: white;
-  font-size: 150px;
-  padding-right: 50px;
-
-}
-
-.second{
-  position: absolute;
-  font-size: 150px;
-  left: 100%;
-  top: 0;
-
-} */
-
-/* animated text */
-
-/* text moving work */
-/* .slider-container-work {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-.first{
-
-  position: relative;
-  margin: 0px;
-  color: white;
-  font-size: 150px;
-  padding-right: 50px;
-
-}
-
-.second{
-  position: absolute;
-  font-size: 150px;
-  left: 100%;
-  top: 0;
-
-} */
-
-/* revealer */
-
-/* .revealer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  transform-origin: center top;
-  background-color: black;
-  pointer-events: none;
-  z-index: 2;
-} */
 
 #transition-overlay {
   transition: opacity 0.7s ease-in-out;

@@ -38,17 +38,17 @@ const AnimatedText2 = ({ text = "", hoverText = "", className = "", resetTrigger
     element.appendChild(defaultBlock);
     element.appendChild(hoverBlock);
 
-    // 🔁 Intervalo automático cada 3 segundos
+    // Intervalo automático cada 3 segundos
     intervalRef.current = setInterval(() => {
       element.classList.add("play");
 
-      // ⏱️ Quitamos la clase .play después de 3 segundos
+      // Quitamos la clase .play después de 3 segundos
       timeoutRef.current = setTimeout(() => {
         element.classList.remove("play");
       }, 1800);
     }, 3600); // Espera total de 6s (3s on + 3s off)
 
-    // 🎯 Hover manual: también activa el efecto
+    // Hover manual: también activa el efecto
     const handleMouseOver = () => {
       element.classList.add("play");
       clearTimeout(timeoutRef.current);

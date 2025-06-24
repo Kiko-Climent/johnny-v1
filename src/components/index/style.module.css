@@ -109,6 +109,13 @@
   text-align: center;
   pointer-events: none;
   z-index: 99999;
+  mix-blend-mode: normal;
+  color: white;
+  transition: mix-blend-mode, 0.3 ease;
+}
+
+.projectTitle:hover {
+  mix-blend-mode: difference;
 }
 
 .projectText {
