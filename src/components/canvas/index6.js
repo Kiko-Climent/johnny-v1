@@ -9,9 +9,9 @@ import items from "./items"
 import styles from "@/components/index/style.module.css"
 
 
-let SplitType;
+// let SplitType;
 
-export default function CanvasGallery4() {
+export default function CanvasGallery6() {
   
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -37,13 +37,16 @@ export default function CanvasGallery4() {
   }
 
   useEffect(() => {
-    const importSplitType = async () => {
-      const SplitTypeModule = await import("split-type");
-      SplitType = SplitTypeModule.default;
-  
-      initializeGallery();
-      // setInitialized(true);
+    const splitTextIntoSpans = (element) => {
+      if (!element) return;
+      const text = element.innerText;
+      const html = text
+        .split("")
+        .map(char => `<span style="display:inline-block; position:relative;">${char === " " ? "&nbsp;" : char}</span>`)
+        .join("");
+      element.innerHTML = html;
     };
+    
   
     gsap.registerPlugin(CustomEase);
     CustomEase.create("hop", "0.9, 0, 0.1, 1");
@@ -54,7 +57,6 @@ export default function CanvasGallery4() {
       document.body.appendChild(el);
     }
   
-    importSplitType();
     const canvas = canvasRef.current;
     if (canvas) {
       // Empezamos "lejos"
@@ -144,10 +146,7 @@ export default function CanvasGallery4() {
   });
 
   const setAndAnimateTitle = (label, galleryLink) => {
-    const { titleSplit } = stateRef.current;
     const projectTitleElement = projectTextRef.current;
-  
-    if (titleSplit) titleSplit.revert();
   
     // Limpiamos el nodo antes de insertar
     projectTitleElement.innerHTML = "";
@@ -156,40 +155,52 @@ export default function CanvasGallery4() {
     link.href = galleryLink;
     link.textContent = label;
     link.className = styles.projectTextLink;
-    projectTitleElement.addEventListener("click", e => e.stopPropagation());
-  
+    link.addEventListener("click", e => e.stopPropagation());
     projectTitleElement.appendChild(link);
   
-    stateRef.current.titleSplit = new SplitType(projectTitleElement, {
-      types: "words",
+    // Fragmentar en spans
+    splitTextIntoSpans(link);
+  
+    const spans = link.querySelectorAll("span");
+  
+    // Estado inicial
+    gsap.set(spans, {
+      y: "100%",
+      rotationX: 90,
+      opacity: 0,
+      transformOrigin: "center top",
     });
   
-    stateRef.current.titleSplit.words.forEach(word => {
-      word.classList.add(styles.word);
-    });
-  
-    gsap.set(stateRef.current.titleSplit.words, { scaleY: "0%" });
-    animateTitleIn();
-  };
-
-  const animateTitleIn = () => {
-    gsap.to(stateRef.current.titleSplit.words, {
-      scaleY: "100%",
-      duration: 1,
-      stagger: 0.1,
+    // Animación de entrada
+    gsap.to(spans, {
+      y: 0,
+      opacity: 1,
+      rotationX: 0,
+      duration: 0.8,
+      stagger: 0.03,
       ease: "power3.out",
     });
   };
+  
 
   const animateTitleOut = () => {
-    gsap.to(stateRef.current.titleSplit.words, {
-      scaleY: "-50%",
-      duration: 1,
-      stagger: 0.1,
+    const link = projectTextRef.current.querySelector("a");
+    if (!link) return;
+    const spans = link.querySelectorAll("span");
+  
+    gsap.to(spans, {
+      y: "-100%",
+      rotationX: -90,
       opacity: 0,
-      ease: "power3.out",
+      duration: 0.8,
+      stagger: 0.02,
+      ease: "power3.in",
+      onComplete: () => {
+        projectTextRef.current.innerHTML = "";
+      },
     });
   };
+  
 
   const updateVisibleItems = () => {
     const state = stateRef.current;
