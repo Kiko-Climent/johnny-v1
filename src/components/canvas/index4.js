@@ -42,7 +42,6 @@ export default function CanvasGallery4() {
       SplitType = SplitTypeModule.default;
   
       initializeGallery();
-      // setInitialized(true);
     };
   
     gsap.registerPlugin(CustomEase);
@@ -57,11 +56,10 @@ export default function CanvasGallery4() {
     importSplitType();
     const canvas = canvasRef.current;
     if (canvas) {
-      // Empezamos "lejos"
       gsap.set(canvas, {
         scale: 0.5,
         z: -1000,
-        transformOrigin: "center center" // simulamos que está "atrás" en un plano 3D
+        transformOrigin: "center center"
       });
     }
   
@@ -175,8 +173,8 @@ export default function CanvasGallery4() {
   const animateTitleIn = () => {
     gsap.to(stateRef.current.titleSplit.words, {
       scaleY: "100%",
-      duration: 1,
-      stagger: 0.1,
+      duration: 0.8,
+      stagger: 0.08,
       ease: "power3.out",
     });
   };
@@ -184,8 +182,8 @@ export default function CanvasGallery4() {
   const animateTitleOut = () => {
     gsap.to(stateRef.current.titleSplit.words, {
       scaleY: "-50%",
-      duration: 1,
-      stagger: 0.1,
+      duration: 0.3,
+      stagger: 0.03,
       opacity: 0,
       ease: "power3.out",
     });

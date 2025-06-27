@@ -32,8 +32,8 @@ const Orb7 = ({
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
+      precision: "mediump",
       preserveDrawingBuffer: true,
-      // powerPreference: "high-performance"
       powerPreference:"default"
     });
 
