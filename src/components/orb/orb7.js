@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const Orb6 = ({
+const Orb7 = ({
   totalImages = 28,
   totalItems = 72,
   baseWidth = 1.7,
@@ -16,7 +16,14 @@ const Orb6 = ({
   const imageUsageCount = {};
   const imagePositions = {};
 
-
+  const isTooCloseToOthers = (phi, theta, positions, threshold = 0.7) => {
+    return positions.some((pos) => {
+      const dPhi = phi - pos.phi;
+      const dTheta = theta - pos.theta;
+      const dist = Math.sqrt(dPhi * dPhi + dTheta * dTheta);
+      return dist < threshold;
+    });
+  };
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -249,4 +256,4 @@ const Orb6 = ({
   );
 };
 
-export default Orb6;
+export default Orb7;
