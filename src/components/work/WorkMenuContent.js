@@ -30,7 +30,8 @@ const projects = [
     mobileTitle1: "johnny",
     mobileTitle2: "color",
     mobileLayout: [
-      ["mobileTitle1", "mobileTitle2"]
+      ["mobileTitle1"],
+      ["mobileTitle2"]
   ],
     src: "imagemenu5.jpeg"
   },
