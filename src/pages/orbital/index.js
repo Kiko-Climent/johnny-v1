@@ -1,5 +1,6 @@
 // import Orb5 from "@/components/orb/orb5";
-import Orb6 from "@/components/orb/orb6";
+// import Orb6 from "@/components/orb/orb6";
+import Orb7 from "@/components/orb/orb7";
 import Head from "next/head";
 
 
@@ -13,7 +14,7 @@ export default function Orbital() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="app">
-        <Orb6 />
+        <Orb7 />
       </div>
     </>
   );

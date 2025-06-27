@@ -6,7 +6,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const Orb7 = ({
   totalImages = 28,
-  totalItems = 72,
+  totalItems = 64,
   baseWidth = 1.7,
   baseHeight = 1.1,
   sphereRadius = 4.6,
@@ -16,16 +16,11 @@ const Orb7 = ({
   const imageUsageCount = {};
   const imagePositions = {};
 
-  const isTooCloseToOthers = (phi, theta, positions, threshold = 0.7) => {
-    return positions.some((pos) => {
-      const dPhi = phi - pos.phi;
-      const dTheta = theta - pos.theta;
-      const dist = Math.sqrt(dPhi * dPhi + dTheta * dTheta);
-      return dist < threshold;
-    });
-  };
-
   useEffect(() => {
+    // Ajustamos totalItems según el dispositivo
+    const isMobile = window.innerWidth <= 768;
+    const adjustedTotalItems = isMobile ? 56 : totalItems;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -38,7 +33,8 @@ const Orb7 = ({
       antialias: true,
       alpha: true,
       preserveDrawingBuffer: true,
-      powerPreference: "high-performance"
+      // powerPreference: "high-performance"
+      powerPreference:"default"
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -62,43 +58,38 @@ const Orb7 = ({
     let loadedCount = 0;
 
     const imagePool = [
-      "image3.jpeg","image5.jpeg","image7.jpeg","image8.jpeg","image12.jpeg","image13.jpeg",
-      "image17.jpeg","image19.jpeg","image20.jpeg","image22.jpeg","image26.jpeg","image27.jpeg",
-      "image28.jpeg","image29.jpeg","image30.jpeg","image33.jpeg","image36.jpeg","image40.jpeg",
-      "image41.jpeg","image42.jpeg","image10.jpeg","image25.jpeg","image39.jpeg","image4.jpeg",
-      "image9.jpeg","image1.jpeg","image2.jpeg","image38.jpeg"
+      "image3.webp", "image5.webp", "image7.webp", "image8.webp", "image12.webp", "image13.webp", "image1.webp",
+      "image17.webp", "image20.webp", "image22.webp", "image26.webp", "image27.webp", "image9.webp", "image19.webp",
+      "image28.webp", "image29.webp", "image30.webp", "image33.webp", "image36.webp", "image40.webp", "image2.webp",
+      "image41.webp", "image42.webp", "image10.webp", "image25.webp", "image39.webp", "image4.webp", "image38.webp"
     ];
 
     const getValidImage = (phi, theta) => {
       const MAX_ATTEMPTS = 15;
       const MIN_ANGULAR_DISTANCE = 0.7;
-    
+
       for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
         const index = Math.floor(Math.random() * imagePool.length);
         const name = imagePool[index];
         const previousPositions = imagePositions[name] || [];
         const usage = imageUsageCount[name] || 0;
-    
+
         const tooClose = previousPositions.some((pos) => {
           const dPhi = phi - pos.phi;
           const dTheta = theta - pos.theta;
           const dist = Math.sqrt(dPhi * dPhi + dTheta * dTheta);
           return dist < MIN_ANGULAR_DISTANCE;
         });
-    
-        const isAllowedThirdUsage = usage < 3 && (usage < 2 || imagePool.slice(0, 18).includes(name));
-    
-        if (!tooClose && isAllowedThirdUsage) {
+
+        if (!tooClose && usage < 3) {
           return { name, path: `/assets/orb/${name}` };
         }
       }
-    
-      // Fallback
+
       const fallbackIndex = Math.floor(Math.random() * imagePool.length);
       const fallbackName = imagePool[fallbackIndex];
       return { name: fallbackName, path: `/assets/orb/${fallbackName}` };
     };
-    
 
     const createImagePlane = (texture) => {
       const imageAspect = texture.image.width / texture.image.height;
@@ -131,8 +122,8 @@ const Orb7 = ({
           texture.magFilter = THREE.LinearFilter;
           texture.encoding = THREE.linearEncoding;
 
+          // Aplica solo el filtro mix-blend (inverso) para segunda aparición
           if (usage === 2) {
-            // Filtro tipo mix-blend-difference (ya implementado)
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = texture.image.width;
@@ -147,24 +138,7 @@ const Orb7 = ({
             }
             ctx.putImageData(imageData, 0, 0);
             texture = new THREE.CanvasTexture(canvas);
-          } else if (usage === 3 && imagePool.slice(0, 18).includes(name)) {
-            // Filtro psicodélico
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = texture.image.width;
-            canvas.height = texture.image.height;
-            ctx.drawImage(texture.image, 0, 0);
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-            for (let i = 0; i < data.length; i += 4) {
-              // Canal R lo dejamos, canal G lo desplazamos, canal B lo posterizamos
-              data[i + 1] = data[i];                  // G toma valor de R
-              data[i + 2] = Math.floor(data[i + 2] / 64) * 64; // posterizar B
-            }
-            ctx.putImageData(imageData, 0, 0);
-            texture = new THREE.CanvasTexture(canvas);
           }
-          
 
           const geometry = createImagePlane(texture);
           const material = new THREE.MeshBasicMaterial({
@@ -185,7 +159,7 @@ const Orb7 = ({
           imagePositions[name].push({ phi, theta });
 
           loadedCount++;
-          if (loadedCount === totalItems) animate();
+          if (loadedCount === adjustedTotalItems) animate();
         },
         undefined,
         (error) => console.error(error)
@@ -193,9 +167,9 @@ const Orb7 = ({
     };
 
     const createSphere = () => {
-      for (let i = 0; i < totalItems; i++) {
-        const phi = Math.acos(-1 + (2 * i) / totalItems);
-        const theta = Math.sqrt(totalItems * Math.PI) * phi;
+      for (let i = 0; i < adjustedTotalItems; i++) {
+        const phi = Math.acos(-1 + (2 * i) / adjustedTotalItems);
+        const theta = Math.sqrt(adjustedTotalItems * Math.PI) * phi;
         loadImageMesh(phi, theta);
       }
     };
