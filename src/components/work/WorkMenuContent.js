@@ -105,7 +105,7 @@ const WorkMenu10Content = () => {
   if (isMobile === null) return null;
 
   return (
-    <div className="w-screen min-h-screen overflow-hidden text-black flex flex-col justify-center items-center">
+    <div className="w-screen h-[100dvh] pt-[1rem] overflow-hidden text-black flex flex-col justify-center items-center">
       <ImagePreloader projects={projects} />
       {projects.map((project) =>
         isMobile ? (
