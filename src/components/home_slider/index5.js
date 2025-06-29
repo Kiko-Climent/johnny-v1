@@ -284,7 +284,7 @@ const HomeSlider5 = () => {
         </div>
       </div>
       <div
-        className="slider-content absolute left-0 bottom-0 flex justify-center items-center text-white w-full h-[50dvh] overflow-hidden"
+        className="slider-content absolute left-0 top-1/2 flex justify-center items-center text-white w-full h-[100dvh] overflow-hidden"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         }}
