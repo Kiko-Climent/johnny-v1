@@ -160,7 +160,7 @@ const HomeSlider5 = () => {
   const newMiniSlide = document.createElement("div");
   newMiniSlide.className = "slide-next absolute w-full h-full flex justify-center items-center";
   newMiniSlide.innerHTML = `
-    <div class="slide-next-img max-h-[50vh] aspect-[4/5]" 
+    <div class="slide-next-img max-h-[50dvh] aspect-[4/5]" 
     style="clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)">
       <img src="/assets/${sliderImages[upcomingIndex]}" loading="lazy" class="w-full h-full object-cover"/>
     </div>`;
@@ -270,7 +270,7 @@ const HomeSlider5 = () => {
         </div>
         <div className="slide-next absolute w-full h-full flex justify-center items-center">
           <div
-            className="slide-next-img max-h-[50vh] aspect-[4/5]"
+            className="slide-next-img max-h-[50dvh] aspect-[4/5]"
             style={{
               clipPath: "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)",
             }}
