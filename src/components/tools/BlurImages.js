@@ -1,32 +1,20 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import { getPlaiceholder } from "plaiceholder";
+import fs from "fs/promises";
+import path from "path";
 
-const useBlurImages = (imageUrls) => {
-  const [blurImages, setBlurImages] = useState([]);
-
-  useEffect(() => {
-    const loadBlurData = async () => {
-      const blurredImages = await Promise.all(
-        imageUrls.map(async (src) => {
-          try {
-            const res = await fetch(src);
-            const buffer = await res.arrayBuffer();
-            const { base64 } = await getPlaiceholder(Buffer.from(buffer));
-            return {src, blurDataUrl: base64}
-          } catch (error) {
-            console.error(`Error processing the image ${src}:`, error);
-            return { src, blurDataURL: "" };
-          }
-        })
-      );
-      setBlurImages(blurredImages)
-    };
-    loadBlurData();
-  }, [imageUrls]);
-  return blurImages
-  
+export async function getGalleryWithBlur(gallery) {
+  const imagesWithBlur = await Promise.all(
+    gallery.map(async ({ src, coord, location }) => {
+      const filePath = path.join(process.cwd(), "public", src);
+      const buffer = await fs.readFile(filePath);
+      const { base64 } = await getPlaiceholder(buffer);
+      return {
+        src,
+        coord,
+        location,
+        blurDataURL: base64,
+      };
+    })
+  );
+  return imagesWithBlur;
 }
-
-export default useBlurImages;
