@@ -256,19 +256,19 @@ const HomeSlider5 = () => {
     }, [isAnimating]);
 
   return (
-    <div className="w-screen h-screen" onClick={handleClick}>
+    <div className="w-screen h-[100dvh]" onClick={handleClick}>
       <div
         className="absolute top-0 left-0 w-screen h-screen overflow-hidden"
         ref={sliderRef}
       >
-        <div className="slide-active absolute w-full h-full">
+        <div className="slide-active absolute w-full h-[100dvh]">
           <img
             src={`/assets/${sliderImages[currentImageIndex % sliderImages.length]}`}
             loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="slide-next absolute w-full h-full flex justify-center items-center">
+        <div className="slide-next absolute w-full h-[100dvh] pt-4 flex justify-center items-center">
           <div
             className="slide-next-img max-h-[50dvh] aspect-[4/5]"
             style={{
@@ -284,7 +284,7 @@ const HomeSlider5 = () => {
         </div>
       </div>
       <div
-        className="slider-content absolute left-0 bottom-4 flex justify-center items-center text-white w-full h-1/2 overflow-hidden"
+        className="slider-content absolute left-0 bottom-4 flex justify-center items-center text-white w-full h-[50dvh] overflow-hidden"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         }}
