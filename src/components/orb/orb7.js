@@ -40,8 +40,8 @@ const Orb7 = ({
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(parseInt(backgroundColor, 16));
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.outputEncoding = THREE.linearEncoding;
-    renderer.gammaFactor = 2.2;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
 
     orbRef.current.appendChild(renderer.domElement);
 
@@ -120,7 +120,7 @@ const Orb7 = ({
           texture.generateMipmaps = false;
           texture.minFilter = THREE.LinearFilter;
           texture.magFilter = THREE.LinearFilter;
-          texture.encoding = THREE.linearEncoding;
+          texture.outputColorSpace = THREE.SRGBColorSpace;
 
           // Aplica solo el filtro mix-blend (inverso) para segunda aparición
           if (usage === 2) {
