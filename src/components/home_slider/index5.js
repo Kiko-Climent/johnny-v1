@@ -309,7 +309,10 @@ const HomeSlider5 = () => {
         </div>
       </div>
       {/* privacy policy and cookie policy */}
-      <div className="absolute uppercase bottom-4 w-full flex justify-center gap-1 text-white mix-blend-difference font-bold tracking-widest text-[0.40rem] md:text-[0.55rem] z-50">
+      <div
+        className="fixed bottom-2 w-full flex justify-center gap-1 text-white mix-blend-difference font-bold tracking-widest text-[0.40rem] md:text-[0.55rem] z-50 p-2"
+        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 0.5rem)' }}
+      >
         <a
           href="https://www.iubenda.com/privacy-policy/32336123"
           target="_blank"
@@ -318,7 +321,7 @@ const HomeSlider5 = () => {
         >
           Privacy Policy
         </a>
-          /
+        /
         <a
           href="https://www.iubenda.com/privacy-policy/32336123/cookie-policy"
           target="_blank"
