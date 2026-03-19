@@ -308,6 +308,26 @@ const HomeSlider5 = () => {
           <h1 className="text-5xl"></h1>
         </div>
       </div>
+      {/* privacy policy and cookie policy */}
+      <div className="absolute uppercase bottom-4 w-full flex justify-center gap-1 text-white mix-blend-difference font-bold tracking-widest text-[0.40rem] md:text-[0.55rem] z-50">
+        <a
+          href="https://www.iubenda.com/privacy-policy/32336123"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          Privacy Policy
+        </a>
+          /
+        <a
+          href="https://www.iubenda.com/privacy-policy/32336123/cookie-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          Cookies
+        </a>
+      </div>
     </div>
   );
 };
